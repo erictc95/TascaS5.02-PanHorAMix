@@ -154,48 +154,43 @@ As an administrator, I want to delete users when necessary.
 
 * PostgreSQL
 
-+------------------------------------------------+
-|                    USER                        |
-+------------------------------------------------+
-| PK  id                                         |
-|     username (unique)                          |
-|     email (unique)                             |
-|     password                                   |
-|     role                                       |
-|     avatar_url                                 |
-|     created_at                                 |
-+------------------------------------------------+
-                     │
-                     │ 1
-                     │
-                     │
-                     │ N
-+------------------------------------------------+
-|                    VIDEO                       |
-+------------------------------------------------+
-| PK  id                                         |
-|     title                                      |
-|     description                                |
-|     video_url                                  |
-|     thumbnail_url                              |
-|     duration                                   |
-|     views                                      |
-|     visibility                                 |
-|     upload_date                                |
-| FK  user_id                                    |
-| FK  category_id                                |
-+------------------------------------------------+
-                     │
-                     │ N
-                     │
-                     │
-                     │ 1
-+------------------------------------------------+
-|                 CATEGORY                       |
-+------------------------------------------------+
-| PK  id                                         |
-|     name (unique)                              |
-+------------------------------------------------+
+# Entity Relationship Diagram (ERD)
+
+```mermaid
+erDiagram
+
+    USER ||--o{ VIDEO : uploads
+    CATEGORY ||--o{ VIDEO : contains
+
+    USER {
+        BIGSERIAL id PK
+        VARCHAR username UK
+        VARCHAR email UK
+        VARCHAR password
+        ENUM role
+        VARCHAR avatar_url
+        TIMESTAMP created_at
+    }
+
+    VIDEO {
+        BIGSERIAL id PK
+        VARCHAR title
+        TEXT description
+        VARCHAR video_url
+        VARCHAR thumbnail_url
+        INTEGER duration
+        INTEGER views
+        ENUM visibility
+        TIMESTAMP upload_date
+        BIGINT user_id FK
+        BIGINT category_id FK
+    }
+
+    CATEGORY {
+        BIGSERIAL id PK
+        VARCHAR name UK
+    }
+```
 
 ## Database Migration
 
