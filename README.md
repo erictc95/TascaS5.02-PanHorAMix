@@ -1,3 +1,5 @@
+<img width="467" height="414" alt="image" src="https://github.com/user-attachments/assets/a8e38d1f-16c7-4a1f-ac06-450ffd7bc9f8" /> 
+
 # PanHorAMix
 
 > Final Project - Tasca S5.02
