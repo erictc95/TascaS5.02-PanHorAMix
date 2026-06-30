@@ -234,6 +234,47 @@ The following features are intentionally excluded from the MVP:
 
 ---
 
+# Future Improvements
+
+The current version of PanHorAMix is a Minimum Viable Product (MVP). The following features are planned for future releases:
+
+## User Interaction
+
+- Like videos
+- Comment on videos
+- Save favorite videos
+- Subscribe to creators
+
+## Content Management
+
+- Create playlists
+- Private and unlisted videos
+- Video reports
+- Content moderation tools
+
+## Personalization
+
+- Watch history
+- Personalized recommendations
+- Notifications
+- User activity dashboard
+
+## Analytics
+
+- Advanced video statistics
+- Creator analytics
+- Most viewed videos
+- Trending content
+
+## Media
+
+- Direct video upload
+- Thumbnail generation
+- Video transcoding
+- Multiple video qualities (720p, 1080p, 4K)
+
+---
+
 # Author
 
 Eric Tarrés
