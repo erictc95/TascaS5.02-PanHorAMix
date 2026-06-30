@@ -154,6 +154,49 @@ As an administrator, I want to delete users when necessary.
 
 * PostgreSQL
 
++------------------------------------------------+
+|                    USER                        |
++------------------------------------------------+
+| PK  id                                         |
+|     username (unique)                          |
+|     email (unique)                             |
+|     password                                   |
+|     role                                       |
+|     avatar_url                                 |
+|     created_at                                 |
++------------------------------------------------+
+                     │
+                     │ 1
+                     │
+                     │
+                     │ N
++------------------------------------------------+
+|                    VIDEO                       |
++------------------------------------------------+
+| PK  id                                         |
+|     title                                      |
+|     description                                |
+|     video_url                                  |
+|     thumbnail_url                              |
+|     duration                                   |
+|     views                                      |
+|     visibility                                 |
+|     upload_date                                |
+| FK  user_id                                    |
+| FK  category_id                                |
++------------------------------------------------+
+                     │
+                     │ N
+                     │
+                     │
+                     │ 1
++------------------------------------------------+
+|                 CATEGORY                       |
++------------------------------------------------+
+| PK  id                                         |
+|     name (unique)                              |
++------------------------------------------------+
+
 ## Database Migration
 
 * Flyway
