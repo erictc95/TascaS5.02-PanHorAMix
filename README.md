@@ -154,20 +154,28 @@ As an administrator, I want to delete users when necessary.
 
 * PostgreSQL
 
-# Entity Relationship Diagram (ERD)
+## Entity Relationships
+
+- A user can upload multiple videos.
+- A video belongs to one user.
+- A video can have multiple tags.
+- A tag can be associated with multiple videos.
+
+## Entity Relationship Diagram (ERD)
 
 ```mermaid
 erDiagram
 
     USER ||--o{ VIDEO : uploads
-    CATEGORY ||--o{ VIDEO : contains
+    VIDEO ||--o{ VIDEO_TAG : has
+    TAG ||--o{ VIDEO_TAG : tags
 
     USER {
         BIGSERIAL id PK
         VARCHAR username UK
         VARCHAR email UK
         VARCHAR password
-        ENUM role
+        VARCHAR role
         VARCHAR avatar_url
         TIMESTAMP created_at
     }
@@ -176,22 +184,25 @@ erDiagram
         BIGSERIAL id PK
         VARCHAR title
         TEXT description
-        VARCHAR video_url
+        VARCHAR storage_url
         VARCHAR thumbnail_url
-        INTEGER duration
+        INTEGER duration_seconds
         INTEGER views
-        ENUM visibility
-        TIMESTAMP upload_date
+        VARCHAR visibility
+        TIMESTAMP created_at
         BIGINT user_id FK
-        BIGINT category_id FK
     }
 
-    CATEGORY {
+    TAG {
         BIGSERIAL id PK
         VARCHAR name UK
     }
-```
 
+    VIDEO_TAG {
+        BIGINT video_id PK,FK
+        BIGINT tag_id PK,FK
+    }
+```
 ## Database Migration
 
 * Flyway
