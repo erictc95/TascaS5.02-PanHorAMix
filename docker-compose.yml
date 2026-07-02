@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: panhoramix-db
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_USER: panhoramix
+      POSTGRES_PASSWORD: panhoramix
+      POSTGRES_DB: panhoramix
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
