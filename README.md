@@ -150,6 +150,48 @@ As an administrator, I want to delete users when necessary.
 * Bean Validation
 * OpenAPI (Swagger)
 
+## Project Structure
+
+```text
+PanHorAMix
+│
+├── backend
+│   ├── src
+│   │   ├── main
+│   │   │   ├── java/com/panhoramix/backend
+│   │   │   │   ├── config
+│   │   │   │   ├── controller
+│   │   │   │   ├── dto
+│   │   │   │   │   ├── request
+│   │   │   │   │   └── response
+│   │   │   │   ├── entity
+│   │   │   │   ├── exception
+│   │   │   │   ├── mapper
+│   │   │   │   ├── repository
+│   │   │   │   ├── security
+│   │   │   │   ├── service
+│   │   │   │   ├── validation
+│   │   │   │   └── BackendApplication.java
+│   │   │   └── resources
+│   │   │       ├── db
+│   │   │       │   └── migration
+│   │   │       ├── static
+│   │   │       ├── templates
+│   │   │       └── application.properties
+│   │   └── test
+│   ├── pom.xml
+│   └── ...
+│
+├── frontend
+│
+├── docs
+│   ├── PanHorAMix-ERD.drawio
+│   └── PanHorAMix-ERD.png
+│
+├── docker-compose.yml
+└── README.md
+```
+
 ## Database
 
 * PostgreSQL
