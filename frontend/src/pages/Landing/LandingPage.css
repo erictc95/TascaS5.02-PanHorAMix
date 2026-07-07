@@ -1,0 +1,167 @@
+.landing {
+
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 40px;
+}
+
+/* ---------- LOGO ---------- */
+
+.logo-frame {
+
+    position: relative;
+
+    display: inline-flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    padding: 70px 130px;
+
+    margin-bottom: 60px;
+}
+
+.logo-frame h1 {
+
+    color: var(--gold);
+
+    font-size: 5rem;
+
+    font-weight: 300;
+
+    letter-spacing: 8px;
+}
+
+.subtitle {
+
+    margin-top: 20px;
+
+    color: var(--gold);
+
+    font-size: 1.3rem;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+}
+
+/* ---------- CORNERS ---------- */
+
+.logo-frame::before,
+.logo-frame::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 90px;
+    height: 90px;
+}
+
+.logo-frame::before {
+
+    top: 0;
+    left: 0;
+
+    border-top: 4px solid var(--gold);
+    border-left: 4px solid var(--gold);
+}
+
+.logo-frame::after {
+
+    top: 0;
+    right: 0;
+
+    border-top: 4px solid var(--gold);
+    border-right: 4px solid var(--gold);
+}
+
+.corner {
+
+    position: absolute;
+
+    width: 90px;
+    height: 90px;
+}
+
+.bottom-left {
+
+    bottom: 0;
+    left: 0;
+
+    border-bottom: 4px solid var(--gold);
+    border-left: 4px solid var(--gold);
+}
+
+.bottom-right {
+
+    bottom: 0;
+    right: 0;
+
+    border-bottom: 4px solid var(--gold);
+    border-right: 4px solid var(--gold);
+}
+
+/* ---------- DESCRIPTION ---------- */
+
+.description {
+
+    color: #bdbdbd;
+
+    font-size: 1.1rem;
+
+    margin-bottom: 45px;
+}
+
+/* ---------- CREATE ACCOUNT AND SING IN BUTTON ---------- */
+.primary-button,
+.secondary-button {
+
+    width: 320px;
+
+    height: 56px;
+
+    border: 2px solid var(--gold);
+
+    background: transparent;
+
+    color: var(--gold);
+
+    font-size: 1rem;
+
+    letter-spacing: 3px;
+
+    cursor: pointer;
+
+    transition: .25s ease;
+}
+
+.primary-button:hover,
+.secondary-button:hover {
+
+    background: var(--gold);
+
+    color: black;
+}
+
+.secondary-button {
+
+    margin-top: 20px;
+}
+
+/* ---------- LOGIN ---------- */
+
+.login-text {
+
+    margin-top: 35px;
+
+    color: #8f8f8f;
+}
