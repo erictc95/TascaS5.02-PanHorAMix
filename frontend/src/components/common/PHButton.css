@@ -1,0 +1,29 @@
+.ph-button{
+
+    width:320px;
+
+    height:56px;
+
+    border:2px solid var(--gold);
+
+    background:transparent;
+
+    color:var(--gold);
+
+    font-size:1rem;
+
+    letter-spacing:3px;
+
+    cursor:pointer;
+
+    transition:.25s ease;
+
+}
+
+.ph-button:hover{
+
+    background:var(--gold);
+
+    color:black;
+
+}
