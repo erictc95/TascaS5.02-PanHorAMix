@@ -1,5 +1,6 @@
 import "./LandingPage.css";
 import { Link } from "react-router-dom";
+import PHButton from "../../components/common/PHButton";
 
 function LandingPage() {
     return (
@@ -22,23 +23,25 @@ function LandingPage() {
                 Experience cinema the way it was meant to be seen.
             </p>
 
-            <Link to="/register">
+            <div className="actions">
 
-                <button className="primary-button">
+                <Link to="/register">
 
-                    CREATE ACCOUNT
+                    <PHButton>
+                        CREATE ACCOUNT
+                    </PHButton>
 
-                </button>
+                </Link>
 
-            </Link>
+                <p className="login-text">
+                    Already have an account?
+                </p>
 
-            <p className="login-text">
-                Already have an account?
-            </p>
+                <PHButton>
+                    SIGN IN
+                </PHButton>
 
-            <button className="secondary-button">
-                SIGN IN
-            </button>
+            </div>
         </main>
     );
 }

@@ -121,42 +121,6 @@
     margin-bottom: 45px;
 }
 
-/* ---------- CREATE ACCOUNT AND SING IN BUTTON ---------- */
-.primary-button,
-.secondary-button {
-
-    width: 320px;
-
-    height: 56px;
-
-    border: 2px solid var(--gold);
-
-    background: transparent;
-
-    color: var(--gold);
-
-    font-size: 1rem;
-
-    letter-spacing: 3px;
-
-    cursor: pointer;
-
-    transition: .25s ease;
-}
-
-.primary-button:hover,
-.secondary-button:hover {
-
-    background: var(--gold);
-
-    color: black;
-}
-
-.secondary-button {
-
-    margin-top: 20px;
-}
-
 /* ---------- LOGIN ---------- */
 
 .login-text {
@@ -169,5 +133,15 @@
 a{
 
     text-decoration:none;
+
+}
+
+.actions{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
 
 }
