@@ -1,0 +1,55 @@
+.ph-input-group{
+
+    width:320px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+.ph-input-group label{
+
+    color:var(--gold);
+
+    text-align:left;
+
+    font-size:.9rem;
+
+    letter-spacing:2px;
+
+}
+
+.ph-input-group input{
+
+    height:55px;
+
+    background:transparent;
+
+    border:2px solid var(--gold);
+
+    color:white;
+
+    padding:0 18px;
+
+    font-size:1rem;
+
+    outline:none;
+
+    transition:.25s;
+
+}
+
+.ph-input-group input::placeholder{
+
+    color:#777;
+
+}
+
+.ph-input-group input:focus{
+
+    border-color:white;
+
+}
