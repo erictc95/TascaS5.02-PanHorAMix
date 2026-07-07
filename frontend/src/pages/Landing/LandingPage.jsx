@@ -1,4 +1,5 @@
 import "./LandingPage.css";
+import { Link } from "react-router-dom";
 
 function LandingPage() {
     return (
@@ -21,9 +22,15 @@ function LandingPage() {
                 Experience cinema the way it was meant to be seen.
             </p>
 
-            <button className="primary-button">
-                CREATE ACCOUNT
-            </button>
+            <Link to="/register">
+
+                <button className="primary-button">
+
+                    CREATE ACCOUNT
+
+                </button>
+
+            </Link>
 
             <p className="login-text">
                 Already have an account?
