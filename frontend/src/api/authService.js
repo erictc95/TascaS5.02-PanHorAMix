@@ -10,3 +10,14 @@ export async function register(request) {
     return response.data;
 
 }
+
+export async function login(request) {
+
+    const response = await api.post(
+        "/auth/login",
+        request
+    );
+
+    return response.data;
+
+}

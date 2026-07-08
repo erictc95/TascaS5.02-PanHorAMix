@@ -36,11 +36,13 @@ function LandingPage() {
                 <p className="login-text">
                     Already have an account?
                 </p>
+                <Link to="/login">
 
-                <PHButton>
-                    SIGN IN
-                </PHButton>
+                    <PHButton>
+                        SIGN IN
+                    </PHButton>
 
+                </Link>
             </div>
         </main>
     );

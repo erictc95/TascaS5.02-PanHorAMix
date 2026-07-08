@@ -1,0 +1,53 @@
+.login-page{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:var(--background);
+
+}
+
+.login-container{
+
+    width:420px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+.login-form{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+.register-text{
+
+    margin-top:15px;
+
+    color:white;
+
+    text-align:center;
+
+}
+
+.register-link{
+
+    text-decoration:none;
+
+}
