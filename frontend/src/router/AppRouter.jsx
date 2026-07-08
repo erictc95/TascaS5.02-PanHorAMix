@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import LandingPage from "../pages/Landing/LandingPage";
 import RegisterPage from "../pages/Register/RegisterPage";
+import LoginPage from "../pages/Login/LoginPage";
 
 function AppRouter() {
 
@@ -11,9 +12,20 @@ function AppRouter() {
 
             <Routes>
 
-                <Route path="/" element={<LandingPage />} />
+                <Route
+                    path="/"
+                    element={<LandingPage />}
+                />
 
-                <Route path="/register" element={<RegisterPage />} />
+                <Route
+                    path="/register"
+                    element={<RegisterPage />}
+                />
+
+                <Route
+                    path="/login"
+                    element={<LoginPage />}
+                />
 
             </Routes>
 

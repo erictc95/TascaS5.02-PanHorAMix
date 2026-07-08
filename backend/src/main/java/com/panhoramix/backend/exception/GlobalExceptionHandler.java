@@ -19,6 +19,7 @@ public class GlobalExceptionHandler {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.CONFLICT.value())
                 .error(HttpStatus.CONFLICT.getReasonPhrase())
+                .code("EMAIL_ALREADY_EXISTS")
                 .message(ex.getMessage())
                 .build();
 
@@ -35,6 +36,7 @@ public class GlobalExceptionHandler {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.CONFLICT.value())
                 .error(HttpStatus.CONFLICT.getReasonPhrase())
+                .code("USERNAME_ALREADY_EXISTS")
                 .message(ex.getMessage())
                 .build();
 
