@@ -6,11 +6,51 @@ import "./LoginPage.css";
 import PHButton from "../../components/common/PHButton";
 import PHInput from "../../components/common/PHInput";
 
+import { login } from "../../api/authService";
+
 function LoginPage() {
 
     const [email, setEmail] = useState("");
-
     const [password, setPassword] = useState("");
+
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const handleLogin = async () => {
+
+        setError("");
+
+        if (!email.trim() || !password.trim()) {
+            setError("Please enter your email and password.");
+            return;
+        }
+
+        try {
+
+            setLoading(true);
+
+            const response = await login({
+                email,
+                password
+            });
+
+            sessionStorage.setItem("token", response.token);
+
+            console.log("Login successful");
+
+            // Más adelante redirigiremos al usuario.
+
+        } catch (error) {
+
+            setError("Invalid email or password.");
+
+        } finally {
+
+            setLoading(false);
+
+        }
+
+    };
 
     return (
 
@@ -51,9 +91,18 @@ function LoginPage() {
                         onChange={(e) => setPassword(e.target.value)}
                     />
 
-                    <PHButton>
+                    {error && (
+                        <p className="login-error">
+                            {error}
+                        </p>
+                    )}
 
-                        SIGN IN
+                    <PHButton
+                        onClick={handleLogin}
+                        disabled={loading}
+                    >
+
+                        {loading ? "SIGNING IN..." : "SIGN IN"}
 
                     </PHButton>
 
