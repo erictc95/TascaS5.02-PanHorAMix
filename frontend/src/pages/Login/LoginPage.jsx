@@ -34,6 +34,8 @@ function LoginPage() {
                 password
             });
 
+            console.log(response);
+
             sessionStorage.setItem("token", response.token);
 
             console.log("Login successful");

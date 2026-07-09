@@ -1,6 +1,8 @@
 package com.panhoramix.backend.controller;
 
+import com.panhoramix.backend.dto.request.LoginRequest;
 import com.panhoramix.backend.dto.request.RegisterRequest;
+import com.panhoramix.backend.dto.response.LoginResponse;
 import com.panhoramix.backend.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,14 @@ public class UserController {
     public void register(@Valid @RequestBody RegisterRequest request) {
 
         userService.register(request);
+
+    }
+
+    @PostMapping("/login")
+    @ResponseStatus(HttpStatus.OK)
+    public LoginResponse login(@Valid @RequestBody LoginRequest request) {
+
+        return userService.login(request);
 
     }
 
