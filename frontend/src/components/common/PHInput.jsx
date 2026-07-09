@@ -1,12 +1,20 @@
+import { useState } from "react";
 import "./PHInput.css";
 
 function PHInput({
-    label,
-    type = "text",
-    placeholder = "",
-    value,
-    onChange
-}) {
+                     label,
+                     type = "text",
+                     placeholder = "",
+                     value,
+                     onChange
+                 }) {
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const inputType =
+        type === "password"
+            ? (showPassword ? "text" : "password")
+            : type;
 
     return (
 
@@ -16,13 +24,29 @@ function PHInput({
                 {label}
             </label>
 
-            <input
-                className="ph-input"
-                type={type}
-                placeholder={placeholder}
-                value={value}
-                onChange={onChange}
-            />
+            <div className="ph-input-container">
+
+                <input
+                    className="ph-input"
+                    type={inputType}
+                    placeholder={placeholder}
+                    value={value}
+                    onChange={onChange}
+                />
+
+                {type === "password" && (
+
+                    <button
+                        type="button"
+                        className="ph-password-toggle"
+                        onClick={() => setShowPassword(!showPassword)}
+                    >
+                        {showPassword ? "🙈" : "🐵"}
+                    </button>
+
+                )}
+
+            </div>
 
         </div>
 
