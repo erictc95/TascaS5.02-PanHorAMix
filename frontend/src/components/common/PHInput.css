@@ -16,10 +16,17 @@
 
 }
 
+.ph-input-container {
+
+    position: relative;
+    width: 100%;
+
+}
+
 .ph-input {
 
     width: 100%;
-    padding: 14px 18px;
+    padding: 14px 50px 14px 18px;
 
     background: transparent;
 
@@ -46,5 +53,34 @@
 .ph-input:focus {
 
     border-color: white;
+
+}
+
+.ph-password-toggle {
+
+    position: absolute;
+
+    top: 50%;
+    right: 14px;
+
+    transform: translateY(-50%);
+
+    background: none;
+
+    border: none;
+
+    cursor: pointer;
+
+    font-size: 1.1rem;
+
+    color: white;
+
+    padding: 0;
+
+}
+
+.ph-password-toggle:hover {
+
+    opacity: .75;
 
 }
