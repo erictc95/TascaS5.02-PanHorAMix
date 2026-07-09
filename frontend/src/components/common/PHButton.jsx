@@ -1,11 +1,12 @@
 import "./PHButton.css";
 
 function PHButton({
-    children,
-    className = "",
-    onClick,
-    type = "button"
-}) {
+                      children,
+                      className = "",
+                      onClick,
+                      type = "button",
+                      disabled = false
+                  }) {
 
     return (
 
@@ -13,8 +14,11 @@ function PHButton({
             className={`ph-button ${className}`}
             type={type}
             onClick={onClick}
+            disabled={disabled}
         >
+
             {children}
+
         </button>
 
     );
