@@ -3,6 +3,7 @@ import { getProfile } from "../../api/userService";
 
 import FocusFrame from "./components/FocusFrame.jsx";
 import EmptyState from "./components/EmptyState";
+import UploadButton from "./components/UploadButton";
 
 import "./HomePage.css";
 
