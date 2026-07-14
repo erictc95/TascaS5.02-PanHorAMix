@@ -1,0 +1,12 @@
+.empty-state {
+    text-align: center;
+}
+
+.empty-state h2 {
+    margin-bottom: 16px;
+    font-size: 36px;
+}
+
+.empty-state p {
+    font-size: 22px;
+}
