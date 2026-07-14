@@ -99,33 +99,37 @@ As a user, I want to log in so that I can access my account.
 
 ## US-03
 
-As a user, I want to upload a video so that I can share content.
+As a user, I want to access a home page after logging in so that I can start using PanHorAMix.
 
 ## US-04
 
-As a user, I want to edit or delete my own videos so that I can keep my content updated.
+As a user, I want to upload a video so that I can share content.
 
 ## US-05
 
-As a visitor, I want to browse published videos so that I can discover content.
+As a user, I want to edit or delete my own videos so that I can keep my content updated.
 
 ## US-06
 
-As a user, I want to search videos by title so that I can quickly find content.
+As a visitor, I want to browse published videos so that I can discover content.
 
 ## US-07
 
-As a user, I want to filter videos by category so that I can discover related content.
+As a user, I want to search videos by title so that I can quickly find content.
 
 ## US-08
 
-As an administrator, I want to manage categories so that videos remain properly organized.
+As a user, I want to filter videos by category so that I can discover related content.
 
 ## US-09
 
-As an administrator, I want to delete inappropriate videos to keep the platform safe.
+As an administrator, I want to manage categories so that videos remain properly organized.
 
 ## US-10
+
+As an administrator, I want to delete inappropriate videos to keep the platform safe.
+
+## US-11
 
 As an administrator, I want to delete users when necessary.
 
