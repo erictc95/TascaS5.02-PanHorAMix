@@ -366,6 +366,32 @@ The current version of PanHorAMix is a Minimum Viable Product (MVP). The followi
 - Video transcoding
 - Multiple video qualities (720p, 1080p, 4K)
 
+# 🔐 Security Roadmap
+
+Estas funcionalidades no forman parte del MVP, pero están previstas para futuras versiones de PanHorAMix.
+
+## Authentication
+
+☐ Logout (invalidar el token del dispositivo actual).
+
+☐ Logout from all devices (invalidar todos los tokens del usuario).
+
+☐ Refresh Token (renovación automática del JWT sin volver a introducir credenciales).
+
+☐ Remember Me (sesiones de larga duración opcionales).
+
+☐ Active Sessions (listar todos los dispositivos donde el usuario tiene una sesión iniciada).
+
+☐ Device Management (cerrar sesión únicamente en un dispositivo concreto).
+
+☐ Token Versioning (invalidación global de JWT mediante versión de token, evitando almacenar todos los tokens emitidos).
+
+☐ Two-Factor Authentication (2FA).
+
+☐ Social Login (Google, Apple, Microsoft...).
+
+☐ Suspicious Login Detection (avisar cuando se inicia sesión desde un nuevo dispositivo o ubicación).
+
 ---
 
 # Author
