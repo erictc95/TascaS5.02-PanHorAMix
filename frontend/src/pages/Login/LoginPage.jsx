@@ -7,6 +7,7 @@ import PHButton from "../../components/common/PHButton";
 import PHInput from "../../components/common/PHInput";
 
 import { login } from "../../api/authService";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
 
@@ -15,6 +16,8 @@ function LoginPage() {
 
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+
+    const navigate = useNavigate();
 
     const handleLogin = async () => {
 
@@ -39,6 +42,8 @@ function LoginPage() {
             sessionStorage.setItem("token", response.token);
 
             console.log("Login successful");
+
+            navigate("/home");
 
             // Más adelante redirigiremos al usuario.
 
