@@ -4,6 +4,7 @@ import LandingPage from "../pages/Landing/LandingPage";
 import RegisterPage from "../pages/Register/RegisterPage";
 import LoginPage from "../pages/Login/LoginPage";
 import HomePage from "../pages/home/HomePage";
+import FirstTakePage from "../pages/firstTake/FirstTakePage.jsx";
 
 function AppRouter() {
 
@@ -31,6 +32,11 @@ function AppRouter() {
                 <Route
                     path="/home"
                     element={<HomePage />}
+                />
+
+                <Route
+                    path="/upload"
+                    element={<FirstTakePage />}
                 />
 
             </Routes>
