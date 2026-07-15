@@ -1,0 +1,33 @@
+.director-note{
+
+    width:700px;
+
+    margin-top:25px;
+
+    padding:20px;
+
+    border-radius:12px;
+
+    text-align:center;
+
+    border:2px solid #d4af37;
+
+    color:#d4af37;
+
+}
+
+.director-note.success{
+
+    border-color:#4CAF50;
+
+    color:#4CAF50;
+
+}
+
+.director-note.error{
+
+    border-color:#ff4d4d;
+
+    color:#ff4d4d;
+
+}
