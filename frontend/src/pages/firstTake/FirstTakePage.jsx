@@ -1,7 +1,7 @@
 import "./FirstTakePage.css";
 
-import VideoSelector from "./components/VideoSelector.jsx";
-import VideoDetailsForm from "./components/VideoDetailsForm.jsx";
+import MediaSelector from "./components/MediaSelector.jsx";
+import MediaDetailsForm from "./components/MediaDetailsForm.jsx";
 import PublishButton from "./components/PublishButton.jsx";
 
 function FirstTakePage() {
@@ -14,9 +14,9 @@ function FirstTakePage() {
 
             <p>Every great story starts here.</p>
 
-            <VideoSelector />
+            <MediaSelector />
 
-            <VideoDetailsForm />
+            <MediaDetailsForm />
 
             <PublishButton />
 

@@ -1,4 +1,4 @@
-.video-selector{
+.media-selector{
 
     width:100%;
 
@@ -62,5 +62,17 @@
     border-radius:8px;
 
     font-size:16px;
+
+}
+
+.selected-video{
+
+    margin-top:30px;
+
+    border:1px solid #d4af37;
+
+    border-radius:12px;
+
+    padding:20px;
 
 }

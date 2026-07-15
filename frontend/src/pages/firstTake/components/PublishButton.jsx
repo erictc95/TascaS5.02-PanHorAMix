@@ -2,9 +2,15 @@ import PHButton from "../../../components/common/PHButton";
 
 function PublishButton() {
 
+    function handlePublish() {
+
+        console.log("Publish video");
+
+    }
+
     return (
 
-        <PHButton>
+        <PHButton onClick={handlePublish}>
 
             🎬 Publish
 
