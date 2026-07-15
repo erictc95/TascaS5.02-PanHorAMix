@@ -314,6 +314,39 @@ The frontend will consume the REST API using Axios.
 
 ---
 
+## Media Requirements (MVP)
+
+To preserve the cinematic identity of PanHorAMix, every uploaded video or image must meet the following requirements.
+
+### 🎥 Videos
+
+| Requirement | Value |
+|-------------|-------|
+| Orientation | Landscape only (width > height) |
+| Minimum Resolution | 1920 × 1080 (Full HD) |
+| Maximum Duration | 5 minutes |
+| Maximum File Size | 700 MB |
+| Supported Formats | MP4 (.mp4), MOV (.mov) |
+
+### 📸 Images
+
+| Requirement | Value |
+|-------------|-------|
+| Orientation | Landscape only (width > height) |
+| Minimum Resolution | 1920 × 1080 (Full HD) |
+| Maximum File Size | 25 MB |
+| Supported Formats | JPG (.jpg, .jpeg), PNG (.png) |
+
+Media that does not meet these requirements will be rejected before upload.
+
+Official PHAM validation message:
+
+🎬 Scene Rejected
+
+Cinema deserves landscape.
+
+---
+
 # Future Improvements
 
 The following features are intentionally excluded from the MVP:
