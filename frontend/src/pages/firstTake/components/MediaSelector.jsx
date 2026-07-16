@@ -2,6 +2,8 @@ import {useRef, useState} from "react";
 import PHButton from "../../../components/common/PHButton";
 import DirectorNote from "./DirectorNote";
 import MediaDetailsForm from "./MediaDetailsForm";
+import PublishButton from "./PublishButton.jsx";
+import SceneInformationForm from "./SceneInformationForm";
 
 function MediaSelector() {
 
@@ -79,6 +81,8 @@ function MediaSelector() {
                 "Supported formats ensure the best playback experience for everyone."
             );
 
+            resetMediaInput();
+
             return false;
 
         }
@@ -120,8 +124,19 @@ function MediaSelector() {
         }
 
         validateOrientation(file);
+
+        resetMediaInput();
     }
 
+    function resetMediaInput() {
+
+        if (inputFileRef.current) {
+
+            inputFileRef.current.value = "";
+
+        }
+
+    }
 
     function validateOrientation(file) {
 
@@ -144,6 +159,22 @@ function MediaSelector() {
                         "Why?\n\n" +
                         "Cinema deserves landscape."
                     );
+
+                    URL.revokeObjectURL(url);
+
+                    return;
+
+                }
+
+                if (!validateResolution(file, image.width, image.height)) {
+
+                    URL.revokeObjectURL(url);
+
+                    return;
+
+                }
+
+                if (!validateFileSize(file)) {
 
                     URL.revokeObjectURL(url);
 
@@ -184,6 +215,26 @@ function MediaSelector() {
 
                 }
 
+                if (!validateResolution(file, video.videoWidth, video.videoHeight)) {
+
+                    URL.revokeObjectURL(url);
+
+                    return;
+
+                }
+
+                if (!validateFileSize(file)) {
+
+                    URL.revokeObjectURL(url);
+
+                    return;
+
+                }
+
+                acceptScene(file);
+
+                URL.revokeObjectURL(url);
+
                 acceptScene(file);
 
                 URL.revokeObjectURL(url);
@@ -196,36 +247,122 @@ function MediaSelector() {
 
     }
 
+    function validateResolution(file, width, height) {
+
+        const minimumWidth = 1920;
+
+        const minimumHeight = 1080;
+
+        if (width < minimumWidth || height < minimumHeight) {
+
+            rejectScene(
+                "Reason\n\n" +
+
+                "This scene doesn't meet PHAM's minimum resolution.\n\n" +
+
+                "Detected\n\n" +
+
+                `${width} × ${height}\n\n` +
+
+                "Required\n\n" +
+
+                "1920 × 1080\n\n" +
+
+                "How to fix it\n\n" +
+
+                "Export your scene in Full HD or higher.\n\n" +
+
+                "Why?\n\n" +
+
+                "Every scene deserves a cinematic presentation."
+            );
+
+            return false;
+
+        }
+
+        return true;
+
+    }
+
+    function validateFileSize(file) {
+
+        const maximumSize = 700 * 1024 * 1024;
+
+        if (file.size > maximumSize) {
+
+            rejectScene(
+
+                "Reason\n\n" +
+
+                "This scene exceeds the maximum file size.\n\n" +
+
+                "Detected\n\n" +
+
+                `${(file.size / 1024 / 1024).toFixed(2)} MB\n\n` +
+
+                "Maximum\n\n" +
+
+                "700 MB\n\n" +
+
+                "How to fix it\n\n" +
+
+                "Compress or export your scene with a lower bitrate.\n\n" +
+
+                "Why?\n\n" +
+
+                "Fast uploads create a better experience for everyone."
+
+            );
+
+            return false;
+
+        }
+
+        return true;
+
+    }
+
     return (
 
         <div className="media-selector">
 
             <div className="upload-zone">
 
-                <h2>🎥</h2>
+                <div className={"upload-content"}>
 
-                <h3>Drag & Drop your First Take</h3>
+                    <h2>🖼️🎥</h2>
 
-                <p>or</p>
+                    <h3>Drag & Drop your First Take</h3>
 
-                <PHButton onClick={handleChooseScene}>
+                    <p>or</p>
 
-                    Choose Scene
+                    <PHButton onClick={handleChooseScene}>
 
-                </PHButton>
+                        Choose Scene
 
-                <input
-                    type="file"
-                    accept="video/*,image/*"
-                    ref={inputFileRef}
-                    onChange={handleMediaSelected}
-                    hidden
-                />
+                    </PHButton>
+
+                    <input
+                        type="file"
+                        accept="video/*,image/*"
+                        ref={inputFileRef}
+                        onChange={handleMediaSelected}
+                        hidden
+                    />
+
+                </div>
 
                 <MediaDetailsForm
                     media={selectedMedia}
                     mediaType={mediaType}
                 />
+
+                {selectedMedia && (
+
+                    <SceneInformationForm />
+
+                )}
 
                 {previewUrl && (
 
@@ -261,6 +398,16 @@ function MediaSelector() {
                         title={directorTitle}
                         message={directorMessage}
                     />
+
+                )}
+
+                {directorType === "success" && (
+
+                    <div className="publish-container">
+
+                        <PublishButton />
+
+                    </div>
 
                 )}
 
