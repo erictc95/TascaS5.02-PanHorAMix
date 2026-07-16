@@ -2,23 +2,19 @@ import "./FirstTakePage.css";
 
 import MediaSelector from "./components/MediaSelector.jsx";
 import MediaDetailsForm from "./components/MediaDetailsForm.jsx";
-import PublishButton from "./components/PublishButton.jsx";
+
 
 function FirstTakePage() {
 
     return (
 
-        <div className="first-take-page">
+        <div className="first-take-header">
 
-            <h1>🎥 FIRST TAKE</h1>
-
-            <p>Every great story starts here.</p>
+            <h1> FIRST TAKE </h1>
 
             <MediaSelector />
 
             <MediaDetailsForm />
-
-            <PublishButton />
 
         </div>
 
