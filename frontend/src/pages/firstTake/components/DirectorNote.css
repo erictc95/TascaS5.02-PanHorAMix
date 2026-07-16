@@ -1,6 +1,8 @@
 .director-note{
 
-    width:700px;
+    width:600px;
+
+    max-width: 100%;
 
     margin-top:25px;
 
@@ -13,6 +15,8 @@
     border:2px solid #d4af37;
 
     color:#d4af37;
+
+    white-space: pre-line;
 
 }
 

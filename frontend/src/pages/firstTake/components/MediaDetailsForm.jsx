@@ -6,6 +6,7 @@ function MediaDetailsForm({ media, mediaType }) {
 
     }
 
+
     return (
 
         <div className="selected-media">
