@@ -9,15 +9,14 @@ import com.panhoramix.backend.entity.enums.Visibility;
 import com.panhoramix.backend.exception.MediaNotFoundException;
 import com.panhoramix.backend.mapper.MediaMapper;
 import com.panhoramix.backend.repository.MediaRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

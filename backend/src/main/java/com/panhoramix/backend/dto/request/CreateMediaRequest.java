@@ -4,11 +4,7 @@ import com.panhoramix.backend.entity.enums.MediaType;
 import com.panhoramix.backend.entity.enums.Visibility;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter

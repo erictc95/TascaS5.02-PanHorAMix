@@ -2,11 +2,7 @@ package com.panhoramix.backend.dto.response;
 
 import com.panhoramix.backend.entity.enums.MediaType;
 import com.panhoramix.backend.entity.enums.Visibility;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 

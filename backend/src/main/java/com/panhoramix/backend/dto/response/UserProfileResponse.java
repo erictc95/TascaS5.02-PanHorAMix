@@ -1,7 +1,10 @@
 package com.panhoramix.backend.dto.response;
 
 import com.panhoramix.backend.entity.enums.Role;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor

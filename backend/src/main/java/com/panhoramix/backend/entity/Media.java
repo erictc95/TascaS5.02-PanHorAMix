@@ -2,7 +2,6 @@ package com.panhoramix.backend.entity;
 
 import com.panhoramix.backend.entity.enums.MediaType;
 import com.panhoramix.backend.entity.enums.Visibility;
-import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import lombok.*;
 

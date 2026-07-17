@@ -5,14 +5,14 @@ import com.panhoramix.backend.dto.request.RegisterRequest;
 import com.panhoramix.backend.dto.response.LoginResponse;
 import com.panhoramix.backend.entity.User;
 import com.panhoramix.backend.entity.enums.Role;
-import com.panhoramix.backend.exception.InvalidCredentialsException;
-import com.panhoramix.backend.repository.UserRepository;
 import com.panhoramix.backend.exception.EmailAlreadyExistsException;
+import com.panhoramix.backend.exception.InvalidCredentialsException;
 import com.panhoramix.backend.exception.UsernameAlreadyExistsException;
+import com.panhoramix.backend.repository.UserRepository;
+import com.panhoramix.backend.security.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.panhoramix.backend.security.jwt.JwtService;
 
 import java.time.LocalDateTime;
 
