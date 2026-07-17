@@ -3,16 +3,22 @@ package com.panhoramix.backend.repository;
 import com.panhoramix.backend.entity.Media;
 import com.panhoramix.backend.entity.enums.MediaType;
 import com.panhoramix.backend.entity.enums.Visibility;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
 
 public interface MediaRepository extends JpaRepository<Media, Long> {
 
-    List<Media> findByVisibility(Visibility visibility);
+    Page<Media> findByVisibility(
+            Visibility visibility,
+            Pageable pageable);
 
-    List<Media> findByMediaType(MediaType mediaType);
+    Page<Media> findByMediaType(
+            MediaType mediaType,
+            Pageable pageable);
 
-    List<Media> findByCategory(String category);
+    Page<Media> findByCategory(
+            String category,
+            Pageable pageable);
 
 }

@@ -1,6 +1,7 @@
 package com.panhoramix.backend.controller;
 
 import com.panhoramix.backend.dto.request.CreateMediaRequest;
+import com.panhoramix.backend.dto.response.MediaPageResponse;
 import com.panhoramix.backend.dto.response.MediaResponse;
 import com.panhoramix.backend.entity.enums.MediaType;
 import com.panhoramix.backend.entity.enums.Visibility;
@@ -9,8 +10,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/media")
@@ -26,7 +25,10 @@ public class MediaController {
     }
 
     @GetMapping
-    public List<MediaResponse> getMedia(
+    public MediaPageResponse getMedia(
+
+            @RequestParam(defaultValue = "0")
+            int page,
 
             @RequestParam(required = false)
             Visibility visibility,
@@ -38,6 +40,7 @@ public class MediaController {
             String category) {
 
         return mediaService.getMedia(
+                page,
                 visibility,
                 mediaType,
                 category);
