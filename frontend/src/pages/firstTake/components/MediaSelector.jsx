@@ -333,10 +333,6 @@ function MediaSelector() {
 
                     <h2>🖼️🎥</h2>
 
-                    <h3>Drag & Drop your First Take</h3>
-
-                    <p>or</p>
-
                     <PHButton onClick={handleChooseScene}>
 
                         Choose Scene
