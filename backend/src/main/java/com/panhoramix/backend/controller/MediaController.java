@@ -3,6 +3,7 @@ package com.panhoramix.backend.controller;
 import com.panhoramix.backend.dto.request.CreateMediaRequest;
 import com.panhoramix.backend.dto.response.MediaResponse;
 import com.panhoramix.backend.service.MediaService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class MediaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MediaResponse createMedia(@RequestBody CreateMediaRequest request) {
+    public MediaResponse createMedia(@Valid @RequestBody CreateMediaRequest request) {
         return mediaService.createMedia(request);
     }
 
@@ -41,6 +42,15 @@ public class MediaController {
     public void deleteMedia(@PathVariable Long id) {
 
         mediaService.deleteMedia(id);
+
+    }
+
+    @PutMapping("/{id}")
+    public MediaResponse updateMedia(
+            @PathVariable Long id,
+            @Valid @RequestBody CreateMediaRequest request) {
+
+        return mediaService.updateMedia(id, request);
 
     }
 

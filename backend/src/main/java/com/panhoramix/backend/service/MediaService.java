@@ -3,6 +3,7 @@ package com.panhoramix.backend.service;
 import com.panhoramix.backend.dto.request.CreateMediaRequest;
 import com.panhoramix.backend.dto.response.MediaResponse;
 import com.panhoramix.backend.entity.Media;
+import com.panhoramix.backend.exception.MediaNotFoundException;
 import com.panhoramix.backend.mapper.MediaMapper;
 import com.panhoramix.backend.repository.MediaRepository;
 import lombok.RequiredArgsConstructor;
@@ -45,7 +46,7 @@ public class MediaService {
     public MediaResponse getMediaById(Long id) {
 
         Media media = mediaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Media not found"));
+                .orElseThrow(() -> new MediaNotFoundException(id));
 
         return mediaMapper.toResponse(media);
 
@@ -54,11 +55,27 @@ public class MediaService {
     public void deleteMedia(Long id) {
 
         if (!mediaRepository.existsById(id)) {
-            throw new RuntimeException("Media not found");
+            throw new MediaNotFoundException(id);
         }
 
         mediaRepository.deleteById(id);
 
+    }
+
+    public MediaResponse updateMedia(Long id, CreateMediaRequest request) {
+
+        Media media = mediaRepository.findById(id)
+                .orElseThrow(() -> new MediaNotFoundException(id));
+
+        media.setTitle(request.getTitle());
+        media.setDescription(request.getDescription());
+        media.setCategory(request.getCategory());
+        media.setVisibility(request.getVisibility());
+        media.setMediaType(request.getMediaType());
+
+        Media updatedMedia = mediaRepository.save(media);
+
+        return mediaMapper.toResponse(updatedMedia);
     }
 
 }
