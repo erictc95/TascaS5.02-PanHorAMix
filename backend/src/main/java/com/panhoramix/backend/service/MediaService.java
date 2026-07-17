@@ -22,10 +22,10 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class MediaService {
 
-    private final MediaRepository mediaRepository;
-    private final MediaMapper mediaMapper;
     private static final int PAGE_SIZE = 20;
     private static final Sort DEFAULT_SORT = Sort.by(Sort.Direction.DESC, "createdAt");
+    private final MediaRepository mediaRepository;
+    private final MediaMapper mediaMapper;
 
     public MediaResponse createMedia(CreateMediaRequest request) {
 
