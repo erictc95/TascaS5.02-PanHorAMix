@@ -3,6 +3,8 @@ package com.panhoramix.backend.service;
 import com.panhoramix.backend.dto.request.CreateMediaRequest;
 import com.panhoramix.backend.dto.response.MediaResponse;
 import com.panhoramix.backend.entity.Media;
+import com.panhoramix.backend.entity.enums.MediaType;
+import com.panhoramix.backend.entity.enums.Visibility;
 import com.panhoramix.backend.exception.MediaNotFoundException;
 import com.panhoramix.backend.mapper.MediaMapper;
 import com.panhoramix.backend.repository.MediaRepository;
@@ -41,6 +43,31 @@ public class MediaService {
 
         return mediaMapper.toResponseList(mediaRepository.findAll());
 
+    }
+
+    public List<MediaResponse> getMedia(
+            Visibility visibility,
+            MediaType mediaType,
+            String category) {
+
+        List<Media> mediaList;
+
+        if (visibility != null) {
+            mediaList = mediaRepository.findByVisibility(visibility);
+
+        } else if (mediaType != null) {
+            mediaList = mediaRepository.findByMediaType(mediaType);
+
+        } else if (category != null && !category.isBlank()) {
+            mediaList = mediaRepository.findByCategory(category);
+
+        } else {
+            mediaList = mediaRepository.findAll();
+        }
+
+        return mediaList.stream()
+                .map(mediaMapper::toResponse)
+                .toList();
     }
 
     public MediaResponse getMediaById(Long id) {

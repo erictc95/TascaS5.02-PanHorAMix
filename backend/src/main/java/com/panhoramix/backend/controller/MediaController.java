@@ -2,6 +2,8 @@ package com.panhoramix.backend.controller;
 
 import com.panhoramix.backend.dto.request.CreateMediaRequest;
 import com.panhoramix.backend.dto.response.MediaResponse;
+import com.panhoramix.backend.entity.enums.MediaType;
+import com.panhoramix.backend.entity.enums.Visibility;
 import com.panhoramix.backend.service.MediaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -24,10 +26,21 @@ public class MediaController {
     }
 
     @GetMapping
-    public List<MediaResponse> getAllMedia() {
+    public List<MediaResponse> getMedia(
 
-        return mediaService.getAllMedia();
+            @RequestParam(required = false)
+            Visibility visibility,
 
+            @RequestParam(required = false)
+            MediaType mediaType,
+
+            @RequestParam(required = false)
+            String category) {
+
+        return mediaService.getMedia(
+                visibility,
+                mediaType,
+                category);
     }
 
     @GetMapping("/{id}")
