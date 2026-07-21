@@ -5,6 +5,7 @@ import com.panhoramix.backend.dto.response.MediaPageResponse;
 import com.panhoramix.backend.dto.response.MediaResponse;
 import com.panhoramix.backend.entity.Media;
 import com.panhoramix.backend.entity.enums.MediaType;
+import com.panhoramix.backend.entity.enums.StorageFolder;
 import com.panhoramix.backend.entity.enums.Visibility;
 import com.panhoramix.backend.exception.MediaNotFoundException;
 import com.panhoramix.backend.mapper.MediaMapper;
@@ -23,11 +24,27 @@ import java.time.LocalDateTime;
 public class MediaService {
 
     private static final int PAGE_SIZE = 20;
-    private static final Sort DEFAULT_SORT = Sort.by(Sort.Direction.DESC, "createdAt");
+    private static final Sort DEFAULT_SORT =
+            Sort.by(Sort.Direction.DESC, "createdAt");
+
     private final MediaRepository mediaRepository;
     private final MediaMapper mediaMapper;
+    private final FileStorageService fileStorageService;
 
     public MediaResponse createMedia(CreateMediaRequest request) {
+
+        Long userId = 1L;
+
+        StorageFolder folder =
+                request.getMediaType() == MediaType.IMAGE
+                        ? StorageFolder.IMAGES
+                        : StorageFolder.VIDEOS;
+
+        String mediaUrl = fileStorageService.uploadFile(
+                request.getFile(),
+                folder,
+                userId
+        );
 
         Media media = Media.builder()
                 .title(request.getTitle())
@@ -35,7 +52,7 @@ public class MediaService {
                 .category(request.getCategory())
                 .visibility(request.getVisibility())
                 .mediaType(request.getMediaType())
-                .mediaUrl("")
+                .mediaUrl(mediaUrl)
                 .thumbnailUrl("")
                 .createdAt(LocalDateTime.now())
                 .build();
@@ -59,22 +76,27 @@ public class MediaService {
         Page<Media> mediaPage;
 
         if (visibility != null) {
+
             mediaPage = mediaRepository.findByVisibility(
                     visibility,
                     pageable);
 
         } else if (mediaType != null) {
+
             mediaPage = mediaRepository.findByMediaType(
                     mediaType,
                     pageable);
 
         } else if (category != null && !category.isBlank()) {
+
             mediaPage = mediaRepository.findByCategory(
                     category,
                     pageable);
 
         } else {
+
             mediaPage = mediaRepository.findAll(pageable);
+
         }
 
         return MediaPageResponse.builder()
@@ -106,7 +128,9 @@ public class MediaService {
 
     }
 
-    public MediaResponse updateMedia(Long id, CreateMediaRequest request) {
+    public MediaResponse updateMedia(
+            Long id,
+            CreateMediaRequest request) {
 
         Media media = mediaRepository.findById(id)
                 .orElseThrow(() -> new MediaNotFoundException(id));
@@ -120,6 +144,7 @@ public class MediaService {
         Media updatedMedia = mediaRepository.save(media);
 
         return mediaMapper.toResponse(updatedMedia);
+
     }
 
 }
