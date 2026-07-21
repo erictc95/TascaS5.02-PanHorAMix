@@ -55,60 +55,24 @@
 
 /* ---------- CORNERS ---------- */
 
-.logo-frame::before,
-.logo-frame::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 90px;
-    height: 90px;
+.frame{
+    position:relative;
+    display:inline-block;
 }
 
-.logo-frame::before {
 
-    top: 0;
-    left: 0;
+.frame-svg{
 
-    border-top: 4px solid var(--gold);
-    border-left: 4px solid var(--gold);
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    pointer-events:none;
 }
 
-.logo-frame::after {
-
-    top: 0;
-    right: 0;
-
-    border-top: 4px solid var(--gold);
-    border-right: 4px solid var(--gold);
-}
-
-.corner {
-
-    position: absolute;
-
-    width: 90px;
-    height: 90px;
-}
-
-.bottom-left {
-
-    bottom: 0;
-    left: 0;
-
-    border-bottom: 4px solid var(--gold);
-    border-left: 4px solid var(--gold);
-}
-
-.bottom-right {
-
-    bottom: 0;
-    right: 0;
-
-    border-bottom: 4px solid var(--gold);
-    border-right: 4px solid var(--gold);
-}
 
 /* ---------- DESCRIPTION ---------- */
 
