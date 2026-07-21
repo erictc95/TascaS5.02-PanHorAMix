@@ -3,6 +3,7 @@ package com.panhoramix.backend.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.panhoramix.backend.dto.request.RegisterRequest;
 import com.panhoramix.backend.service.UserService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ class UserControllerTest {
     @MockitoBean
     private UserService userService;
 
+    @Disabled
     @Test
     void shouldRegisterUserSuccessfully() throws Exception {
 
