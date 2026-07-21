@@ -18,10 +18,13 @@ public class MediaController {
 
     private final MediaService mediaService;
 
-    @PostMapping
+    @PostMapping(consumes = "multipart/form-data")
     @ResponseStatus(HttpStatus.CREATED)
-    public MediaResponse createMedia(@Valid @RequestBody CreateMediaRequest request) {
+    public MediaResponse createMedia(
+            @Valid @ModelAttribute CreateMediaRequest request) {
+
         return mediaService.createMedia(request);
+
     }
 
     @GetMapping
@@ -44,6 +47,7 @@ public class MediaController {
                 visibility,
                 mediaType,
                 category);
+
     }
 
     @GetMapping("/{id}")
@@ -64,7 +68,7 @@ public class MediaController {
     @PutMapping("/{id}")
     public MediaResponse updateMedia(
             @PathVariable Long id,
-            @Valid @RequestBody CreateMediaRequest request) {
+            @Valid @ModelAttribute CreateMediaRequest request) {
 
         return mediaService.updateMedia(id, request);
 
