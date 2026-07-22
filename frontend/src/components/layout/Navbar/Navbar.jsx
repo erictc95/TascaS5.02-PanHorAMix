@@ -59,11 +59,22 @@ function Navbar() {
 
         <header className="pham-navbar">
 
-            <Link
-                to="/home"
-                className="pham-logo"
-            >
-                PHAM
+            <Link to="/home" className="pham-logo">
+
+                <span className="pham-frame"></span>
+
+                <div className="pham-logo-text">
+
+        <span className="pham-title">
+            PHAM
+        </span>
+
+                    <span className="pham-subtitle">
+            Designed for Landscape Cinema
+        </span>
+
+                </div>
+
             </Link>
 
             <nav className="pham-navbar-links">

@@ -1,89 +1,153 @@
 .pham-navbar {
 
     position: sticky;
-
     top: 0;
-
     z-index: 1000;
 
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
 
-    padding: 18px 40px;
+    height: 72px;
+    padding: 0 60px;
 
-    background: #0b0b0b;
+    background: rgba(10, 10, 10, 0.88);
 
-    border-bottom: 1px solid #c8a24b;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 
-}
-
-.pham-logo{
-
-    text-decoration:none;
-
-    color:white;
-
-    font-size:26px;
-
-    font-weight:bold;
-
-    letter-spacing:3px;
+    border-bottom: 1px solid rgba(200, 162, 75, 0.35);
 
 }
 
-.pham-navbar-links{
+.pham-logo {
 
-    display:flex;
+    display: flex;
+    align-items: center;
+    gap: 14px;
 
-    align-items:center;
-
-    gap:28px;
-
-}
-
-.pham-navbar-links a{
-
-    color:white;
-
-    text-decoration:none;
-
-    transition:.25s;
+    text-decoration: none;
+    color: white;
 
 }
 
-.pham-navbar-links a:hover{
+.pham-frame {
 
-    color:#c8a24b;
+    width: 24px;
+    aspect-ratio: 16 / 9;
 
-}
+    border: 2px solid #C8A24B;
+    border-radius: 3px;
 
-.pham-user{
-
-    color:#c8a24b;
-
-    font-weight:600;
+    flex-shrink: 0;
 
 }
 
-.pham-logout{
+.pham-logo-text {
 
-    background:none;
-
-    border:none;
-
-    color:white;
-
-    cursor:pointer;
-
-    transition:.25s;
+    display: flex;
+    flex-direction: column;
 
 }
 
-.pham-logout:hover{
+.pham-title {
 
-    color:#c8a24b;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    line-height: 1;
+
+    color: white;
+
+}
+
+.pham-subtitle {
+
+    margin-top: 3px;
+
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    color: #8d8d8d;
+
+}
+
+.pham-navbar-links {
+
+    display: flex;
+    align-items: center;
+    gap: 36px;
+
+}
+
+.pham-navbar-links a {
+
+    position: relative;
+
+    color: #F5F5F5;
+    text-decoration: none;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    transition: color .25s ease;
+
+}
+
+.pham-navbar-links a::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -8px;
+
+    width: 0;
+    height: 2px;
+
+    background: #C8A24B;
+
+    transition: width .25s ease;
+
+}
+
+.pham-navbar-links a:hover {
+
+    color: #C8A24B;
+
+}
+
+.pham-navbar-links a:hover::after {
+
+    width: 100%;
+
+}
+
+.pham-user {
+
+    color: #C8A24B;
+    font-weight: 600;
+
+}
+
+.pham-logout {
+
+    background: transparent;
+    border: none;
+
+    color: #F5F5F5;
+
+    font-size: 15px;
+    cursor: pointer;
+
+    transition: color .25s ease;
+
+}
+
+.pham-logout:hover {
+
+    color: #C8A24B;
 
 }
