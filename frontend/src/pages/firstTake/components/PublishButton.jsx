@@ -1,10 +1,58 @@
 import PHButton from "../../../components/common/PHButton";
+import videoService from "../../../api/videoService";
 
-function PublishButton() {
+function PublishButton({
+                           selectedMedia,
+                           mediaType,
+                           sceneData
+                       }) {
 
-    function handlePublish() {
+    async function handlePublish() {
 
-        console.log("Publish video");
+        try {
+
+            const formData = new FormData();
+
+            formData.append("file", selectedMedia);
+
+            formData.append(
+                "title",
+                sceneData.title
+            );
+
+            formData.append(
+                "description",
+                sceneData.description
+            );
+
+            formData.append(
+                "category",
+                sceneData.category
+            );
+
+            formData.append(
+                "visibility",
+                sceneData.visibility
+            );
+
+            formData.append(
+                "mediaType",
+                mediaType.toUpperCase()
+            );
+
+            const media = await videoService.createMedia(formData);
+
+            console.log(media);
+
+            alert("Scene published successfully!");
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert("Error publishing the scene.");
+
+        }
 
     }
 
