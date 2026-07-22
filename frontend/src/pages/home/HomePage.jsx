@@ -3,6 +3,7 @@ import { getProfile } from "../../api/userService";
 
 import FocusFrame from "./components/FocusFrame.jsx";
 import VideoFeed from "./components/VideoFeed";
+import AppLayout from "../../components/layout/AppLayout";
 import UploadButton from "./components/UploadButton";
 
 import "./HomePage.css";
@@ -24,17 +25,18 @@ function HomePage() {
         loadProfile();
     }, []);
 
-
     return (
-        <div className="home-page">
+        <AppLayout>
+            <div className="home-page">
 
-            <FocusFrame username={user?.username} />
+                <FocusFrame username={user?.username} />
 
-            <UploadButton />
+                <UploadButton />
 
-            <VideoFeed />
+                <VideoFeed />
 
-        </div>
+            </div>
+        </AppLayout>
     );
 }
 
