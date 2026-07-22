@@ -5,6 +5,7 @@ import com.panhoramix.backend.entity.enums.Visibility;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -26,5 +27,8 @@ public class CreateMediaRequest {
 
     @NotNull(message = "Media type is required.")
     private MediaType mediaType;
+
+    @NotNull(message = "File is required.")
+    private MultipartFile file;
 
 }

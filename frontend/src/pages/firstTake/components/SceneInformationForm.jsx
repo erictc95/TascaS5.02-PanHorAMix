@@ -1,4 +1,17 @@
-function SceneInformationForm() {
+function SceneInformationForm({ sceneData, setSceneData }) {
+
+    function handleChange(event) {
+
+        const { name, value } = event.target;
+
+        setSceneData((previousData) => ({
+
+            ...previousData,
+            [name]: value
+
+        }));
+
+    }
 
     return (
 
@@ -8,37 +21,51 @@ function SceneInformationForm() {
 
             <input
                 type="text"
+                name="title"
                 placeholder="Scene title"
+                value={sceneData.title}
+                onChange={handleChange}
             />
 
             <textarea
+                name="description"
                 placeholder="Describe your scene..."
                 rows="4"
+                value={sceneData.description}
+                onChange={handleChange}
             />
 
-            <select>
+            <select
+                name="category"
+                value={sceneData.category}
+                onChange={handleChange}
+            >
 
                 <option value="">Select a category</option>
 
-                <option>Cinema</option>
+                <option value="Cinema">Cinema</option>
 
-                <option>Photography</option>
+                <option value="Photography">Photography</option>
 
-                <option>Nature</option>
+                <option value="Nature">Nature</option>
 
-                <option>Travel</option>
+                <option value="Travel">Travel</option>
 
-                <option>Automotive</option>
+                <option value="Automotive">Automotive</option>
 
             </select>
 
-            <select>
+            <select
+                name="visibility"
+                value={sceneData.visibility}
+                onChange={handleChange}
+            >
 
                 <option value="">Select visibility</option>
 
-                <option>Public</option>
+                <option value="PUBLIC">Public</option>
 
-                <option>Private</option>
+                <option value="PRIVATE">Private</option>
 
             </select>
 

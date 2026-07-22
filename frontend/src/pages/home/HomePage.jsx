@@ -25,17 +25,18 @@ function HomePage() {
         loadProfile();
     }, []);
 
-
     return (
-        <div className="home-page">
+        <AppLayout>
+            <div className="home-page">
 
-            <FocusFrame username={user?.username} />
+                <FocusFrame username={user?.username} />
 
-            <UploadButton />
+                <UploadButton />
 
-            <EmptyState />
+                <VideoFeed />
 
-        </div>
+            </div>
+        </AppLayout>
     );
 }
 
