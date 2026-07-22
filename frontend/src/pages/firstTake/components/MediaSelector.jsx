@@ -15,6 +15,15 @@ function MediaSelector() {
 
     const [previewUrl, setPreviewUrl] = useState("");
 
+    const [sceneData, setSceneData] = useState({
+
+        title: "",
+        description: "",
+        category: "",
+        visibility: ""
+
+    });
+
     const [directorTitle, setDirectorTitle] = useState("");
 
     const [directorMessage, setDirectorMessage] = useState("");
@@ -356,7 +365,10 @@ function MediaSelector() {
 
                 {selectedMedia && (
 
-                    <SceneInformationForm />
+                    <SceneInformationForm
+                        sceneData={sceneData}
+                        setSceneData={setSceneData}
+                    />
 
                 )}
 
@@ -401,7 +413,11 @@ function MediaSelector() {
 
                     <div className="publish-container">
 
-                        <PublishButton />
+                        <PublishButton
+                            selectedMedia={selectedMedia}
+                            mediaType={mediaType}
+                            sceneData={sceneData}
+                        />
 
                     </div>
 

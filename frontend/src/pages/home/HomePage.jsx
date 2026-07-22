@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getProfile } from "../../api/userService";
 
 import FocusFrame from "./components/FocusFrame.jsx";
-import EmptyState from "./components/EmptyState";
+import VideoFeed from "./components/VideoFeed";
 import UploadButton from "./components/UploadButton";
 
 import "./HomePage.css";
@@ -32,7 +32,7 @@ function HomePage() {
 
             <UploadButton />
 
-            <EmptyState />
+            <VideoFeed />
 
         </div>
     );
