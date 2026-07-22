@@ -1,0 +1,89 @@
+.pham-navbar {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 18px 40px;
+
+    background: #0b0b0b;
+
+    border-bottom: 1px solid #c8a24b;
+
+}
+
+.pham-logo{
+
+    text-decoration:none;
+
+    color:white;
+
+    font-size:26px;
+
+    font-weight:bold;
+
+    letter-spacing:3px;
+
+}
+
+.pham-navbar-links{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:28px;
+
+}
+
+.pham-navbar-links a{
+
+    color:white;
+
+    text-decoration:none;
+
+    transition:.25s;
+
+}
+
+.pham-navbar-links a:hover{
+
+    color:#c8a24b;
+
+}
+
+.pham-user{
+
+    color:#c8a24b;
+
+    font-weight:600;
+
+}
+
+.pham-logout{
+
+    background:none;
+
+    border:none;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.pham-logout:hover{
+
+    color:#c8a24b;
+
+}

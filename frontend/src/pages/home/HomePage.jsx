@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { getProfile } from "../../api/userService";
 
 import FocusFrame from "./components/FocusFrame.jsx";
-import EmptyState from "./components/EmptyState";
+import VideoFeed from "./components/VideoFeed";
+import AppLayout from "../../components/layout/AppLayout";
 import UploadButton from "./components/UploadButton";
 
 import "./HomePage.css";
