@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import videoService from "../../../api/videoService";
 
 import EmptyState from "./EmptyState";
+import VideoFeedSkeleton from "./VideoFeedSkeleton.jsx";
 
 function VideoFeed() {
 
@@ -38,7 +39,7 @@ function VideoFeed() {
 
     if (loading) {
 
-        return <p>Loading...</p>;
+        return <VideoFeedSkeleton />;
 
     }
 
