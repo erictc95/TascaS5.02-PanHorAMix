@@ -1,0 +1,120 @@
+.pham-toast {
+
+    position: fixed;
+
+    top: 90px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 500px;
+
+    overflow: hidden;
+
+    padding: 24px 30px;
+
+    background: #111111;
+
+    border: 1px solid #C8A24B;
+
+    border-radius: 12px;
+
+    color: white;
+
+    box-shadow: 0 12px 35px rgba(0,0,0,.45);
+
+    z-index: 9999;
+
+    animation: toastIn .35s ease;
+
+}
+
+.pham-toast.success{
+
+    border-color:#C8A24B;
+
+}
+
+.pham-toast.error{
+
+    border-color:#D9534F;
+
+}
+
+.pham-toast-title{
+
+    color:#C8A24B;
+
+    font-size:22px;
+
+    font-weight:700;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
+
+    margin-bottom:12px;
+
+}
+
+.pham-toast-message{
+
+    color:#DDDDDD;
+
+    font-size:17px;
+
+    line-height:1.6;
+
+}
+
+.pham-toast-progress{
+
+    position:absolute;
+
+    left:0;
+    bottom:0;
+
+    width:100%;
+    height:4px;
+
+    background:#C8A24B;
+
+    animation:toastProgress 5s linear forwards;
+
+}
+
+@keyframes toastProgress{
+
+    from{
+
+        width:100%;
+
+    }
+
+    to{
+
+        width:0;
+
+    }
+
+}
+
+@keyframes toastIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translate(-50%,-35px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translate(-50%,0);
+
+    }
+
+}

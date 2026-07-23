@@ -1,29 +1,80 @@
-.ph-button{
+.ph-button {
 
-    width:320px;
+    width: 320px;
 
-    height:56px;
+    height: 56px;
 
-    border:2px solid var(--gold);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
 
-    background:transparent;
+    border: 2px solid var(--gold);
 
-    color:var(--gold);
+    background: transparent;
 
-    font-size:1rem;
+    color: var(--gold);
 
-    letter-spacing:3px;
+    font-size: 1rem;
 
-    cursor:pointer;
+    font-weight: 600;
 
-    transition:.25s ease;
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition: all .25s ease;
 
 }
 
-.ph-button:hover{
+.ph-button:hover:not(:disabled) {
 
-    background:var(--gold);
+    background: var(--gold);
 
-    color:black;
+    color: black;
+
+}
+
+.ph-button:disabled {
+
+    cursor: not-allowed;
+
+    opacity: .75;
+
+    background: rgba(200, 162, 75, .08);
+
+    color: var(--gold);
+
+}
+
+.ph-button-spinner {
+
+    width: 18px;
+
+    height: 18px;
+
+    border: 2px solid rgba(200,162,75,.35);
+
+    border-top: 2px solid var(--gold);
+
+    border-radius: 50%;
+
+    animation: phButtonSpin .8s linear infinite;
+
+}
+
+@keyframes phButtonSpin {
+
+    from {
+
+        transform: rotate(0deg);
+
+    }
+
+    to {
+
+        transform: rotate(360deg);
+
+    }
 
 }
