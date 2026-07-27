@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import videoService from "../../../api/videoService";
+import mediaService from "../../../api/mediaService.js";
 
 import EmptyState from "./EmptyState";
 import VideoFeedSkeleton from "./VideoFeedSkeleton.jsx";
@@ -21,7 +21,7 @@ function VideoFeed() {
 
         try {
 
-            const response = await videoService.getMedia();
+            const response = await mediaService.getMedia();
 
             setMedia(response.content);
 

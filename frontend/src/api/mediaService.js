@@ -1,6 +1,6 @@
 import api from "./axiosConfig";
 
-const videoService = {
+const mediaService = {
 
     async createMedia(formData) {
 
@@ -15,6 +15,12 @@ const videoService = {
         );
 
         return response.data;
+
+    },
+
+    async deleteMedia(id) {
+
+        await api.delete(`/media/${id}`);
 
     },
 
@@ -38,12 +44,18 @@ const videoService = {
 
     },
 
-    async deleteMedia(id) {
+    async getMyMedia(page = 0) {
 
-        await api.delete(`/media/${id}`);
+        const response = await api.get("/media/me", {
+            params: {
+                page
+            }
+        });
+
+        return response.data;
 
     }
 
 };
 
-export default videoService;
+export default mediaService;
