@@ -3,7 +3,6 @@ import { getProfile } from "../../api/userService";
 
 import FocusFrame from "./components/FocusFrame.jsx";
 import VideoFeed from "./components/VideoFeed";
-import AppLayout from "../../components/layout/AppLayout";
 import UploadButton from "./components/UploadButton";
 
 import "./HomePage.css";
@@ -26,7 +25,6 @@ function HomePage() {
     }, []);
 
     return (
-        <AppLayout>
             <div className="home-page">
 
                 <FocusFrame username={user?.username} />
@@ -36,7 +34,6 @@ function HomePage() {
                 <VideoFeed />
 
             </div>
-        </AppLayout>
     );
 }
 

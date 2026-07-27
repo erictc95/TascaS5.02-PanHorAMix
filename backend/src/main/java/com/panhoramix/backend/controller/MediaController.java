@@ -74,4 +74,14 @@ public class MediaController {
 
     }
 
+    @GetMapping("/me")
+    public MediaPageResponse getMyMedia(
+
+            @RequestParam(defaultValue = "0")
+            int page) {
+
+        return mediaService.getMyMedia(page);
+
+    }
+
 }

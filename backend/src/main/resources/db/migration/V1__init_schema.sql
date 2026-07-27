@@ -17,7 +17,14 @@ CREATE TABLE media (
                        media_type VARCHAR(20) NOT NULL CHECK (media_type IN ('VIDEO', 'IMAGE')),
                        category VARCHAR(100) NOT NULL,
                        visibility VARCHAR(20) NOT NULL CHECK (visibility IN ('PUBLIC', 'PRIVATE')),
-                       created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+                       created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+                       user_id BIGINT NOT NULL,
+
+                       CONSTRAINT fk_media_user
+                           FOREIGN KEY (user_id)
+                               REFERENCES users(id)
+                               ON DELETE CASCADE
 );
 
 CREATE TABLE tags (

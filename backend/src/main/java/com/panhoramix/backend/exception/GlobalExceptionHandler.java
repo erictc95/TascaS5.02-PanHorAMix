@@ -88,4 +88,22 @@ public class GlobalExceptionHandler {
                 .body(response);
     }
 
+    @ExceptionHandler(UserNotAuthenticatedException.class)
+    public ResponseEntity<ErrorResponse> handleUserNotAuthenticated(
+            UserNotAuthenticatedException ex) {
+
+        ErrorResponse response = ErrorResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.UNAUTHORIZED.value())
+                .error(HttpStatus.UNAUTHORIZED.getReasonPhrase())
+                .code("USER_NOT_AUTHENTICATED")
+                .message(ex.getMessage())
+                .build();
+
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(response);
+
+    }
+
 }

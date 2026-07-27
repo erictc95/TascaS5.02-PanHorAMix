@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import PHButton from "../../../components/common/PHButton";
-import videoService from "../../../api/videoService";
+import mediaService from "../../../api/mediaService.js";
 import { useToast } from "../../../context/ToastContext";
 
 function PublishButton({
@@ -39,7 +39,7 @@ function PublishButton({
 
             formData.append("mediaType", mediaType.toUpperCase());
 
-            const media = await videoService.createMedia(formData);
+            const media = await mediaService.createMedia(formData);
 
             console.log(media);
 

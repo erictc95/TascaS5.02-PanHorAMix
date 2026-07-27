@@ -4,13 +4,16 @@ import com.panhoramix.backend.dto.request.CreateMediaRequest;
 import com.panhoramix.backend.dto.response.MediaPageResponse;
 import com.panhoramix.backend.dto.response.MediaResponse;
 import com.panhoramix.backend.entity.Media;
+import com.panhoramix.backend.entity.User;
 import com.panhoramix.backend.entity.enums.MediaType;
 import com.panhoramix.backend.entity.enums.StorageFolder;
 import com.panhoramix.backend.entity.enums.Visibility;
 import com.panhoramix.backend.exception.MediaNotFoundException;
 import com.panhoramix.backend.mapper.MediaMapper;
 import com.panhoramix.backend.repository.MediaRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MediaService {
@@ -30,10 +34,14 @@ public class MediaService {
     private final MediaRepository mediaRepository;
     private final MediaMapper mediaMapper;
     private final FileStorageService fileStorageService;
+    private final CurrentUserService currentUserService;
 
+    @Transactional
     public MediaResponse createMedia(CreateMediaRequest request) {
 
-        Long userId = 1L;
+        User user = currentUserService.getCurrentUser();
+
+        Long userId = user.getId();
 
         StorageFolder folder =
                 request.getMediaType() == MediaType.IMAGE
@@ -54,12 +62,35 @@ public class MediaService {
                 .mediaType(request.getMediaType())
                 .mediaUrl(mediaUrl)
                 .thumbnailUrl("")
+                .user(user)
                 .createdAt(LocalDateTime.now())
                 .build();
 
-        Media savedMedia = mediaRepository.save(media);
+        try {
 
-        return mediaMapper.toResponse(savedMedia);
+            Media savedMedia = mediaRepository.save(media);
+
+            return mediaMapper.toResponse(savedMedia);
+
+        } catch (Exception ex) {
+
+            try {
+
+                fileStorageService.deleteFile(mediaUrl);
+
+            } catch (Exception cleanupEx) {
+
+                log.error(
+                        "Failed to delete orphaned file from Cloudflare: {}",
+                        mediaUrl,
+                        cleanupEx
+                );
+
+            }
+
+            throw ex;
+
+        }
     }
 
     public MediaPageResponse getMedia(
@@ -120,11 +151,12 @@ public class MediaService {
 
     public void deleteMedia(Long id) {
 
-        if (!mediaRepository.existsById(id)) {
-            throw new MediaNotFoundException(id);
-        }
+        Media media = mediaRepository.findById(id)
+                .orElseThrow(() -> new MediaNotFoundException(id));
 
-        mediaRepository.deleteById(id);
+        fileStorageService.deleteFile(media.getMediaUrl());
+
+        mediaRepository.delete(media);
 
     }
 
@@ -147,4 +179,25 @@ public class MediaService {
 
     }
 
+    public MediaPageResponse getMyMedia(int page) {
+        User currentUser = currentUserService.getCurrentUser();
+
+        Pageable pageable = PageRequest.of(
+                page,
+                PAGE_SIZE,
+                DEFAULT_SORT);
+
+        Page<Media> mediaPage =
+                mediaRepository.findByUserId(
+                        currentUser.getId(),
+                        pageable);
+
+        return MediaPageResponse.builder()
+                .content(mediaMapper.toResponseList(mediaPage.getContent()))
+                .page(mediaPage.getNumber())
+                .size(mediaPage.getSize())
+                .totalElements(mediaPage.getTotalElements())
+                .last(mediaPage.isLast())
+                .build();
+    }
 }
