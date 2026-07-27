@@ -1,6 +1,8 @@
+import { Outlet } from "react-router-dom";
+
 import Navbar from "./Navbar/Navbar";
 
-function AppLayout({ children }) {
+function AppLayout() {
 
     return (
 
@@ -10,7 +12,7 @@ function AppLayout({ children }) {
 
             <main>
 
-                {children}
+                <Outlet />
 
             </main>
 

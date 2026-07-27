@@ -92,7 +92,9 @@ function Navbar() {
                         </Link>
 
                         <span className="pham-user">
-                            @{user.username}
+                            <Link to="/profile">
+                                @{user.username}
+                            </Link>
                         </span>
 
                         <button
