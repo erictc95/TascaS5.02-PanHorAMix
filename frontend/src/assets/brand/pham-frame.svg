@@ -1,0 +1,38 @@
+<svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 160 90"
+        fill="none">
+
+    <!-- Superior izquierda -->
+    <path
+            d="M4 22 V4 H36"
+            stroke="#D4AF37"
+            stroke-width="4"
+            stroke-linecap="round"
+            stroke-linejoin="round"/>
+
+    <!-- Superior derecha -->
+    <path
+            d="M124 4 H156 V22"
+            stroke="#D4AF37"
+            stroke-width="4"
+            stroke-linecap="round"
+            stroke-linejoin="round"/>
+
+    <!-- Inferior izquierda -->
+    <path
+            d="M4 68 V86 H36"
+            stroke="#D4AF37"
+            stroke-width="4"
+            stroke-linecap="round"
+            stroke-linejoin="round"/>
+
+    <!-- Inferior derecha -->
+    <path
+            d="M124 86 H156 V68"
+            stroke="#D4AF37"
+            stroke-width="4"
+            stroke-linecap="round"
+            stroke-linejoin="round"/>
+
+</svg>
