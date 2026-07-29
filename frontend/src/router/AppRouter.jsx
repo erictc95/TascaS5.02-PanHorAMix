@@ -7,6 +7,7 @@ import HomePage from "../pages/Home/HomePage";
 import FirstTakePage from "../pages/FirstTake/FirstTakePage.jsx";
 import ProfilePage from "../pages/Profile/ProfilePage.jsx";
 import AppLayout from "../components/layout/AppLayout.jsx";
+import MediaPage from "../pages/Media/MediaPage.jsx";
 
 function AppRouter() {
 
@@ -29,6 +30,8 @@ function AppRouter() {
                 <Route element={<AppLayout />}>
 
                     <Route path="/home" element={<HomePage />} />
+
+                    <Route path="/media/:id" element={<MediaPage />} />
 
                     <Route path="/upload" element={<FirstTakePage />} />
 

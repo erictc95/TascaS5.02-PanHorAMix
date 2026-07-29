@@ -31,4 +31,8 @@ public class MediaResponse {
 
     private LocalDateTime createdAt;
 
+    private String username;
+
+    private String avatarUrl;
+
 }

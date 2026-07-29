@@ -2,26 +2,34 @@ import "./PhamFrame.css";
 
 function PhamFrame({ username }) {
     return (
-        <div className="pham-frame">
+        <div className="welcome-frame">
 
-            <p className="pham-title">
+            <p className="welcome-title">
+
                 WELCOME BACK
+
             </p>
 
-            <div className="pham-box">
+            <div className="welcome-box">
 
-                <span className="corner top-left"></span>
-                <span className="corner top-right"></span>
+                <div className="welcome-box">
 
-                <h1>@{username}</h1>
+                    <span className="welcome-corner welcome-top-left"></span>
+                    <span className="welcome-corner welcome-top-right"></span>
 
-                <span className="corner bottom-left"></span>
-                <span className="corner bottom-right"></span>
+                    <h1>@{username}</h1>
+
+                    <span className="welcome-corner welcome-bottom-left"></span>
+                    <span className="welcome-corner welcome-bottom-right"></span>
+
+                </div>
 
             </div>
 
-            <p className="pham-subtitle">
+            <p className="welcome-subtitle">
+
                 Ready for the Landscape Experience?
+
             </p>
 
         </div>

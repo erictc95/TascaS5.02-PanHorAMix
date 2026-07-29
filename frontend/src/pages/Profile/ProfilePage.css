@@ -87,6 +87,19 @@
 
     cursor:pointer;
 
+    position: relative;
+
+}
+
+.profile-card-status{
+
+    position:absolute;
+
+    top:12px;
+    right:12px;
+
+    z-index:10;
+
 }
 
 .profile-card:hover{

@@ -21,6 +21,8 @@ public class MediaMapper {
                 .category(media.getCategory())
                 .visibility(media.getVisibility())
                 .createdAt(media.getCreatedAt())
+                .username(media.getUser().getUsername())
+                .avatarUrl(media.getUser().getAvatarUrl())
                 .build();
 
     }

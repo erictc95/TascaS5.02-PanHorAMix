@@ -4,12 +4,16 @@ import { useEffect, useState } from "react";
 
 import { getProfile } from "../../api/userService";
 import mediaService from "../../api/mediaService";
+import phamVideoPlaceholder from "../../assets/placeholders/pham-video-placeholder.png";
+import SceneStatus from "../../components/scene/SceneStatus.jsx";
+import {useNavigate} from "react-router-dom";
 
 function ProfilePage() {
 
     const [user, setUser] = useState(null);
     const [media, setMedia] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -109,27 +113,45 @@ function ProfilePage() {
 
                     <div className="profile-grid">
 
-                        {media.map(scene => (
+                        {media.map(scene => {
 
-                            <div
-                                key={scene.id}
-                                className="profile-card"
-                            >
+                            const imageSrc =
+                                scene.mediaType === "VIDEO"
+                                    ? (scene.thumbnailUrl?.trim()
+                                        ? scene.thumbnailUrl
+                                        : phamVideoPlaceholder)
+                                    : scene.mediaUrl;
 
-                                <img
-                                    src={scene.thumbnailUrl || scene.mediaUrl}
-                                    alt={scene.title}
-                                />
+                            return (
 
-                                <h3>
+                                <div
+                                    key={scene.id}
+                                    className="profile-card"
+                                    onClick={() => navigate(`/media/${scene.id}`)}
+                                >
 
-                                    {scene.title}
+                                    <div className="profile-card-status">
 
-                                </h3>
+                                        <SceneStatus visibility={scene.visibility} />
 
-                            </div>
+                                    </div>
 
-                        ))}
+                                    <img
+                                        src={imageSrc}
+                                        alt={scene.title}
+                                    />
+
+                                    <h3>
+
+                                        {scene.title}
+
+                                    </h3>
+
+                                </div>
+
+                            );
+
+                        })}
 
                     </div>
 

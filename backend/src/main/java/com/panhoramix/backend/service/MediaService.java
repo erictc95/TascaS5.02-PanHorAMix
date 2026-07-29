@@ -126,7 +126,9 @@ public class MediaService {
 
         } else {
 
-            mediaPage = mediaRepository.findAll(pageable);
+            mediaPage = mediaRepository.findByVisibility(
+                    Visibility.PUBLIC,
+                    pageable);
 
         }
 
@@ -145,7 +147,21 @@ public class MediaService {
         Media media = mediaRepository.findById(id)
                 .orElseThrow(() -> new MediaNotFoundException(id));
 
-        return mediaMapper.toResponse(media);
+        if (media.getVisibility() == Visibility.PUBLIC) {
+
+            return mediaMapper.toResponse(media);
+
+        }
+
+        User currentUser = currentUserService.getCurrentUser();
+
+        if (media.getUser().getId().equals(currentUser.getId())) {
+
+            return mediaMapper.toResponse(media);
+
+        }
+
+        throw new MediaNotFoundException(id);
 
     }
 

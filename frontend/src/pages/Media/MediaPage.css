@@ -1,0 +1,58 @@
+.media-page{
+
+    width:100%;
+    max-width:1200px;
+
+    margin:110px auto 60px;
+
+    padding:0 20px;
+
+}
+
+.media-player{
+
+    width:100%;
+
+    aspect-ratio:16/9;
+
+    background:#000;
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+}
+
+.media-player img,
+.media-player video{
+
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+
+    display:block;
+
+}
+
+.media-info{
+
+    margin-top:30px;
+
+}
+
+.media-info h1{
+
+    color:#fff;
+
+    margin-bottom:15px;
+
+}
+
+.media-info p{
+
+    color:#bdbdbd;
+
+    line-height:1.6;
+
+}
