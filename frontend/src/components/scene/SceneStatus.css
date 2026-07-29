@@ -1,0 +1,31 @@
+.scene-status {
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid #D4AF37;
+    border-radius: 50%;
+
+    color: #D4AF37;
+
+    font-size: 18px;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    backdrop-filter: blur(6px);
+
+    transition: all .2s ease;
+
+}
+
+.scene-status:hover {
+
+    transform: scale(1.08);
+
+    background: rgba(212, 175, 55, 0.12);
+
+}

@@ -3,7 +3,6 @@ import { getProfile } from "../../api/userService";
 
 import PhamFrame from "./components/PhamFrame.jsx";
 import VideoFeed from "./components/VideoFeed";
-import UploadButton from "./components/UploadButton";
 
 import "./HomePage.css";
 

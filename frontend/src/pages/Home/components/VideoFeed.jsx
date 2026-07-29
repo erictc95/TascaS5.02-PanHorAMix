@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 
 import mediaService from "../../../api/mediaService.js";
 
+import SceneStatus from "../../../components/scene/SceneStatus";
 import EmptyState from "./EmptyState";
 import VideoFeedSkeleton from "./VideoFeedSkeleton.jsx";
+import MediaCard from "../../../components/scene/MediaCard";
+import "./VideoFeed.css";
 
 function VideoFeed() {
 
@@ -53,39 +56,12 @@ function VideoFeed() {
 
         <div className="video-feed">
 
-            {media.map((item) => (
+            {media.map(item => (
 
-                <div
+                <MediaCard
                     key={item.id}
-                    className="media-card"
-                >
-
-                    <h3>{item.title}</h3>
-
-                    <p>{item.description}</p>
-
-                    {item.mediaType === "IMAGE" ? (
-
-                        <img
-                            src={item.mediaUrl}
-                            alt={item.title}
-                            width="600"
-                        />
-
-                    ) : (
-
-                        <video
-                            controls
-                            width="600"
-                        >
-
-                            <source src={item.mediaUrl} />
-
-                        </video>
-
-                    )}
-
-                </div>
+                    item={item}
+                />
 
             ))}
 

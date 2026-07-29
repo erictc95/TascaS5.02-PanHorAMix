@@ -1,65 +1,65 @@
-.pham-frame {
+.welcome-frame {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 80px;
+    margin-bottom: 40px;
 }
 
-.pham-title {
+.welcome-title {
     color: #d4af37;
     letter-spacing: 6px;
     font-size: 18px;
-    margin-bottom: 25px;
+    margin-bottom: 16px;
 }
 
-.pham-box {
+.welcome-box {
     position: relative;
-    padding: 30px 60px;
+    padding: 18px 45px;
 }
 
-.pham-box h1 {
+.welcome-box h1 {
     color: #d4af37;
     font-size: 48px;
     margin: 0;
 }
 
-.pham-subtitle {
+.welcome-subtitle {
     color: #d4af37;
-    margin-top: 20px;
+    margin-top: 16px;
     font-size: 22px;
 }
 
 /* Esquinas */
 
-.corner {
+.welcome-corner {
     position: absolute;
     width: 25px;
     height: 25px;
     border-color: #d4af37;
 }
 
-.top-left {
+.welcome-top-left {
     top: 0;
     left: 0;
     border-top: 3px solid;
     border-left: 3px solid;
 }
 
-.top-right {
+.welcome-top-right {
     top: 0;
     right: 0;
     border-top: 3px solid;
     border-right: 3px solid;
 }
 
-.bottom-left {
+.welcome-bottom-left {
     bottom: 0;
     left: 0;
     border-bottom: 3px solid;
     border-left: 3px solid;
 }
 
-.bottom-right {
+.welcome-bottom-right {
     bottom: 0;
     right: 0;
     border-bottom: 3px solid;
