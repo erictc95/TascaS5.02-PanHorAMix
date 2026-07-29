@@ -63,14 +63,12 @@
 }
 
 .media-card-status{
-
     position:absolute;
 
     top:20px;
+    left:20px;
 
-    right:20px;
-
-    z-index: 10;
+    z-index:10;
 
 }
 
@@ -96,4 +94,36 @@
 
     color:#aaa;
 
+}
+
+.media-card-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    width: fit-content;
+    transition: color 0.2s ease;
+}
+
+.media-card-author img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #D4AF37;
+    transition: box-shadow 0.2s ease;
+}
+
+.media-card-author span {
+    color: #fff;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.media-card-author:hover span {
+    color: #D4AF37;
+}
+
+.media-card-author:hover img {
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.45);
 }
