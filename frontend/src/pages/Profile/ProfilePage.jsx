@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import { getProfile } from "../../api/userService";
 import mediaService from "../../api/mediaService";
+import phamVideoPlaceholder from "../../assets/placeholders/pham-video-placeholder.png";
 import SceneStatus from "../../components/scene/SceneStatus.jsx";
 import {useNavigate} from "react-router-dom";
 
@@ -112,34 +113,45 @@ function ProfilePage() {
 
                     <div className="profile-grid">
 
-                        {media.map(scene => (
+                        {media.map(scene => {
 
-                            <div
-                                key={scene.id}
-                                className="profile-card"
-                                onClick={() => navigate(`/media/${scene.id}`)}
-                            >
+                            const imageSrc =
+                                scene.mediaType === "VIDEO"
+                                    ? (scene.thumbnailUrl?.trim()
+                                        ? scene.thumbnailUrl
+                                        : phamVideoPlaceholder)
+                                    : scene.mediaUrl;
 
-                                <div className="profile-card-status">
+                            return (
 
-                                    <SceneStatus visibility={scene.visibility} />
+                                <div
+                                    key={scene.id}
+                                    className="profile-card"
+                                    onClick={() => navigate(`/media/${scene.id}`)}
+                                >
+
+                                    <div className="profile-card-status">
+
+                                        <SceneStatus visibility={scene.visibility} />
+
+                                    </div>
+
+                                    <img
+                                        src={imageSrc}
+                                        alt={scene.title}
+                                    />
+
+                                    <h3>
+
+                                        {scene.title}
+
+                                    </h3>
 
                                 </div>
 
-                                <img
-                                    src={scene.thumbnailUrl || scene.mediaUrl}
-                                    alt={scene.title}
-                                />
+                            );
 
-                                <h3>
-
-                                    {scene.title}
-
-                                </h3>
-
-                            </div>
-
-                        ))}
+                        })}
 
                     </div>
 
