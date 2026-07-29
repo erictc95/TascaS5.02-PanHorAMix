@@ -1,4 +1,4 @@
-
+<img width="1402" height="1122" alt="PHAM-Logo" src="https://github.com/user-attachments/assets/dc8fbb31-2645-4ed1-8316-961749c45492" />
 
 # PanHorAMix
 
