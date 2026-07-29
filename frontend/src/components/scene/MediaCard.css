@@ -16,6 +16,28 @@
 
 }
 
+.back-button{
+
+    margin-bottom:20px;
+
+    background:none;
+    border:none;
+
+    color:#D4AF37;
+
+    font-size:16px;
+    cursor:pointer;
+
+    transition:opacity .2s;
+
+}
+
+.back-button:hover{
+
+    opacity:.7;
+
+}
+
 .media-card-media{
 
     width:100%;

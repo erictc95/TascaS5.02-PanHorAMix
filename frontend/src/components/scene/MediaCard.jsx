@@ -1,13 +1,17 @@
 import "./MediaCard.css";
 import SceneStatus from "./SceneStatus";
+import { useNavigate } from "react-router-dom";
 
 function MediaCard({ item }) {
+
+    const navigate = useNavigate();
+
 
     return (
 
         <div className="media-card">
 
-            <div className="media-card-media">
+            <div className="media-card-media" onClick={() => navigate(`/media/${item.id}`)}>
 
                 {item.mediaType === "IMAGE" ? (
 
