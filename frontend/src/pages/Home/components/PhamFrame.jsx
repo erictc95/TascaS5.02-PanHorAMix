@@ -1,14 +1,14 @@
-import "./FocusFrame.css";
+import "./PhamFrame.css";
 
-function FocusFrame({ username }) {
+function PhamFrame({ username }) {
     return (
-        <div className="focus-frame">
+        <div className="pham-frame">
 
-            <p className="focus-title">
+            <p className="pham-title">
                 WELCOME BACK
             </p>
 
-            <div className="focus-box">
+            <div className="pham-box">
 
                 <span className="corner top-left"></span>
                 <span className="corner top-right"></span>
@@ -20,7 +20,7 @@ function FocusFrame({ username }) {
 
             </div>
 
-            <p className="focus-subtitle">
+            <p className="pham-subtitle">
                 Ready for the Landscape Experience?
             </p>
 
@@ -28,4 +28,4 @@ function FocusFrame({ username }) {
     );
 }
 
-export default FocusFrame;
+export default PhamFrame;

@@ -1,29 +1,29 @@
-.focus-frame {
+.pham-frame {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 80px;
 }
 
-.focus-title {
+.pham-title {
     color: #d4af37;
     letter-spacing: 6px;
     font-size: 18px;
     margin-bottom: 25px;
 }
 
-.focus-box {
+.pham-box {
     position: relative;
     padding: 30px 60px;
 }
 
-.focus-box h1 {
+.pham-box h1 {
     color: #d4af37;
     font-size: 48px;
     margin: 0;
 }
 
-.focus-subtitle {
+.pham-subtitle {
     color: #d4af37;
     margin-top: 20px;
     font-size: 22px;

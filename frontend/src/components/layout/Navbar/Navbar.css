@@ -33,13 +33,47 @@
 
 .pham-frame {
 
+    position: relative;
+
     width: 24px;
     aspect-ratio: 16 / 9;
 
-    border: 2px solid #C8A24B;
-    border-radius: 3px;
-
     flex-shrink: 0;
+
+}
+
+.pham-frame::before,
+.pham-frame::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+}
+
+.pham-frame::before {
+
+    background:
+
+                /* Superior izquierda */
+            linear-gradient(#D4AF37, #D4AF37) top left / 8px 2px no-repeat,
+            linear-gradient(#D4AF37, #D4AF37) top left / 2px 8px no-repeat,
+
+                /* Superior derecha */
+            linear-gradient(#D4AF37, #D4AF37) top right / 8px 2px no-repeat,
+            linear-gradient(#D4AF37, #D4AF37) top right / 2px 8px no-repeat,
+
+                /* Inferior izquierda */
+            linear-gradient(#D4AF37, #D4AF37) bottom left / 8px 2px no-repeat,
+            linear-gradient(#D4AF37, #D4AF37) bottom left / 2px 8px no-repeat,
+
+                /* Inferior derecha */
+            linear-gradient(#D4AF37, #D4AF37) bottom right / 8px 2px no-repeat,
+            linear-gradient(#D4AF37, #D4AF37) bottom right / 2px 8px no-repeat;
 
 }
 

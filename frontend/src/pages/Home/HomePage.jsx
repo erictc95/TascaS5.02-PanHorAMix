@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getProfile } from "../../api/userService";
 
-import FocusFrame from "./components/FocusFrame.jsx";
+import PhamFrame from "./components/PhamFrame.jsx";
 import VideoFeed from "./components/VideoFeed";
 import UploadButton from "./components/UploadButton";
 
@@ -27,9 +27,7 @@ function HomePage() {
     return (
             <div className="home-page">
 
-                <FocusFrame username={user?.username} />
-
-                <UploadButton />
+                <PhamFrame username={user?.username} />
 
                 <VideoFeed />
 
