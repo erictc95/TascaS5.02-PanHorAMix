@@ -61,6 +61,7 @@ function VideoFeed() {
                 <MediaCard
                     key={item.id}
                     item={item}
+                    showVisibility={false}
                 />
 
             ))}

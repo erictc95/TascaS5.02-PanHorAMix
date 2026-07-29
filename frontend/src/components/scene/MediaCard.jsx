@@ -2,7 +2,7 @@ import "./MediaCard.css";
 import SceneStatus from "./SceneStatus";
 import { useNavigate } from "react-router-dom";
 
-function MediaCard({ item }) {
+function MediaCard({ item, showVisibility = false }) {
 
     const navigate = useNavigate();
 
@@ -30,11 +30,15 @@ function MediaCard({ item }) {
 
                 )}
 
-                <div className="media-card-status">
+                {showVisibility && (
 
-                    <SceneStatus visibility={item.visibility} />
+                    <div className="media-card-status">
 
-                </div>
+                        <SceneStatus visibility={item.visibility} />
+
+                    </div>
+
+                )}
 
             </div>
 

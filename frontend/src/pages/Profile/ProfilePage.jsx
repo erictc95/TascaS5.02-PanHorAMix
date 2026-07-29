@@ -4,12 +4,15 @@ import { useEffect, useState } from "react";
 
 import { getProfile } from "../../api/userService";
 import mediaService from "../../api/mediaService";
+import SceneStatus from "../../components/scene/SceneStatus.jsx";
+import {useNavigate} from "react-router-dom";
 
 function ProfilePage() {
 
     const [user, setUser] = useState(null);
     const [media, setMedia] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -114,7 +117,14 @@ function ProfilePage() {
                             <div
                                 key={scene.id}
                                 className="profile-card"
+                                onClick={() => navigate(`/media/${scene.id}`)}
                             >
+
+                                <div className="profile-card-status">
+
+                                    <SceneStatus visibility={scene.visibility} />
+
+                                </div>
 
                                 <img
                                     src={scene.thumbnailUrl || scene.mediaUrl}
