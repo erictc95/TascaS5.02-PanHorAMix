@@ -1,6 +1,7 @@
 package com.panhoramix.backend.service;
 
 import com.panhoramix.backend.dto.request.CreateMediaRequest;
+import com.panhoramix.backend.dto.request.UpdateMediaRequest;
 import com.panhoramix.backend.dto.response.MediaPageResponse;
 import com.panhoramix.backend.dto.response.MediaResponse;
 import com.panhoramix.backend.entity.Media;
@@ -170,6 +171,12 @@ public class MediaService {
         Media media = mediaRepository.findById(id)
                 .orElseThrow(() -> new MediaNotFoundException(id));
 
+        User currentUser = currentUserService.getCurrentUser();
+
+        if (!media.getUser().getId().equals(currentUser.getId())) {
+            throw new MediaNotFoundException(id);
+        }
+
         fileStorageService.deleteFile(media.getMediaUrl());
 
         mediaRepository.delete(media);
@@ -178,7 +185,7 @@ public class MediaService {
 
     public MediaResponse updateMedia(
             Long id,
-            CreateMediaRequest request) {
+            UpdateMediaRequest request) {
 
         Media media = mediaRepository.findById(id)
                 .orElseThrow(() -> new MediaNotFoundException(id));
@@ -187,7 +194,12 @@ public class MediaService {
         media.setDescription(request.getDescription());
         media.setCategory(request.getCategory());
         media.setVisibility(request.getVisibility());
-        media.setMediaType(request.getMediaType());
+
+        User currentUser = currentUserService.getCurrentUser();
+
+        if (!media.getUser().getId().equals(currentUser.getId())) {
+            throw new MediaNotFoundException(id);
+        }
 
         Media updatedMedia = mediaRepository.save(media);
 

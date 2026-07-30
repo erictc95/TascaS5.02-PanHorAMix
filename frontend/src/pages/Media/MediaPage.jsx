@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import FrameButton from "../../components/common/FrameButton";
 
 import mediaService from "../../api/mediaService";
+import { getProfile } from "../../api/userService";
 
 import "./MediaPage.css";
 
@@ -12,6 +13,8 @@ function MediaPage() {
     const { id } = useParams();
 
     const [media, setMedia] = useState(null);
+
+    const [isOwner, setIsOwner] = useState(false);
 
     const [loading, setLoading] = useState(true);
 
@@ -30,6 +33,10 @@ function MediaPage() {
             const response = await mediaService.getMediaById(id);
 
             setMedia(response);
+
+            const profile = await getProfile();
+
+            setIsOwner(profile.username === response.username);
 
         } catch (error) {
 
@@ -52,6 +59,32 @@ function MediaPage() {
     if (!media) {
 
         return <h2>Scene not found</h2>;
+
+    }
+
+    async function handleDelete() {
+
+        const confirmed = window.confirm(
+            "Are you sure you want to delete this scene?"
+        );
+
+        if (!confirmed) {
+            return;
+        }
+
+        try {
+
+            await mediaService.deleteMedia(id);
+
+            navigate("/profile");
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert("Failed to delete the scene.");
+
+        }
 
     }
 
@@ -91,6 +124,20 @@ function MediaPage() {
                 <h1>{media.title}</h1>
 
                 <p>{media.description}</p>
+
+                {isOwner && (
+                    <div className="media-actions">
+
+                        <FrameButton>
+                            ✏️ Edit Scene
+                        </FrameButton>
+
+                        <FrameButton onClick={handleDelete}>
+                            🗑️ Delete Scene
+                        </FrameButton>
+
+                    </div>
+                )}
 
             </div>
 

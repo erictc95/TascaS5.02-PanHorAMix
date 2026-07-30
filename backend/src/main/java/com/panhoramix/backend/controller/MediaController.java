@@ -1,6 +1,7 @@
 package com.panhoramix.backend.controller;
 
 import com.panhoramix.backend.dto.request.CreateMediaRequest;
+import com.panhoramix.backend.dto.request.UpdateMediaRequest;
 import com.panhoramix.backend.dto.response.MediaPageResponse;
 import com.panhoramix.backend.dto.response.MediaResponse;
 import com.panhoramix.backend.entity.enums.MediaType;
@@ -68,7 +69,7 @@ public class MediaController {
     @PutMapping("/{id}")
     public MediaResponse updateMedia(
             @PathVariable Long id,
-            @Valid @ModelAttribute CreateMediaRequest request) {
+            @Valid @RequestBody UpdateMediaRequest request) {
 
         return mediaService.updateMedia(id, request);
 
