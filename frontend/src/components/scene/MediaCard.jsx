@@ -1,6 +1,6 @@
 import "./MediaCard.css";
-import SceneStatus from "./SceneStatus";
 import { useNavigate } from "react-router-dom";
+import SceneMenu from "../common/SceneMenu/SceneMenu";
 import defaultAvatar from "../../assets/icons/default-avatar.png";
 
 function MediaCard({ item, showVisibility = false }) {
@@ -35,13 +35,13 @@ function MediaCard({ item, showVisibility = false }) {
 
                     {showVisibility ? (
 
-                        <SceneStatus visibility={item.visibility} />
+                        <SceneMenu item={item} />
 
                     ) : (
 
                         <div
                             className="media-card-author"
-                            //onClick={() => navigate(`/users/${item.username}`)} --> cambiar cuando haya perfil publico.
+                            //onClick={() => navigate(`/users/${item.username}`)}
                         >
                             <img
                                 src={item.avatarUrl || defaultAvatar}
