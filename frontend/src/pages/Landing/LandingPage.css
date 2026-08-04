@@ -3,76 +3,43 @@
     min-height: 100vh;
 
     display: flex;
+
     flex-direction: column;
 
     justify-content: center;
+
     align-items: center;
 
     text-align: center;
-
-    padding: 40px;
 }
 
 /* ---------- LOGO ---------- */
 
-.logo-frame {
+.logo-frame{
 
-    position: relative;
+    display:flex;
 
-    display: inline-flex;
-    flex-direction: column;
+    justify-content:center;
 
-    align-items: center;
+    align-items:center;
 
-    padding: 70px 130px;
+    margin-bottom:10px;
 
-    margin-bottom: 60px;
 }
 
-.logo-frame h1 {
+.landing-logo{
 
-    color: var(--gold);
+    width: min(700px, 90vw);
 
-    font-size: 5rem;
+    height: auto;
 
-    font-weight: 300;
+    display: block;
 
-    letter-spacing: 8px;
+    margin-top: -2.5%;
+
+    margin-bottom: -8%;
+
 }
-
-.subtitle {
-
-    margin-top: 20px;
-
-    color: var(--gold);
-
-    font-size: 1.3rem;
-
-    letter-spacing: 4px;
-
-    text-transform: uppercase;
-}
-
-/* ---------- CORNERS ---------- */
-
-.frame{
-    position:relative;
-    display:inline-block;
-}
-
-
-.frame-svg{
-
-    position:absolute;
-
-    inset:0;
-
-    width:100%;
-    height:100%;
-
-    pointer-events:none;
-}
-
 
 /* ---------- DESCRIPTION ---------- */
 
@@ -82,7 +49,7 @@
 
     font-size: 1.1rem;
 
-    margin-bottom: 45px;
+    margin-bottom: 50px;
 }
 
 /* ---------- LOGIN ---------- */

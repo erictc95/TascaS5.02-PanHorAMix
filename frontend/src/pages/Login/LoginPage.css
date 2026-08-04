@@ -34,6 +34,8 @@
 
     gap:20px;
 
+    align-items:center;
+
 }
 
 .register-text{
@@ -50,4 +52,10 @@
 
     text-decoration:none;
 
+}
+
+p{
+    margin-top: 20px;
+
+    margin-bottom: 20px;
 }
