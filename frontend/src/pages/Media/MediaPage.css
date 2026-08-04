@@ -1,6 +1,7 @@
 .media-page{
 
     width:100%;
+
     max-width:1200px;
 
     margin:110px auto 60px;
@@ -23,7 +24,18 @@
 
 }
 
-.media-player img,
+.media-player img{
+
+    width:100%;
+
+    height:auto;
+
+    display:block;
+
+    border-radius:16px;
+
+}
+
 .media-player video{
 
     width:100%;
@@ -35,13 +47,37 @@
 
 }
 
+.scene-container{
+
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+}
+
+.media-toolbar{
+
+    width: 100%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
 .media-info{
 
-    margin-top:30px;
+    margin-top:32px;
+
+    flex: 1;
 
 }
 
 .media-info h1{
+
+    margin:0 0 12px;
 
     color:#fff;
 
@@ -50,6 +86,8 @@
 }
 
 .media-info p{
+
+    margin:0;
 
     color:#bdbdbd;
 

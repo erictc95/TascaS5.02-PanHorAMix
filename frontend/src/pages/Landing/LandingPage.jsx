@@ -16,31 +16,63 @@ function LandingPage() {
                         preserveAspectRatio="none"
                     >
 
+                        <defs>
+
+                            <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+
+                                <stop offset="0%" stopColor="#FFE89A"/>
+
+                                <stop offset="35%" stopColor="#F8D86A"/>
+
+                                <stop offset="65%" stopColor="#D8A42E"/>
+
+                                <stop offset="100%" stopColor="#A56A05"/>
+
+                            </linearGradient>
+
+                        </defs>
+
+                        {/* Superior izquierda */}
+
                         <path
-                            d="M2 18 L2 2 L18 2"
-                            stroke="var(--gold)"
-                            strokeWidth="1"
+                            d="M4 24 L4 8 Q4 4 8 4 L16 4"
+                            stroke="url(#goldGradient)"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                             fill="none"
                         />
 
+                        {/* Superior derecha */}
+
                         <path
-                            d="M82 2 L98 2 L98 18"
-                            stroke="var(--gold)"
-                            strokeWidth="1"
+                            d="M84 4 L92 4 Q96 4 96 8 L96 24"
+                            stroke="url(#goldGradient)"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                             fill="none"
                         />
 
+                        {/* Inferior izquierda */}
+
                         <path
-                            d="M2 82 L2 98 L18 98"
-                            stroke="var(--gold)"
-                            strokeWidth="1"
+                            d="M4 76 L4 92 Q4 96 8 96 L16 96"
+                            stroke="url(#goldGradient)"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                             fill="none"
                         />
 
+                        {/* Inferior derecha */}
+
                         <path
-                            d="M88 98 L98 98 L98 78"
-                            stroke="var(--gold)"
-                            strokeWidth="1"
+                            d="M84 96 L92 96 Q96 96 96 92 L96 76"
+                            stroke="url(#goldGradient)"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                             fill="none"
                         />
 

@@ -3,8 +3,8 @@ import {useState} from "react";
 import phamStudioIcon from "../../../assets/icons/pham-studio-icon.png";
 import phamEditIcon from "../../../assets/icons/pham-edit-icon.png";
 import phamDeleteIcon from "../../../assets/icons/pham-delete-icon.png";
-import publicSceneIcon from "../../../assets/icons/public-scene-icon.png";
-import privateSceneIcon from "../../../assets/icons/private-scene-icon.png";
+//import publicSceneIcon from "../../../assets/icons/public-scene-icon.png";
+//import privateSceneIcon from "../../../assets/icons/private-scene-icon.png";
 
 function SceneMenu({item}) {
 

@@ -15,8 +15,8 @@
 
 .scene-menu-button img {
 
-    width: 84px;
-    height: 84px;
+    width: 100px;
+    height: 100px;
 
     transition:
             transform .25s ease,
