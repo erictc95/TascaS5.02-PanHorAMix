@@ -177,7 +177,18 @@ public class MediaService {
             throw new MediaNotFoundException(id);
         }
 
-        fileStorageService.deleteFile(media.getMediaUrl());
+        try {
+
+            fileStorageService.deleteFile(media.getMediaUrl());
+
+        } catch (Exception e) {
+
+            throw new RuntimeException(
+                    "Failed to delete media from Cloudflare",
+                    e
+            );
+
+        }
 
         mediaRepository.delete(media);
 
