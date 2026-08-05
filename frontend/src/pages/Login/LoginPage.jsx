@@ -1,13 +1,14 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import {useState} from "react";
+import {Link} from "react-router-dom";
 
 import "./LoginPage.css";
 
 import PHButton from "../../components/common/PHButton";
 import PHInput from "../../components/common/PHInput";
 
-import { login } from "../../api/authService";
-import { useNavigate } from "react-router-dom";
+import {login} from "../../api/authService";
+import {useNavigate} from "react-router-dom";
+import loginLogo from "../../assets/brand/Panhoramix-login-logo.png";
 
 function LoginPage() {
 
@@ -67,18 +68,17 @@ function LoginPage() {
 
                 <div className="logo-frame">
 
-                    <span className="corner top-left"></span>
-                    <span className="corner top-right"></span>
-                    <span className="corner bottom-left"></span>
-                    <span className="corner bottom-right"></span>
-
-                    <h1>LOGIN</h1>
-
-                    <p className="subtitle">
-                        Welcome back to PanHorAMix
-                    </p>
+                    <img
+                        src={loginLogo}
+                        alt="PanHorAMix"
+                        className="login-logo"
+                    />
 
                 </div>
+
+                <p className="subtitle">
+                    Keep building your cinematic world
+                </p>
 
                 <div className="login-form">
 
@@ -114,9 +114,7 @@ function LoginPage() {
                     </PHButton>
 
                     <p className="register-text">
-
                         Don't have an account?
-
                     </p>
 
                     <Link

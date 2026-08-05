@@ -2,6 +2,7 @@ package com.panhoramix.backend.service.impl;
 
 import com.panhoramix.backend.entity.enums.StorageFolder;
 import com.panhoramix.backend.service.FileStorageService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +14,7 @@ import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
 import java.io.IOException;
 import java.util.UUID;
 
+@Slf4j
 @Service
 public class CloudflareStorageService implements FileStorageService {
 
@@ -72,12 +74,14 @@ public class CloudflareStorageService implements FileStorageService {
 
     @Override
     public void deleteFile(String fileUrl) {
-        String objectKey = fileUrl.replace(publicUrl + "/,", "");
+        String objectKey = fileUrl.replace(publicUrl + "/", "");
 
         DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
                 .bucket(bucket)
                 .key(objectKey)
                 .build();
+
+        log.info("Deleting object: {}", objectKey);
 
         s3Client.deleteObject(deleteObjectRequest);
     }

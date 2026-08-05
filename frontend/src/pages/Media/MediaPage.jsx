@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import FrameButton from "../../components/common/FrameButton";
+import SceneMenu from "../../components/common/SceneMenu/SceneMenu";
 
 import mediaService from "../../api/mediaService";
+import { getProfile } from "../../api/userService";
 
 import "./MediaPage.css";
 
@@ -12,6 +14,8 @@ function MediaPage() {
     const { id } = useParams();
 
     const [media, setMedia] = useState(null);
+
+    const [isOwner, setIsOwner] = useState(false);
 
     const [loading, setLoading] = useState(true);
 
@@ -30,6 +34,10 @@ function MediaPage() {
             const response = await mediaService.getMediaById(id);
 
             setMedia(response);
+
+            const profile = await getProfile();
+
+            setIsOwner(profile.username === response.username);
 
         } catch (error) {
 
@@ -55,42 +63,80 @@ function MediaPage() {
 
     }
 
+    async function handleDelete() {
+
+        const confirmed = window.confirm(
+            "Are you sure you want to delete this scene?"
+        );
+
+        if (!confirmed) {
+            return;
+        }
+
+        try {
+
+            await mediaService.deleteMedia(id);
+
+            navigate("/profile");
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert("Failed to delete the scene.");
+
+        }
+
+    }
+
     return (
 
         <div className="media-page">
 
-            <FrameButton
-                onClick={() => navigate(-1)}
-            >
-                ← Back
-            </FrameButton>
+            <div className="scene-container">
 
-            <div className="media-player">
+                <div className="media-toolbar">
 
-                {media.mediaType === "IMAGE" ? (
+                    <FrameButton
+                        onClick={() => navigate(-1)}
+                    >
+                        ← Back
+                    </FrameButton>
 
-                    <img
-                        src={media.mediaUrl}
-                        alt={media.title}
-                    />
+                    {isOwner && (
+                        <SceneMenu item={media} />
+                    )}
 
-                ) : (
+                </div>
 
-                    <video controls>
+                <div className="media-player">
 
-                        <source src={media.mediaUrl} />
+                    {media.mediaType === "IMAGE" ? (
 
-                    </video>
+                        <img
+                            src={media.mediaUrl}
+                            alt={media.title}
+                        />
 
-                )}
+                    ) : (
 
-            </div>
+                        <video controls>
 
-            <div className="media-info">
+                            <source src={media.mediaUrl} />
 
-                <h1>{media.title}</h1>
+                        </video>
 
-                <p>{media.description}</p>
+                    )}
+
+                </div>
+
+                <div className="media-info">
+
+                    <h1>{media.title}</h1>
+
+                    <p>{media.description}</p>
+
+                </div>
 
             </div>
 

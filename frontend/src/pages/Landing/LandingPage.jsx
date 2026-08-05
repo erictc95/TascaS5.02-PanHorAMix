@@ -1,86 +1,54 @@
 import "./LandingPage.css";
 import {Link} from "react-router-dom";
 import PHButton from "../../components/common/PHButton";
+import landingLogo from "../../assets/brand/panhoramix-landscape-logo.png";
 
 function LandingPage() {
     return (
-        <main className="landing">
+        <main className="landing-page">
 
-            <div className="frame">
+            <div className="choose-container">
 
                 <div className="logo-frame">
 
-                    <svg
-                        className="frame-svg"
-                        viewBox="0 0 100 100"
-                        preserveAspectRatio="none"
-                    >
+                    <img
+                        src={landingLogo}
+                        alt="PanHorAMix"
+                        className="landing-logo"
+                    />
 
-                        <path
-                            d="M2 18 L2 2 L18 2"
-                            stroke="var(--gold)"
-                            strokeWidth="1"
-                            fill="none"
-                        />
+                </div>
 
-                        <path
-                            d="M82 2 L98 2 L98 18"
-                            stroke="var(--gold)"
-                            strokeWidth="1"
-                            fill="none"
-                        />
+                <p className="subtitle">
+                    Experience cinema the way it was meant to be seen.
+                </p>
 
-                        <path
-                            d="M2 82 L2 98 L18 98"
-                            stroke="var(--gold)"
-                            strokeWidth="1"
-                            fill="none"
-                        />
+                <div className="choose-form">
 
-                        <path
-                            d="M88 98 L98 98 L98 78"
-                            stroke="var(--gold)"
-                            strokeWidth="1"
-                            fill="none"
-                        />
+                    <Link to="/register">
 
-                    </svg>
+                        <PHButton>
+                            CREATE ACCOUNT
+                        </PHButton>
 
-                    <h1>PANHORAMIX</h1>
+                    </Link>
 
-                    <p className="subtitle">
-                        Designed for Landscape Cinema
+                    <p className="login-text">
+                        Already have an account?
                     </p>
+
+                    <Link to="/login">
+
+                        <PHButton>
+                            SIGN IN
+                        </PHButton>
+
+                    </Link>
 
                 </div>
 
             </div>
 
-            <p className="description">
-                Experience cinema the way it was meant to be seen.
-            </p>
-
-            <div className="actions">
-
-                <Link to="/register">
-
-                    <PHButton>
-                        CREATE ACCOUNT
-                    </PHButton>
-
-                </Link>
-
-                <p className="login-text">
-                    Already have an account?
-                </p>
-                <Link to="/login">
-
-                    <PHButton>
-                        SIGN IN
-                    </PHButton>
-
-                </Link>
-            </div>
         </main>
     );
 }

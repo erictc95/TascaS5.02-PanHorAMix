@@ -1,111 +1,97 @@
-.landing {
+.landing-page {
 
     min-height: 100vh;
 
     display: flex;
+
     flex-direction: column;
 
     justify-content: center;
+
     align-items: center;
 
     text-align: center;
-
-    padding: 40px;
 }
 
-/* ---------- LOGO ---------- */
+.choose-container {
 
-.logo-frame {
+    width: 420px;
 
-    position: relative;
+    display: flex;
 
-    display: inline-flex;
     flex-direction: column;
 
     align-items: center;
 
-    padding: 70px 130px;
-
-    margin-bottom: 60px;
 }
 
-.logo-frame h1 {
+.logo-frame {
 
-    color: var(--gold);
+    display: flex;
 
-    font-size: 5rem;
+    justify-content: center;
 
-    font-weight: 300;
+    align-items: center;
 
-    letter-spacing: 8px;
+    margin-bottom: 10px;
+
+}
+
+.landing-logo {
+
+    width: min(700px, 90vw);
+
+    height: auto;
+
+    display: block;
+
+    margin-bottom: 40px;
+
 }
 
 .subtitle {
 
-    margin-top: 20px;
+    margin-top: 5px;
+
+    margin-bottom: 80px;
 
     color: var(--gold);
 
-    font-size: 1.3rem;
-
-    letter-spacing: 4px;
+    letter-spacing: 3px;
 
     text-transform: uppercase;
+
+    font-size: .95rem;
+
 }
 
-/* ---------- CORNERS ---------- */
+.choose-form {
 
-.frame{
-    position:relative;
-    display:inline-block;
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+
 }
-
-
-.frame-svg{
-
-    position:absolute;
-
-    inset:0;
-
-    width:100%;
-    height:100%;
-
-    pointer-events:none;
-}
-
-
-/* ---------- DESCRIPTION ---------- */
-
-.description {
-
-    color: #bdbdbd;
-
-    font-size: 1.1rem;
-
-    margin-bottom: 45px;
-}
-
-/* ---------- LOGIN ---------- */
 
 .login-text {
 
-    margin-top: 35px;
+    margin-top: 15px;
+
+    margin-bottom: 15px;
+
+    text-align: center;
 
     color: #8f8f8f;
 }
 
-a{
+.choose-form a {
 
-    text-decoration:none;
+    text-decoration: none;
 
-}
-
-.actions{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:20px;
+    width: 100%;
 
 }

@@ -1,67 +1,21 @@
 .welcome-frame {
     display: flex;
-    flex-direction: column;
+
+    justify-content: center;
+
     align-items: center;
+
+    margin-bottom: 10px;
+}
+
+.feed-logo {
+
+    width: min(700px, 90vw);
+
+    height: auto;
+
+    display: block;
+
     margin-bottom: 40px;
-}
 
-.welcome-title {
-    color: #d4af37;
-    letter-spacing: 6px;
-    font-size: 18px;
-    margin-bottom: 16px;
-}
-
-.welcome-box {
-    position: relative;
-    padding: 18px 45px;
-}
-
-.welcome-box h1 {
-    color: #d4af37;
-    font-size: 48px;
-    margin: 0;
-}
-
-.welcome-subtitle {
-    color: #d4af37;
-    margin-top: 16px;
-    font-size: 22px;
-}
-
-/* Esquinas */
-
-.welcome-corner {
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    border-color: #d4af37;
-}
-
-.welcome-top-left {
-    top: 0;
-    left: 0;
-    border-top: 3px solid;
-    border-left: 3px solid;
-}
-
-.welcome-top-right {
-    top: 0;
-    right: 0;
-    border-top: 3px solid;
-    border-right: 3px solid;
-}
-
-.welcome-bottom-left {
-    bottom: 0;
-    left: 0;
-    border-bottom: 3px solid;
-    border-left: 3px solid;
-}
-
-.welcome-bottom-right {
-    bottom: 0;
-    right: 0;
-    border-bottom: 3px solid;
-    border-right: 3px solid;
 }

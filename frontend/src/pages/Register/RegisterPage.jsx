@@ -7,12 +7,13 @@ import PHButton from "../../components/common/PHButton";
 import PHInput from "../../components/common/PHInput";
 
 import { register } from "../../api/authService";
+import registerLogo from "../../assets/brand/Panhoramix-register-logo.png";
 
 function RegisterPage() {
 
-    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [username, setUsername] = useState("");
 
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
@@ -21,11 +22,6 @@ function RegisterPage() {
 
         setSuccessMessage("");
         setErrorMessage("");
-
-        if (!username.trim()) {
-            setErrorMessage("Username is required.");
-            return;
-        }
 
         if (!email.trim()) {
             setErrorMessage("Email is required.");
@@ -42,10 +38,15 @@ function RegisterPage() {
             return;
         }
 
+        if (!username.trim()) {
+            setErrorMessage("Username is required.");
+            return;
+        }
+
         const request = {
-            username,
             email,
-            password
+            password,
+            username
         };
 
         try {
@@ -54,9 +55,9 @@ function RegisterPage() {
 
             setSuccessMessage("Account created successfully!");
 
-            setUsername("");
             setEmail("");
             setPassword("");
+            setUsername("");
 
         } catch (error) {
 
@@ -90,27 +91,19 @@ function RegisterPage() {
 
                 <div className="logo-frame">
 
-                    <span className="corner top-left"></span>
-                    <span className="corner top-right"></span>
-                    <span className="corner bottom-left"></span>
-                    <span className="corner bottom-right"></span>
-
-                    <h1>REGISTER</h1>
-
-                    <p className="subtitle">
-                        Create your PanHorAMix account
-                    </p>
+                    <img
+                        src={registerLogo}
+                        alt="PanHorAMix"
+                        className="register-logo"
+                    />
 
                 </div>
 
-                <div className="register-form">
+                <p className="subtitle">
+                    Join the landscape revolution
+                </p>
 
-                    <PHInput
-                        label="Username"
-                        placeholder="Choose your username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
+                <div className="register-form">
 
                     <PHInput
                         label="Email"
@@ -128,11 +121,30 @@ function RegisterPage() {
                         onChange={(e) => setPassword(e.target.value)}
                     />
 
+                    <PHInput
+                        label="Username"
+                        placeholder="Choose your username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+
                     <PHButton
                         onClick={handleRegister}
                     >
                         CREATE ACCOUNT
                     </PHButton>
+
+                    <p className="login-text">
+                        Already have an account?
+                    </p>
+
+                    <Link to="/login">
+
+                        <PHButton>
+                            SIGN IN
+                        </PHButton>
+
+                    </Link>
 
                     {successMessage && (
 
