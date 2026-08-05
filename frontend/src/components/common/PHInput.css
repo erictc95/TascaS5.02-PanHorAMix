@@ -9,7 +9,7 @@
 
 .ph-input-label {
 
-    color: var(--ph-gold);
+    color: var(--gold);
     margin-bottom: 8px;
     font-size: 0.95rem;
     letter-spacing: 1px;
@@ -30,7 +30,7 @@
 
     background: transparent;
 
-    border: 2px solid var(--ph-gold);
+    border: 2px solid var(--gold);
 
     color: white;
 

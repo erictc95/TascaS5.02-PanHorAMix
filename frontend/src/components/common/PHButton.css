@@ -1,12 +1,17 @@
 .ph-button {
 
-    width: 320px;
+    width: 100%;
+
+    max-width: 420px;
 
     height: 56px;
 
     display: flex;
+
     justify-content: center;
+
     align-items: center;
+
     gap: 12px;
 
     border: 2px solid var(--gold);
@@ -53,7 +58,7 @@
 
     height: 18px;
 
-    border: 2px solid rgba(200,162,75,.35);
+    border: 2px solid rgba(200, 162, 75, .35);
 
     border-top: 2px solid var(--gold);
 

@@ -5,43 +5,50 @@ import landingLogo from "../../assets/brand/panhoramix-landscape-logo.png";
 
 function LandingPage() {
     return (
-        <main className="landing">
+        <main className="landing-page">
 
-            <div className="logo-frame">
+            <div className="choose-container">
 
-                <img
-                    src={landingLogo}
-                    alt="PanHorAMix"
-                    className="landing-logo"
-                />
+                <div className="logo-frame">
 
-            </div>
+                    <img
+                        src={landingLogo}
+                        alt="PanHorAMix"
+                        className="landing-logo"
+                    />
 
-            <p className="description">
-                Experience cinema the way it was meant to be seen.
-            </p>
+                </div>
 
-            <div className="actions">
-
-                <Link to="/register">
-
-                    <PHButton>
-                        CREATE ACCOUNT
-                    </PHButton>
-
-                </Link>
-
-                <p className="login-text">
-                    Already have an account?
+                <p className="subtitle">
+                    Experience cinema the way it was meant to be seen.
                 </p>
-                <Link to="/login">
 
-                    <PHButton>
-                        SIGN IN
-                    </PHButton>
+                <div className="choose-form">
 
-                </Link>
+                    <Link to="/register">
+
+                        <PHButton>
+                            CREATE ACCOUNT
+                        </PHButton>
+
+                    </Link>
+
+                    <p className="login-text">
+                        Already have an account?
+                    </p>
+
+                    <Link to="/login">
+
+                        <PHButton>
+                            SIGN IN
+                        </PHButton>
+
+                    </Link>
+
+                </div>
+
             </div>
+
         </main>
     );
 }
