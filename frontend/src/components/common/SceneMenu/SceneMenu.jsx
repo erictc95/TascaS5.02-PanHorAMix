@@ -3,10 +3,10 @@ import {useState} from "react";
 import phamStudioIcon from "../../../assets/icons/pham-studio-icon.png";
 import phamEditIcon from "../../../assets/icons/pham-edit-icon.png";
 import phamDeleteIcon from "../../../assets/icons/pham-delete-icon.png";
-//import publicSceneIcon from "../../../assets/icons/public-scene-icon.png";
-//import privateSceneIcon from "../../../assets/icons/private-scene-icon.png";
+import publicSceneIcon from "../../../assets/icons/public-scene-icon.png";
+import privateSceneIcon from "../../../assets/icons/private-scene-icon.png";
 
-function SceneMenu({item}) {
+function SceneMenu({item, onDelete}) {
 
     const [open, setOpen] = useState(false);
 
@@ -70,16 +70,16 @@ function SceneMenu({item}) {
                             <strong>
 
                                 {item.visibility === "PUBLIC"
-                                ? "🔒 Make Private"
-                                : "🌍 Make Public"}
+                                ? "Make Private"
+                                : "Make Public"}
 
                             </strong>
 
                             <small>
 
                                 {item.visibility === "PUBLIC"
-                                ? "🔒 Only visible to you"
-                                : "🌍 Visible to everyone"}
+                                ? "Only visible to you"
+                                : "Visible to everyone"}
 
                             </small>
 
@@ -87,11 +87,13 @@ function SceneMenu({item}) {
 
                     </button>
 
-                    <button className="scene-action">
+                    <button className="scene-action"
+                            onClick={onDelete}
+                    >
 
                         <img
                             src={phamDeleteIcon}
-                            alt="Edit Scene"
+                            alt="Delete Scene"
                         />
 
                         <span>

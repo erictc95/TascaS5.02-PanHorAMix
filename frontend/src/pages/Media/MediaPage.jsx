@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import FrameButton from "../../components/common/FrameButton";
 import SceneMenu from "../../components/common/SceneMenu/SceneMenu";
+import phamBackIcon from "../../assets/icons/pham-back-icon.png";
 
 import mediaService from "../../api/mediaService";
 import { getProfile } from "../../api/userService";
@@ -97,15 +97,20 @@ function MediaPage() {
 
                 <div className="media-toolbar">
 
-                    <FrameButton
+                    <button
+                        className="back-button"
                         onClick={() => navigate(-1)}
                     >
-                        ← Back
-                    </FrameButton>
+                        <img
+                            src={phamBackIcon}
+                            alt="Back"
+                        />
+                    </button>
 
-                    {isOwner && (
-                        <SceneMenu item={media} />
-                    )}
+                    <SceneMenu
+                        item={media}
+                        onDelete={handleDelete}
+                    />
 
                 </div>
 
