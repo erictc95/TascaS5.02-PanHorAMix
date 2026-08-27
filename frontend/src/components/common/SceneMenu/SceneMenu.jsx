@@ -5,8 +5,9 @@ import phamEditIcon from "../../../assets/icons/pham-edit-icon.png";
 import phamDeleteIcon from "../../../assets/icons/pham-delete-icon.png";
 import publicSceneIcon from "../../../assets/icons/public-scene-icon.png";
 import privateSceneIcon from "../../../assets/icons/private-scene-icon.png";
+import mediaService from "../../../api/mediaService";
 
-function SceneMenu({item, onDelete}) {
+function SceneMenu({item, onDelete, onVisibilityChange}) {
 
     const [open, setOpen] = useState(false);
 
@@ -14,6 +15,31 @@ function SceneMenu({item, onDelete}) {
         e.stopPropagation();
         setOpen(!open);
     };
+
+    async function handleVisibilityChange(e) {
+        e.stopPropagation();
+
+        const newVisibility =
+            item.visibility === "PUBLIC"
+                ? "PRIVATE"
+                : "PUBLIC";
+
+        try {
+            const updateMedia = await mediaService.updateMedia(item.id, {
+                title: item.title,
+                description: item.description,
+                category: item.category,
+                visibility: newVisibility
+            });
+
+            onVisibilityChange(updateMedia);
+
+            setOpen(false);
+
+        } catch (error) {
+            console.error("Error updating visibility:", error);
+        }
+    }
 
     return (
 
@@ -54,7 +80,10 @@ function SceneMenu({item, onDelete}) {
 
                     </button>
 
-                    <button className="scene-action">
+                    <button
+                        className="scene-action"
+                        onClick={handleVisibilityChange}
+                    >
 
                         <img
                             src={

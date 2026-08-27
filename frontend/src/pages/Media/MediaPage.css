@@ -116,3 +116,82 @@
     transform: scale(1.06);
     filter: drop-shadow(0 0 10px rgba(212,175,55,.35));
 }
+
+.delete-modal-overlay {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0, 0, 0, 0.75);
+
+    z-index: 9999;
+}
+
+.delete-modal {
+    width: 420px;
+    padding: 35px;
+
+    background: var(--background);
+    border: 2px solid var(--gold);
+    border-radius: var(--radius);
+
+    text-align: center;
+
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.25);
+}
+
+.delete-modal h2 {
+    margin: 0 0 20px;
+
+    color: var(--gold);
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+}
+
+.delete-modal p {
+    margin: 0 0 10px;
+
+    color: var(--white);
+    font-size: 1rem;
+}
+
+.delete-modal small {
+    display: block;
+
+    color: var(--gray);
+    font-size: 0.85rem;
+}
+
+.delete-modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+
+    margin-top: 30px;
+}
+
+.delete-modal-actions button {
+    min-width: 130px;
+    padding: 12px 20px;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+}
+
+.delete-modal-cancel {
+    background: transparent;
+    color: var(--gold);
+    border: 2px solid var(--gold);
+}
+
+.delete-modal-confirm {
+    background: var(--gold);
+    color: #000;
+    border: 2px solid var(--gold);
+}
