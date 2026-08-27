@@ -54,6 +54,11 @@ const mediaService = {
 
         return response.data;
 
+    },
+
+    async updateMedia(id, data) {
+        const response = await api.put(`/media/${id}`, data);
+        return response.data;
     }
 
 };
