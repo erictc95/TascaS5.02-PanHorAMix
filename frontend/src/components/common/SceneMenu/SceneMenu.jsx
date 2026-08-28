@@ -7,7 +7,7 @@ import publicSceneIcon from "../../../assets/icons/public-scene-icon.png";
 import privateSceneIcon from "../../../assets/icons/private-scene-icon.png";
 import mediaService from "../../../api/mediaService";
 
-function SceneMenu({item, onDelete, onVisibilityChange}) {
+function SceneMenu({item, onDelete, onVisibilityChange, onEdit}) {
 
     const [open, setOpen] = useState(false);
 
@@ -61,7 +61,14 @@ function SceneMenu({item, onDelete, onVisibilityChange}) {
 
                 <div className="scene-menu-panel">
 
-                    <button className="scene-action">
+                    <button
+                        className="scene-action"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onEdit();
+                            setOpen(false);
+                        }}
+                    >
 
                         <img
                             src={phamEditIcon}

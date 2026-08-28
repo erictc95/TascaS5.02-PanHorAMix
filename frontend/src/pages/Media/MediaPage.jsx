@@ -20,6 +20,16 @@ function MediaPage() {
 
     const [loading, setLoading] = useState(true);
 
+    const [showEditModal, setShowEditModal] = useState(false);
+
+    const [editForm, setEditForm] = useState({
+        title: "",
+        description: "",
+        category: ""
+    });
+
+    const [isEditing, setIsEditing] = useState(false);
+
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
     const [isDeleting, setIsDeleting] = useState(false);
@@ -88,12 +98,71 @@ function MediaPage() {
         }
     }
 
+    function openEditModal() {
+        setEditForm({
+            title: media.title || "",
+            description: media.description || "",
+            category: media.category || ""
+        });
+
+        setShowEditModal(true);
+    }
+
+    function closeEditModal() {
+        setShowEditModal(false);
+    }
+
+    function handleEditChange(e) {
+        const { name, value } = e.target;
+
+        setEditForm((prev) => ({
+            ...prev,
+            [name]: value
+        }));
+    }
+
     function openDeleteModal() {
         setShowDeleteModal(true);
     }
 
     function closeDeleteModal() {
         setShowDeleteModal(false);
+    }
+
+    async function handleEdit() {
+        if (isEditing) return;
+
+        setIsEditing(true);
+
+        try {
+            const updatedMedia = await mediaService.updateMedia(id, {
+                title: editForm.title,
+                description: editForm.description,
+                category: editForm.category,
+                visibility: media.visibility
+            });
+
+            setMedia(updatedMedia);
+            setShowEditModal(false);
+
+            showToast({
+                type: "Success",
+                title: "SCENE UPDATED",
+                message: "Your scene has been updated."
+            });
+
+        } catch (error) {
+            console.error("Error updating scene:", error);
+
+            showToast({
+                type: "Error",
+                title: "SCENE UPDATE FAILED",
+                message: "Please try again."
+            });
+
+        } finally {
+            setIsEditing(false);
+        }
     }
 
     async function handleDelete() {
@@ -155,6 +224,7 @@ function MediaPage() {
                             item={media}
                             onDelete={openDeleteModal}
                             onVisibilityChange={handleVisibilityChange}
+                            onEdit={openEditModal}
                         />
                     )}
 
@@ -190,6 +260,91 @@ function MediaPage() {
                 </div>
 
             </div>
+
+            {showEditModal && (
+                <div className="delete-modal-overlay">
+                    <div className="delete-modal edit-modal">
+
+                        <h2>EDIT THIS SCENE</h2>
+
+                        <div className="edit-form">
+
+                            <label>
+                                TITLE
+                            </label>
+
+                            <input
+                                type="text"
+                                name="title"
+                                value={editForm.title}
+                                onChange={handleEditChange}
+                            />
+
+                            <label>
+                                DESCRIPTION
+                            </label>
+
+                            <textarea
+                                name="description"
+                                value={editForm.description}
+                                onChange={handleEditChange}
+                                rows="4"
+                            />
+
+                            <label>
+                                CATEGORY
+                            </label>
+
+                            <select
+                                name="category"
+                                value={editForm.category}
+                                onChange={handleEditChange}
+                            >
+                                <option value="">Select a category</option>
+
+                                <option value="Cinema">Cinema</option>
+                                <option value="Photography">Photography</option>
+                                <option value="Nature">Nature</option>
+                                <option value="Travel">Travel</option>
+                                <option value="Automotive">Automotive</option>
+                                <option value="Architecture">Architecture</option>
+                                <option value="Urban">Urban</option>
+                                <option value="People">People</option>
+                                <option value="Wildlife">Wildlife</option>
+                                <option value="Sports">Sports</option>
+                                <option value="Lifestyle">Lifestyle</option>
+                                <option value="Events">Events</option>
+                                <option value="Food">Food</option>
+                                <option value="Fashion">Fashion</option>
+                                <option value="Technology">Technology</option>
+                                <option value="Abstract">Abstract</option>
+                            </select>
+
+                        </div>
+
+                        <div className="delete-modal-actions">
+
+                            <button
+                                className="delete-modal-cancel"
+                                onClick={closeEditModal}
+                                disabled={isEditing}
+                            >
+                                CANCEL
+                            </button>
+
+                            <button
+                                className="delete-modal-confirm"
+                                onClick={handleEdit}
+                                disabled={isEditing}
+                            >
+                                {isEditing ? "SAVING..." : "SAVE CHANGES"}
+                            </button>
+
+                        </div>
+
+                    </div>
+                </div>
+            )}
 
             {showDeleteModal && (
                 <div className="delete-modal-overlay">
