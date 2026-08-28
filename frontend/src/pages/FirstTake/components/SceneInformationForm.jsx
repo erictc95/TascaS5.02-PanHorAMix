@@ -53,6 +53,28 @@ function SceneInformationForm({ sceneData, setSceneData }) {
 
                 <option value="Automotive">Automotive</option>
 
+                <option value="Architecture">Architecture</option>
+
+                <option value="Urban">Urban</option>
+
+                <option value="People">People</option>
+
+                <option value="Wildlife">Wildlife</option>
+
+                <option value="Sports">Sports</option>
+
+                <option value="Lifestyle">Lifestyle</option>
+
+                <option value="Events">Events</option>
+
+                <option value="Food">Food</option>
+
+                <option value="Fashion">Fashion</option>
+
+                <option value="Technology">Technology</option>
+
+                <option value="Abstract">Abstract</option>
+
             </select>
 
             <select
