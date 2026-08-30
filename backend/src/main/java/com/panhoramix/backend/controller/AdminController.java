@@ -12,16 +12,19 @@ public class AdminController {
 
     private final MediaService mediaService;
 
-    @GetMapping("/test")
-    public String adminTest() {
-        return "ADMIN access granted";
-    }
-
     @GetMapping("/media")
     public MediaPageResponse getAllMedia(
             @RequestParam(defaultValue = "0")
             int page) {
 
         return mediaService.getAllMediaForAdmin(page);
+    }
+
+    @GetMapping("/media/user/{userId}")
+    public MediaPageResponse getMediaByUser(
+            @PathVariable Long userId,
+            @RequestParam(defaultValue = "0") int page) {
+
+        return mediaService.getMediaByUserForAdmin(userId, page);
     }
 }
