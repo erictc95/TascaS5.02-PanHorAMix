@@ -72,4 +72,13 @@ export async function getPublicMediaByUserId(userId, page = 0) {
     return response.data;
 }
 
+export async function getAdminMediaByUserId(userId, page = 0) {
+
+    const response = await api.get(`/admin/media/user/${userId}`, {
+        params: { page }
+    });
+
+    return response.data;
+}
+
 export default mediaService;
