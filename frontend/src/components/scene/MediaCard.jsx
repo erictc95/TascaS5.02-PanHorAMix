@@ -1,7 +1,7 @@
 import "./MediaCard.css";
 import { useNavigate } from "react-router-dom";
 import SceneMenu from "../common/SceneMenu/SceneMenu";
-import defaultAvatar from "../../assets/icons/default-avatar.png";
+import defaultAvatar from "../../assets/icons/default-avatar-icon.png";
 
 function MediaCard({ item, showVisibility = false }) {
 
