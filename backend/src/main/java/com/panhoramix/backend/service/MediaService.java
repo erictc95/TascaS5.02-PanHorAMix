@@ -143,6 +143,26 @@ public class MediaService {
                 .build();
     }
 
+    public MediaPageResponse getAllMediaForAdmin(int page) {
+
+        Pageable pageable = PageRequest.of(
+                page,
+                PAGE_SIZE,
+                DEFAULT_SORT);
+
+        Page<Media> mediaPage =
+                mediaRepository.findAll(pageable);
+
+        return MediaPageResponse.builder()
+                .content(mediaMapper.toResponseList(mediaPage.getContent()))
+                .page(mediaPage.getNumber())
+                .size(mediaPage.getSize())
+                .totalElements(mediaPage.getTotalElements())
+                .totalPages(mediaPage.getTotalPages())
+                .last(mediaPage.isLast())
+                .build();
+    }
+
     public MediaResponse getMediaById(Long id) {
 
         Media media = mediaRepository.findById(id)
