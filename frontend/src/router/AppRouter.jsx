@@ -6,6 +6,7 @@ import LoginPage from "../pages/Login/LoginPage";
 import HomePage from "../pages/Home/HomePage";
 import FirstTakePage from "../pages/FirstTake/FirstTakePage.jsx";
 import ProfilePage from "../pages/Profile/ProfilePage.jsx";
+import PublicProfilePage from "../pages/PublicProfile/PublicProfilePage.jsx";
 import AppLayout from "../components/layout/AppLayout.jsx";
 import MediaPage from "../pages/Media/MediaPage.jsx";
 
@@ -36,6 +37,8 @@ function AppRouter() {
                     <Route path="/upload" element={<FirstTakePage />} />
 
                     <Route path="/profile" element={<ProfilePage />} />
+
+                    <Route path="/users/:username" element={<PublicProfilePage />} />
 
                 </Route>
 

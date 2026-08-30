@@ -6,3 +6,10 @@ export async function getProfile() {
 
     return response.data;
 }
+
+export async function getPublicProfile(username) {
+
+    const response = await api.get(`/users/${username}`);
+
+    return response.data;
+}

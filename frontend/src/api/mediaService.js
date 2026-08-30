@@ -63,4 +63,13 @@ const mediaService = {
 
 };
 
+export async function getPublicMediaByUserId(userId, page = 0) {
+
+    const response = await api.get(`/media/user/${userId}`, {
+        params: { page }
+    });
+
+    return response.data;
+}
+
 export default mediaService;

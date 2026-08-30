@@ -41,7 +41,10 @@ function MediaCard({ item, showVisibility = false }) {
 
                         <div
                             className="media-card-author"
-                            //onClick={() => navigate(`/users/${item.username}`)}
+                            onClick={(event) => {
+                                event.stopPropagation();
+                                navigate(`/users/${item.username}`);
+                            }}
                         >
                             <img
                                 src={item.avatarUrl || defaultAvatar}

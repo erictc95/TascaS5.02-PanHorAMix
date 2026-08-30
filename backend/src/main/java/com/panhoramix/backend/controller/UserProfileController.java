@@ -6,10 +6,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.panhoramix.backend.dto.response.PublicUserProfileResponse;
+import com.panhoramix.backend.repository.UserRepository;
+import org.springframework.web.bind.annotation.PathVariable;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/users")
 public class UserProfileController {
+
+    private final UserRepository userRepository;
 
 
     @GetMapping("/me")
@@ -25,6 +32,20 @@ public class UserProfileController {
                 .avatarUrl(user.getAvatarUrl())
                 .build();
 
+    }
+
+    @GetMapping("/{username}")
+    public PublicUserProfileResponse getPublicProfile(
+            @PathVariable String username) {
+
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return PublicUserProfileResponse.builder()
+                .id(user.getId())
+                .username(user.getUsername())
+                .avatarUrl(user.getAvatarUrl())
+                .build();
     }
 
 }
