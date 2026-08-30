@@ -129,7 +129,8 @@
 
 }
 
-.pham-navbar-links a::after {
+.pham-navbar-links a::after,
+.pham-logout::after {
 
     content: "";
 
@@ -153,7 +154,8 @@
 
 }
 
-.pham-navbar-links a:hover::after {
+.pham-navbar-links a:hover::after,
+.pham-logout:hover::after {
 
     width: 100%;
 
@@ -167,6 +169,7 @@
 }
 
 .pham-logout {
+    position: relative;
 
     background: transparent;
     border: none;

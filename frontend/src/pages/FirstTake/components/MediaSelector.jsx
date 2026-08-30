@@ -4,8 +4,10 @@ import DirectorNote from "./DirectorNote";
 import MediaDetailsForm from "./MediaDetailsForm";
 import PublishButton from "./PublishButton.jsx";
 import SceneInformationForm from "./SceneInformationForm";
+import phamPhotoIcon from "../../../assets/icons/pham-photo-icon.png";
+import phamVideoIcon from "../../../assets/icons/pham-video-icon.png";
 
-function MediaSelector() {
+function MediaSelector({ isFirstTake }) {
 
     const inputFileRef = useRef(null);
 
@@ -338,9 +340,31 @@ function MediaSelector() {
 
             <div className="upload-zone">
 
+                <div className="first-take-header">
+                    <h1>{isFirstTake ? "FIRST TAKE" : "NEXT SCENE"}</h1>
+                    <p>
+                        {isFirstTake
+                            ? "CHOOSE HOW YOUR STORY BEGINS."
+                            : "CONTINUE YOUR STORY."
+                        }
+                    </p>
+                </div>
+
                 <div className={"upload-content"}>
 
-                    <h2>🖼️🎥</h2>
+                    <div className="media-type-icons">
+                        <img
+                            src={phamPhotoIcon}
+                            alt="Photo"
+                            className="media-type-icon"
+                        />
+
+                        <img
+                            src={phamVideoIcon}
+                            alt="Video"
+                            className="media-type-icon"
+                        />
+                    </div>
 
                     <PHButton onClick={handleChooseScene}>
 
