@@ -25,4 +25,9 @@ public interface MediaRepository extends JpaRepository<Media, Long> {
             Long userId,
             Pageable pageable);
 
+    Page<Media> findByUserIdAndVisibility(
+            Long userId,
+            Visibility visibility,
+            Pageable pageable);
+
 }

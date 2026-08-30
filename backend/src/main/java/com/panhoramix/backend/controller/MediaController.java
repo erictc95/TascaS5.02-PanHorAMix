@@ -51,6 +51,14 @@ public class MediaController {
 
     }
 
+    @GetMapping("/user/{userId}")
+    public MediaPageResponse getPublicMediaByUser(
+            @PathVariable Long userId,
+            @RequestParam(defaultValue = "0") int page) {
+
+        return mediaService.getPublicMediaByUser(userId, page);
+    }
+
     @GetMapping("/{id}")
     public MediaResponse getMediaById(@PathVariable Long id) {
 
