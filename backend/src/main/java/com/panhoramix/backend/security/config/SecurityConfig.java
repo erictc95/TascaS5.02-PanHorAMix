@@ -74,6 +74,7 @@ public class SecurityConfig {
                                 "/api/media/**",
                                 "/api/test/**"
                         ).permitAll()
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
