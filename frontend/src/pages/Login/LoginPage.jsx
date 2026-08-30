@@ -42,6 +42,8 @@ function LoginPage() {
 
             sessionStorage.setItem("token", response.token);
 
+            sessionStorage.setItem("role", response.role);
+
             console.log("Login successful");
 
             navigate("/home");

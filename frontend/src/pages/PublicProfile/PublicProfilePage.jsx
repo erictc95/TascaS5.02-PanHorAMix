@@ -4,7 +4,10 @@ import { getPublicProfile } from "../../api/userService";
 import ProfileGrid from "../../components/profile/ProfileGrid";
 import ProfileHeader from "../../components/profile/ProfileHeader";
 import "./PublicProfilePage.css";
-import { getPublicMediaByUserId } from "../../api/mediaService";
+import {
+    getPublicMediaByUserId,
+    getAdminMediaByUserId
+} from "../../api/mediaService";
 
 function PublicProfilePage() {
 
@@ -26,7 +29,11 @@ function PublicProfilePage() {
 
             setUser(profile);
 
-            const mediaResponse = await getPublicMediaByUserId(profile.id);
+            const role = sessionStorage.getItem("role");
+
+            const mediaResponse = role === "ADMIN"
+                ? await getAdminMediaByUserId(profile.id)
+                : await getPublicMediaByUserId(profile.id);
 
             setMedia(mediaResponse.content);
 

@@ -9,6 +9,7 @@ import com.panhoramix.backend.entity.User;
 import com.panhoramix.backend.entity.enums.MediaType;
 import com.panhoramix.backend.entity.enums.StorageFolder;
 import com.panhoramix.backend.entity.enums.Visibility;
+import com.panhoramix.backend.entity.enums.Role;
 import com.panhoramix.backend.exception.MediaNotFoundException;
 import com.panhoramix.backend.mapper.MediaMapper;
 import com.panhoramix.backend.repository.MediaRepository;
@@ -219,7 +220,8 @@ public class MediaService {
 
         User currentUser = currentUserService.getCurrentUser();
 
-        if (media.getUser().getId().equals(currentUser.getId())) {
+        if (media.getUser().getId().equals(currentUser.getId())
+                || currentUser.getRole() == Role.ADMIN) {
 
             return mediaMapper.toResponse(media);
 
