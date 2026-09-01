@@ -103,11 +103,7 @@ function ProfilePage() {
 
                 ) : media.length === 0 ? (
 
-                    <p>
-
-                        No scenes published yet.
-
-                    </p>
+                    <p> No scenes published yet. </p>
 
                 ) : (
 
