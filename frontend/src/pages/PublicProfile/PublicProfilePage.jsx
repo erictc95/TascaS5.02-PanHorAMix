@@ -62,6 +62,8 @@ function PublicProfilePage() {
             <ProfileHeader
                 username={user.username}
                 sceneCount={media.length}
+                avatarUrl={user.avatarUrl}
+                bannerUrl={user.bannerUrl}
             />
 
             <ProfileGrid media={media} />

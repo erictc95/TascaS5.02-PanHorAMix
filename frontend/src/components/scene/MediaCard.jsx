@@ -49,6 +49,10 @@ function MediaCard({ item, showVisibility = false }) {
                             <img
                                 src={item.avatarUrl || defaultAvatar}
                                 alt={item.username}
+                                onError={(e) => {
+                                    e.currentTarget.onerror = null;
+                                    e.currentTarget.src = defaultAvatar;
+                                }}
                             />
 
                             <span>{item.username}</span>
