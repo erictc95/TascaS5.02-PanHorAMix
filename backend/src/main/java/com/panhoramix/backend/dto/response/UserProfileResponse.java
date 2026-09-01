@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,5 +23,19 @@ public class UserProfileResponse {
     private Role role;
 
     private String avatarUrl;
+
+    private String firstName;
+
+    private String lastName;
+
+    private String bio;
+
+    private String bannerUrl;
+
+    private String phoneNumber;
+
+    private LocalDateTime phoneVerifiedAt;
+
+    private LocalDateTime createdAt;
 
 }

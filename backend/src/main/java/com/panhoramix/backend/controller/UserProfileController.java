@@ -10,6 +10,11 @@ import com.panhoramix.backend.dto.response.PublicUserProfileResponse;
 import com.panhoramix.backend.repository.UserRepository;
 import org.springframework.web.bind.annotation.PathVariable;
 import lombok.RequiredArgsConstructor;
+import com.panhoramix.backend.dto.request.UpdateProfileRequest;
+import com.panhoramix.backend.service.UserService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @RequiredArgsConstructor
 @RestController
@@ -17,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class UserProfileController {
 
     private final UserRepository userRepository;
+    private final UserService userService;
 
 
     @GetMapping("/me")
@@ -30,8 +36,26 @@ public class UserProfileController {
                 .email(user.getEmail())
                 .role(user.getRole())
                 .avatarUrl(user.getAvatarUrl())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .bio(user.getBio())
+                .bannerUrl(user.getBannerUrl())
+                .phoneNumber(user.getPhoneNumber())
+                .phoneVerifiedAt(user.getPhoneVerifiedAt())
+                .createdAt(user.getCreatedAt())
                 .build();
+    }
 
+    @PutMapping("/me")
+    public ResponseEntity<Void> updateProfile(
+            Authentication authentication,
+            @RequestBody UpdateProfileRequest request) {
+
+        User user = (User) authentication.getPrincipal();
+
+        userService.updateProfile(user.getId(), request);
+
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{username}")
@@ -45,6 +69,11 @@ public class UserProfileController {
                 .id(user.getId())
                 .username(user.getUsername())
                 .avatarUrl(user.getAvatarUrl())
+                .bannerUrl(user.getBannerUrl())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .bio(user.getBio())
+                .createdAt(user.getCreatedAt())
                 .build();
     }
 
