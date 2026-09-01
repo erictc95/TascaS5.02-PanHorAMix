@@ -1,4 +1,7 @@
 .home-page {
+
+    position: relative;
+
     min-height: 100vh;
 
     background: #000;
@@ -14,4 +17,106 @@
     margin-top: 10px;
 
     padding-top: 30px;
+
+}
+
+.feed-filter-container {
+    position: fixed;
+    top: 100px;
+    left: 60px;
+    z-index: 1000;
+}
+
+.feed-filter-button {
+    background: transparent;
+    border: none;
+    padding: 0;
+    outline: none;
+    box-shadow: none;
+
+    width: 100px;
+    height: 100px;
+
+    cursor: pointer;
+}
+
+.feed-filter-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.filter-menu {
+    position: absolute;
+    top: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 160px;
+    max-height: 350px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding: 14px;
+
+    background: rgba(10, 10, 10, 0.98);
+    border: 1px solid #D4AF37;
+    border-radius: 14px;
+
+    box-shadow:
+            0 12px 35px rgba(0, 0, 0, 0.55),
+            0 0 18px rgba(212, 175, 55, 0.12);
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    z-index: 100;
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 6px 8px;
+
+    color: white;
+    transition: color 0.2s ease;
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+.filter-option input[type="checkbox"] {
+    accent-color: #d4af37;
+}
+
+.filter-option.selected {
+    color: #d4af37;
+}
+
+.filter-option:hover {
+    color: #d4af37;
+}
+
+.filter-button:focus,
+.filter-button:active {
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+.filter-menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+.filter-menu::-webkit-scrollbar-thumb {
+    background: #D4AF37;
+    border-radius: 10px;
+}
+
+.filter-menu::-webkit-scrollbar-track {
+    background: transparent;
 }

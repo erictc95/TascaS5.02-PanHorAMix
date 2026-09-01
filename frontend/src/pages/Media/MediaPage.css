@@ -12,11 +12,13 @@
 
 .media-player{
 
-    width:100%;
+    width:85%;
 
-    aspect-ratio:16/9;
+    height:auto;
 
-    background:#000;
+    display: block;
+
+    margin: 0 auto;
 
     border-radius:16px;
 
