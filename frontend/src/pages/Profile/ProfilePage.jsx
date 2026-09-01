@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { getProfile } from "../../api/userService";
 import mediaService from "../../api/mediaService";
 import phamVideoPlaceholder from "../../assets/placeholders/pham-video-placeholder.png";
+import ProfileHeader from "../../components/profile/ProfileHeader";
 import SceneStatus from "../../components/scene/SceneStatus.jsx";
 import {useNavigate} from "react-router-dom";
 
@@ -63,27 +64,13 @@ function ProfilePage() {
 
         <div className="profile-page">
 
-            <div className="profile-header">
-
-                <div className="profile-avatar">
-
-                    👤
-
-                </div>
-
-                <h1>
-
-                    @{user?.username}
-
-                </h1>
-
-                <p>
-
-                    {media.length} Scene{media.length !== 1 ? "s" : ""}
-
-                </p>
-
-            </div>
+            <ProfileHeader
+                username={user?.username}
+                sceneCount={media.length}
+                avatarUrl={user?.avatarUrl}
+                bannerUrl={user?.bannerUrl}
+                isOwnProfile={true}
+            />
 
             <div className="profile-content">
 
