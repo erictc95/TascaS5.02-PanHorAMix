@@ -5,6 +5,11 @@
     margin-bottom: 50px;
 }
 
+.profile-avatar-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+}
+
 .profile-avatar {
     width: 120px;
     height: 120px;
@@ -14,7 +19,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 0;
 }
 
 .profile-avatar img {
@@ -24,6 +29,124 @@
     display: block;
 }
 
+.profile-avatar-wrapper.clickable {
+    cursor: pointer;
+}
+
+.profile-avatar-wrapper.clickable .profile-avatar {
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.profile-avatar-wrapper.clickable .profile-avatar:hover {
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+    transform: scale(1.02);
+}
+
+
+/* =========================
+   PROFILE ACCOUNT MENU
+   ========================= */
+
+.profile-account-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+
+    background: #171717;
+    border: 1px solid #3a3a3a;
+    border-radius: 10px;
+
+    padding: 6px;
+
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+
+    z-index: 1000;
+}
+
+.profile-account-menu button {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: #e8e8e8;
+
+    text-align: left;
+
+    padding: 11px 13px;
+    border-radius: 7px;
+
+    font-size: 14px;
+    cursor: pointer;
+
+    transition:
+            background-color 0.15s ease,
+            color 0.15s ease;
+}
+
+.profile-account-menu > button:hover {
+    background: rgba(212, 175, 55, 0.14);
+    color: #d4af37;
+}
+
+
+/* =========================
+   LOG OUT
+   ========================= */
+
+.profile-account-menu .logout-option:hover {
+    background: rgba(220, 60, 60, 0.14);
+    color: #e05a5a;
+}
+
+
+/* =========================
+   DIVIDER
+   ========================= */
+
+.profile-menu-divider {
+    height: 1px;
+    background: #333;
+    margin: 6px 4px;
+}
+
+
+/* =========================
+   FOOTER LINKS
+   ========================= */
+
+.profile-menu-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    padding: 9px 4px 5px;
+
+    color: #777;
+    font-size: 11px;
+}
+
+.profile-menu-footer button {
+    width: auto;
+
+    padding: 0;
+
+    color: #777;
+    font-size: 11px;
+    border-radius: 0;
+}
+
+.profile-menu-footer button:hover {
+    background: transparent;
+    color: #d4af37;
+}
+
+
+/* =========================
+   PROFILE TEXT
+   ========================= */
+
 .profile-header h1 {
     margin-bottom: 10px;
 }
@@ -31,6 +154,11 @@
 .profile-header p {
     color: #999;
 }
+
+
+/* =========================
+   BANNER
+   ========================= */
 
 .profile-banner {
     width: 100%;
@@ -43,4 +171,77 @@
     height: 100%;
     object-fit: cover;
     display: block;
+}
+
+.profile-toggle-option {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 11px 13px;
+    border-radius: 7px;
+
+    color: #e8e8e8;
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: background-color 0.15s ease;
+}
+
+.profile-toggle-option:hover {
+    background: rgba(212, 175, 55, 0.14);
+    color: #d4af37;
+}
+
+
+/* Toggle */
+
+.profile-toggle {
+    position: relative;
+
+    width: 34px;
+    height: 18px;
+
+    flex-shrink: 0;
+
+    background: #111;
+    border: 1px solid #555;
+    border-radius: 999px;
+
+    transition:
+            background-color 0.2s ease,
+            border-color 0.2s ease;
+}
+
+.profile-toggle-knob {
+    position: absolute;
+
+    top: 2px;
+    left: 2px;
+
+    width: 12px;
+    height: 12px;
+
+    border-radius: 50%;
+
+    background: #777;
+
+    transition:
+            transform 0.2s ease,
+            background-color 0.2s ease;
+}
+
+
+/* Active */
+
+.profile-toggle.active {
+    background: #d4af37;
+    border-color: #d4af37;
+}
+
+.profile-toggle.active .profile-toggle-knob {
+    transform: translateX(16px);
+    background: #111;
 }

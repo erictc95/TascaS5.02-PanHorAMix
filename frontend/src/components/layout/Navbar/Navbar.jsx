@@ -1,13 +1,11 @@
 import "./Navbar.css";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { getProfile } from "../../../api/userService";
 
 function Navbar() {
-
-    const navigate = useNavigate();
 
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -46,14 +44,6 @@ function Navbar() {
         loadProfile();
 
     }, []);
-
-    function logout() {
-
-        sessionStorage.clear();
-
-        navigate("/");
-
-    }
 
     return (
 
@@ -96,13 +86,6 @@ function Navbar() {
                                 @{user.username}
                             </Link>
                         </span>
-
-                        <button
-                            onClick={logout}
-                            className="pham-logout"
-                        >
-                            Logout
-                        </button>
 
                     </>
 

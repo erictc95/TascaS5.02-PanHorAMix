@@ -35,8 +35,14 @@ public class User {
     @Column(name = "avatar_url")
     private String avatarUrl;
 
+    @Column(name = "avatar_enabled", nullable = false)
+    private boolean avatarEnabled;
+
     @Column(name = "banner_url")
     private String bannerUrl;
+
+    @Column(name = "banner_enabled", nullable = false)
+    private boolean bannerEnabled;
 
     @Column(name = "first_name", length = 100)
     private String firstName;

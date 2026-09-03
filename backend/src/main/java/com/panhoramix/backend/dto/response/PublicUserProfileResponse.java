@@ -19,7 +19,11 @@ public class PublicUserProfileResponse {
 
     private String avatarUrl;
 
+    private boolean avatarEnabled;
+
     private String bannerUrl;
+
+    private boolean bannerEnabled;
 
     private String firstName;
 

@@ -100,4 +100,24 @@ public class UserService {
 
         userRepository.save(user);
     }
+
+    public void updateAvatarEnabled(Long userId, boolean enabled) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setAvatarEnabled(enabled);
+        user.setUpdatedAt(LocalDateTime.now());
+
+        userRepository.save(user);
+    }
+
+    public void updateBannerEnabled(Long userId, boolean enabled) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setBannerEnabled(enabled);
+        user.setUpdatedAt(LocalDateTime.now());
+
+        userRepository.save(user);
+    }
 }
