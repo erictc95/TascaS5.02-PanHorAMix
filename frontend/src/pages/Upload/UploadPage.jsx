@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./FirstTakePage.css";
+import "./UploadPage.css";
 
 import mediaService from "../../api/mediaService";
 import MediaSelector from "./components/MediaSelector.jsx";
@@ -7,7 +7,7 @@ import firstTakeHero from "../../assets/brand/Panhoramix-first-take-hero.png";
 import nextSceneHero from "../../assets/brand/Panhoramix-next-scene-hero.png";
 
 
-function FirstTakePage() {
+function UploadPage() {
 
     const [isFirstTake, setIsFirstTake] = useState(null);
 
@@ -67,4 +67,4 @@ function FirstTakePage() {
 
 }
 
-export default FirstTakePage;
+export default UploadPage;

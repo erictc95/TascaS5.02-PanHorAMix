@@ -4,9 +4,10 @@ import LandingPage from "../pages/Landing/LandingPage";
 import RegisterPage from "../pages/Register/RegisterPage";
 import LoginPage from "../pages/Login/LoginPage";
 import HomePage from "../pages/Home/HomePage";
-import FirstTakePage from "../pages/FirstTake/FirstTakePage.jsx";
+import UploadPage from "../pages/Upload/UploadPage.jsx";
 import ProfilePage from "../pages/Profile/ProfilePage.jsx";
 import PublicProfilePage from "../pages/PublicProfile/PublicProfilePage.jsx";
+import EditProfilePage from "../pages/EditProfile/EditProfilePage.jsx";
 import AppLayout from "../components/layout/AppLayout.jsx";
 import MediaPage from "../pages/Media/MediaPage.jsx";
 
@@ -34,9 +35,11 @@ function AppRouter() {
 
                     <Route path="/media/:id" element={<MediaPage />} />
 
-                    <Route path="/upload" element={<FirstTakePage />} />
+                    <Route path="/upload" element={<UploadPage />} />
 
                     <Route path="/profile" element={<ProfilePage />} />
+
+                    <Route path="/edit-profile" element={<EditProfilePage />} />
 
                     <Route path="/users/:username" element={<PublicProfilePage />} />
 

@@ -1,0 +1,112 @@
+.pham-select {
+    position: relative;
+    width: 100%;
+}
+
+.pham-select-trigger {
+    width: 100%;
+    padding: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border: 1px solid #d4af37;
+    border-radius: 8px;
+
+    background: #1a1a1a;
+    color: white;
+
+    font-size: 16px;
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+            background 0.2s ease,
+            border-color 0.2s ease;
+}
+
+.pham-select-trigger:hover,
+.pham-select-trigger.open {
+    background: #222;
+    border-color: #d4af37;
+}
+
+.pham-select-trigger .placeholder {
+    color: #999;
+}
+
+.pham-select-arrow {
+    color: #d4af37;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.pham-select-menu {
+    position: absolute;
+
+    top: calc(100% + 6px);
+    left: 0;
+
+    width: 100%;
+    max-height: 300px;
+
+    background: #1a1a1a;
+    border: 1px solid #d4af37;
+    border-radius: 8px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    z-index: 1000;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+}
+
+.pham-select-menu::-webkit-scrollbar {
+    width: 8px;
+}
+
+.pham-select-menu::-webkit-scrollbar-track {
+    background: #111;
+}
+
+.pham-select-menu::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+}
+
+.pham-select-menu::-webkit-scrollbar-thumb:hover {
+    background: #d4af37;
+}
+
+.pham-select-option {
+    width: 100%;
+
+    padding: 11px 12px;
+
+    border: none;
+    background: transparent;
+
+    color: white;
+
+    font-size: 16px;
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+            background 0.15s ease,
+            color 0.15s ease;
+}
+
+.pham-select-option:hover {
+    background: #d4af37;
+    color: #111;
+}
+
+.pham-select-option.selected {
+    background: #2a2a2a;
+    color: #d4af37;
+}

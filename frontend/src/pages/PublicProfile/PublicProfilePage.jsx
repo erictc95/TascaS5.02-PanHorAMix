@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getPublicProfile } from "../../api/userService";
+import { getProfile, getPublicProfile } from "../../api/userService";
 import ProfileGrid from "../../components/profile/ProfileGrid";
 import ProfileHeader from "../../components/profile/ProfileHeader";
 import "./PublicProfilePage.css";
@@ -15,6 +15,7 @@ function PublicProfilePage() {
 
     const [user, setUser] = useState(null);
     const [media, setMedia] = useState([]);
+    const [currentUser, setCurrentUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -25,9 +26,16 @@ function PublicProfilePage() {
 
         try {
 
-            const profile = await getPublicProfile(username);
+            const [profile, current] = await Promise.all([
+                getPublicProfile(username),
+                getProfile()
+            ]);
+
+            console.log("PUBLIC PROFILE:", profile);
+            console.log("CURRENT USER:", current);
 
             setUser(profile);
+            setCurrentUser(current);
 
             const role = sessionStorage.getItem("role");
 
@@ -64,6 +72,9 @@ function PublicProfilePage() {
                 sceneCount={media.length}
                 avatarUrl={user.avatarUrl}
                 bannerUrl={user.bannerUrl}
+                avatarEnabled={user.avatarEnabled}
+                bannerEnabled={user.bannerEnabled}
+                isOwnProfile={currentUser?.id === user.id}
             />
 
             <ProfileGrid media={media} />

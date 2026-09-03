@@ -24,6 +24,8 @@ public class UserProfileResponse {
 
     private String avatarUrl;
 
+    private boolean avatarEnabled;
+
     private String firstName;
 
     private String lastName;
@@ -31,6 +33,8 @@ public class UserProfileResponse {
     private String bio;
 
     private String bannerUrl;
+
+    private boolean bannerEnabled;
 
     private String phoneNumber;
 

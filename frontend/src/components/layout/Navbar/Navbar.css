@@ -129,8 +129,7 @@
 
 }
 
-.pham-navbar-links a::after,
-.pham-logout::after {
+.pham-navbar-links a::after {
 
     content: "";
 
@@ -154,8 +153,7 @@
 
 }
 
-.pham-navbar-links a:hover::after,
-.pham-logout:hover::after {
+.pham-navbar-links a:hover::after {
 
     width: 100%;
 
@@ -168,23 +166,3 @@
 
 }
 
-.pham-logout {
-    position: relative;
-
-    background: transparent;
-    border: none;
-
-    color: #F5F5F5;
-
-    font-size: 15px;
-    cursor: pointer;
-
-    transition: color .25s ease;
-
-}
-
-.pham-logout:hover {
-
-    color: #C8A24B;
-
-}
