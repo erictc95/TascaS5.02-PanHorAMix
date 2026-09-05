@@ -12,6 +12,9 @@ function ProfileHeader({
                            bannerUrl,
                            avatarEnabled = false,
                            bannerEnabled = false,
+                           firstName,
+                           lastName,
+                           bio,
                            isOwnProfile = false
                        }) {
 
@@ -26,6 +29,10 @@ function ProfileHeader({
 
     const [avatarActive, setAvatarActive] = useState(avatarEnabled);
     const [bannerActive, setBannerActive] = useState(bannerEnabled);
+    const [overlapAvatar, setOverlapAvatar] = useState(true);
+
+    const canOverlapBanner = bannerActive && !!bannerUrl;
+    const shouldOverlap = canOverlapBanner && overlapAvatar;
 
     const handleAvatarToggle = async () => {
         const newValue = !avatarActive;
@@ -91,6 +98,7 @@ function ProfileHeader({
     return (
         <div className="profile-header">
 
+            {/* BANNER */}
             <div className="profile-banner">
                 <img
                     src={bannerActive && bannerUrl ? bannerUrl : defaultBanner}
@@ -102,122 +110,203 @@ function ProfileHeader({
                 />
             </div>
 
-            <div
-                className={`profile-avatar-wrapper ${isOwnProfile ? "clickable" : ""}`}
-                ref={menuRef}
-            >
-                <div
-                    className="profile-avatar"
-                    onClick={() => {
-                        if (isOwnProfile) {
-                            setMenuOpen((prev) => !prev);
-                        }
-                    }}
-                    role={isOwnProfile ? "button" : undefined}
-                    tabIndex={isOwnProfile ? 0 : undefined}
-                    onKeyDown={(e) => {
-                        if (
-                            isOwnProfile &&
-                            (e.key === "Enter" || e.key === " ")
-                        ) {
-                            e.preventDefault();
-                            setMenuOpen((prev) => !prev);
-                        }
-                    }}
-                >
-                    <img
-                        src={avatarActive && avatarUrl ? avatarUrl : defaultAvatar}
-                        alt=""
-                        onError={(e) => {
-                            e.currentTarget.onerror = null;
-                            e.currentTarget.src = defaultAvatar;
-                        }}
-                    />
+            {/* PROFILE INFORMATION */}
+            <div className="profile-info-layout">
+
+                {/* LEFT — PERSONAL DETAILS */}
+                <div className="profile-personal-info">
+
+                    {(firstName || lastName) && (
+                        <h2>
+                            {[firstName, lastName]
+                                .filter(Boolean)
+                                .join(" ")}
+                        </h2>
+                    )}
+
+                    {bio && (
+                        <p className="profile-bio">
+                            {bio}
+                        </p>
+                    )}
+
                 </div>
 
-                {isOwnProfile && menuOpen && (
-                    <div className="profile-account-menu">
+                {/* CENTER — AVATAR + USERNAME + SCENES */}
+                <div className="profile-center-info">
+
+                    <div
+                        className={`profile-avatar-wrapper ${
+                            shouldOverlap
+                                ? "avatar-overlap"
+                                : "avatar-below-banner"
+                        } ${isOwnProfile ? "clickable" : ""}`}
+                        ref={menuRef}
+                    >
 
                         <div
-                            className="profile-toggle-option"
-                            onClick={handleAvatarToggle}
+                            className="profile-avatar"
+                            onClick={() => {
+                                if (isOwnProfile) {
+                                    setMenuOpen((prev) => !prev);
+                                }
+                            }}
+                            role={isOwnProfile ? "button" : undefined}
+                            tabIndex={isOwnProfile ? 0 : undefined}
+                            onKeyDown={(e) => {
+                                if (
+                                    isOwnProfile &&
+                                    (e.key === "Enter" || e.key === " ")
+                                ) {
+                                    e.preventDefault();
+                                    setMenuOpen((prev) => !prev);
+                                }
+                            }}
                         >
-                            <span>Activate Avatar</span>
-
-                            <span className={`profile-toggle ${avatarActive ? "active" : ""}`}>
-                                <span className="profile-toggle-knob"/>
-                            </span>
+                            <img
+                                src={
+                                    avatarActive && avatarUrl
+                                        ? avatarUrl
+                                        : defaultAvatar
+                                }
+                                alt=""
+                                onError={(e) => {
+                                    e.currentTarget.onerror = null;
+                                    e.currentTarget.src = defaultAvatar;
+                                }}
+                            />
                         </div>
 
-                        <div
-                            className="profile-toggle-option"
-                            onClick={handleBannerToggle}
-                        >
-                            <span>Activate Banner</span>
+                        {/* ACCOUNT MENU */}
+                        {isOwnProfile && menuOpen && (
+                            <div className="profile-account-menu">
 
-                            <span className={`profile-toggle ${bannerActive ? "active" : ""}`}>
-                                <span className="profile-toggle-knob"/>
-                            </span>
-                        </div>
+                                <div
+                                    className="profile-toggle-option"
+                                    onClick={handleAvatarToggle}
+                                >
+                                    <span>Activate Avatar</span>
 
-                        <button
-                            type="button"
-                            onClick={() => handleMenuAction("edit-profile")}
-                        >
-                            Edit Profile
-                        </button>
+                                    <span
+                                        className={`profile-toggle ${
+                                            avatarActive ? "active" : ""
+                                        }`}
+                                    >
+                                    <span className="profile-toggle-knob"/>
+                                </span>
+                                </div>
 
-                        <button
-                            type="button"
-                            onClick={() => handleMenuAction("settings")}
-                        >
-                            Settings
-                        </button>
+                                <div
+                                    className="profile-toggle-option"
+                                    onClick={handleBannerToggle}
+                                >
+                                    <span>Activate Banner</span>
 
-                        <button
-                            type="button"
-                            onClick={() => handleMenuAction("change-password")}
-                        >
-                            Change Password
-                        </button>
+                                    <span
+                                        className={`profile-toggle ${
+                                            bannerActive ? "active" : ""
+                                        }`}
+                                    >
+                                    <span className="profile-toggle-knob"/>
+                                </span>
+                                </div>
 
-                        <div className="profile-menu-divider"/>
+                                <div
+                                    className={`profile-toggle-option ${
+                                        !canOverlapBanner ? "disabled" : ""
+                                    }`}
+                                    onClick={() => {
+                                        if (canOverlapBanner) {
+                                            setOverlapAvatar(prev => !prev);
+                                        }
+                                    }}
+                                >
+                                    <span>Overlap Banner</span>
 
-                        <button
-                            type="button"
-                            className="logout-option"
-                            onClick={handleLogout}
-                        >
-                            Log Out
-                        </button>
+                                    <div
+                                        className={`profile-toggle ${
+                                            overlapAvatar && canOverlapBanner ? "active" : ""
+                                        } ${!canOverlapBanner ? "disabled" : ""}`}
+                                    >
+                                        <div className="profile-toggle-knob" />
+                                    </div>
+                                </div>
 
-                        <div className="profile-menu-footer">
-                            <button
-                                type="button"
-                                onClick={() => handleMenuAction("privacy-policy")}
-                            >
-                                Privacy Policy
-                            </button>
+                                <button
+                                    type="button"
+                                    onClick={() =>
+                                        handleMenuAction("edit-profile")
+                                    }
+                                >
+                                    Edit Profile
+                                </button>
 
-                            <span>·</span>
+                                <button
+                                    type="button"
+                                    onClick={() =>
+                                        handleMenuAction("settings")
+                                    }
+                                >
+                                    Settings
+                                </button>
 
-                            <button
-                                type="button"
-                                onClick={() => handleMenuAction("terms")}
-                            >
-                                Terms of Service
-                            </button>
-                        </div>
+                                <button
+                                    type="button"
+                                    onClick={() =>
+                                        handleMenuAction("change-password")
+                                    }
+                                >
+                                    Change Password
+                                </button>
+
+                                <div className="profile-menu-divider"/>
+
+                                <button
+                                    type="button"
+                                    className="logout-option"
+                                    onClick={handleLogout}
+                                >
+                                    Log Out
+                                </button>
+
+                                <div className="profile-menu-footer">
+
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            handleMenuAction("privacy-policy")
+                                        }
+                                    >
+                                        Privacy Policy
+                                    </button>
+
+                                    <span>·</span>
+
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            handleMenuAction("terms")
+                                        }
+                                    >
+                                        Terms of Service
+                                    </button>
+
+                                </div>
+
+                            </div>
+                        )}
 
                     </div>
-                )}
+
+                    <h1>@{username}</h1>
+
+                    <p className="profile-scene-count">
+                        {sceneCount} Scene{sceneCount !== 1 ? "s" : ""}
+                    </p>
+
+                </div>
+
             </div>
-
-            <h1>@{username}</h1>
-
-            <p>
-                {sceneCount} Scene{sceneCount !== 1 ? "s" : ""}
-            </p>
 
         </div>
     );

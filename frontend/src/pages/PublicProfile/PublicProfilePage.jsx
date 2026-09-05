@@ -72,9 +72,12 @@ function PublicProfilePage() {
                 sceneCount={media.length}
                 avatarUrl={user.avatarUrl}
                 bannerUrl={user.bannerUrl}
-                avatarEnabled={user.avatarEnabled}
-                bannerEnabled={user.bannerEnabled}
-                isOwnProfile={currentUser?.id === user.id}
+                avatarEnabled={user.avatarEnabled ?? false}
+                bannerEnabled={user.bannerEnabled ?? false}
+                firstName={user.firstName}
+                lastName={user.lastName}
+                bio={user.bio}
+                isOwnProfile={true}
             />
 
             <ProfileGrid media={media} />

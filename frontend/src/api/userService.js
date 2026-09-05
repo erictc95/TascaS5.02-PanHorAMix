@@ -7,10 +7,15 @@ export async function getProfile() {
     return response.data;
 }
 
-export async function updateProfile(profileData) {
+export async function updateProfile(formData) {
     const response = await api.put(
         "/users/me",
-        profileData
+        formData,
+        {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        }
     );
 
     return response.data;

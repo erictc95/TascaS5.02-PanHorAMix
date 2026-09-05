@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.panhoramix.backend.dto.request.UpdateProfileRequest;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
@@ -25,6 +26,8 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final ProfileImageService profileImageService;
+    private final FileStorageService fileStorageService;
 
     public void register(RegisterRequest request) {
 
@@ -85,6 +88,119 @@ public class UserService {
         user.setUpdatedAt(LocalDateTime.now());
 
         userRepository.save(user);
+    }
+
+    public void updateProfile(
+            Long userId,
+            String firstName,
+            String lastName,
+            String bio,
+            MultipartFile avatar,
+            MultipartFile banner,
+            boolean removeAvatar,
+            boolean removeBanner) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        String oldAvatarUrl = user.getAvatarUrl();
+        String oldBannerUrl = user.getBannerUrl();
+
+        String newAvatarUrl = null;
+        String newBannerUrl = null;
+
+        try {
+
+            // Upload new avatar
+            if (avatar != null && !avatar.isEmpty()) {
+                newAvatarUrl = profileImageService.uploadAvatar(
+                        avatar,
+                        userId
+                );
+            }
+
+            // Upload new banner
+            if (banner != null && !banner.isEmpty()) {
+                newBannerUrl = profileImageService.uploadBanner(
+                        banner,
+                        userId
+                );
+            }
+
+            // Personal details
+            user.setFirstName(
+                    firstName == null || firstName.isBlank()
+                            ? null
+                            : firstName
+            );
+
+            user.setLastName(
+                    lastName == null || lastName.isBlank()
+                            ? null
+                            : lastName
+            );
+
+            user.setBio(
+                    bio == null || bio.isBlank()
+                            ? null
+                            : bio
+            );
+
+            // Avatar
+            if (newAvatarUrl != null) {
+                user.setAvatarUrl(newAvatarUrl);
+            } else if (removeAvatar) {
+                user.setAvatarUrl(null);
+            }
+
+            // Banner
+            if (newBannerUrl != null) {
+                user.setBannerUrl(newBannerUrl);
+            } else if (removeBanner) {
+                user.setBannerUrl(null);
+            }
+
+            user.setUpdatedAt(LocalDateTime.now());
+
+            userRepository.save(user);
+
+            // Delete old avatar after successful save
+            if (newAvatarUrl != null && oldAvatarUrl != null) {
+                fileStorageService.deleteFile(oldAvatarUrl);
+            }
+
+            if (removeAvatar && newAvatarUrl == null && oldAvatarUrl != null) {
+                fileStorageService.deleteFile(oldAvatarUrl);
+            }
+
+            // Delete old banner after successful save
+            if (newBannerUrl != null && oldBannerUrl != null) {
+                fileStorageService.deleteFile(oldBannerUrl);
+            }
+
+            if (removeBanner && newBannerUrl == null && oldBannerUrl != null) {
+                fileStorageService.deleteFile(oldBannerUrl);
+            }
+
+        } catch (Exception ex) {
+
+            // Clean up newly uploaded files if the database update fails
+            if (newAvatarUrl != null) {
+                try {
+                    fileStorageService.deleteFile(newAvatarUrl);
+                } catch (Exception ignored) {
+                }
+            }
+
+            if (newBannerUrl != null) {
+                try {
+                    fileStorageService.deleteFile(newBannerUrl);
+                } catch (Exception ignored) {
+                }
+            }
+
+            throw ex;
+        }
     }
 
     public void changePassword(Long userId, ChangePasswordRequest request) {
