@@ -8,7 +8,8 @@ public enum StorageFolder {
     IMAGES("images"),
     VIDEOS("videos"),
     THUMBNAILS("thumbnails"),
-    AVATARS("avatars");
+    AVATARS("avatars"),
+    BANNERS("banners");
 
     private final String folder;
 

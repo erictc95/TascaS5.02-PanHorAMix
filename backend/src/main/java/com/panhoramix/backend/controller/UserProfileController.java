@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import com.panhoramix.backend.dto.request.UpdateProfileRequest;
 import com.panhoramix.backend.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
 @RestController
@@ -51,6 +53,36 @@ public class UserProfileController {
         User user = (User) authentication.getPrincipal();
 
         userService.updateProfile(user.getId(), request);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping(
+            value = "/me",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+    )
+    public ResponseEntity<Void> updateProfileMultipart(
+            Authentication authentication,
+            @RequestParam(required = false) String firstName,
+            @RequestParam(required = false) String lastName,
+            @RequestParam(required = false) String bio,
+            @RequestPart(required = false) MultipartFile avatar,
+            @RequestPart(required = false) MultipartFile banner,
+            @RequestParam(defaultValue = "false") boolean removeAvatar,
+            @RequestParam(defaultValue = "false") boolean removeBanner) {
+
+        User user = (User) authentication.getPrincipal();
+
+        userService.updateProfile(
+                user.getId(),
+                firstName,
+                lastName,
+                bio,
+                avatar,
+                banner,
+                removeAvatar,
+                removeBanner
+        );
 
         return ResponseEntity.ok().build();
     }
