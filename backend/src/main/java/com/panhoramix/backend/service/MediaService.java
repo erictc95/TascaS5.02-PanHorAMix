@@ -304,4 +304,22 @@ public class MediaService {
                 .last(mediaPage.isLast())
                 .build();
     }
+
+    @Transactional
+    public void deleteMediaAsAdmin(Long id) {
+
+        Media media = mediaRepository.findById(id)
+                .orElseThrow(() -> new MediaNotFoundException(id));
+
+        try {
+            fileStorageService.deleteFile(media.getMediaUrl());
+        } catch (Exception e) {
+            throw new RuntimeException(
+                    "Failed to delete media from Cloudflare",
+                    e
+            );
+        }
+
+        mediaRepository.delete(media);
+    }
 }
