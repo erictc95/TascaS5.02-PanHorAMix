@@ -24,6 +24,14 @@ const mediaService = {
 
     },
 
+    async deleteAdminMedia(id, directorNote) {
+        await api.delete(`/admin/media/${id}`, {
+            data: {
+                directorNote
+            }
+        });
+    },
+
     async getMedia(page = 0) {
 
         const response = await api.get("/media", {

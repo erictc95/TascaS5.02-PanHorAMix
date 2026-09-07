@@ -15,6 +15,7 @@ function ProfileHeader({
                            firstName,
                            lastName,
                            bio,
+                           role,
                            isOwnProfile = false
                        }) {
 
@@ -240,6 +241,15 @@ function ProfileHeader({
                                 >
                                     Edit Profile
                                 </button>
+
+                                {role === "ADMIN" && (
+                                    <button
+                                        type="button"
+                                        onClick={() => navigate("/admin")}
+                                    >
+                                        Admin Panel
+                                    </button>
+                                )}
 
                                 <button
                                     type="button"

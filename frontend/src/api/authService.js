@@ -21,3 +21,15 @@ export async function login(request) {
     return response.data;
 
 }
+
+export async function resendVerification(email) {
+
+    const response = await api.post(
+        "/auth/resend-verification",
+        {
+            email
+        }
+    );
+
+    return response.data;
+}

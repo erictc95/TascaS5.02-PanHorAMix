@@ -7,6 +7,7 @@ import com.panhoramix.backend.dto.response.LoginResponse;
 import com.panhoramix.backend.entity.User;
 import com.panhoramix.backend.entity.enums.Role;
 import com.panhoramix.backend.exception.EmailAlreadyExistsException;
+import com.panhoramix.backend.exception.EmailNotVerifiedException;
 import com.panhoramix.backend.exception.InvalidCredentialsException;
 import com.panhoramix.backend.exception.UsernameAlreadyExistsException;
 import com.panhoramix.backend.repository.UserRepository;
@@ -18,6 +19,10 @@ import com.panhoramix.backend.dto.request.UpdateProfileRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.Duration;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +33,12 @@ public class UserService {
     private final JwtService jwtService;
     private final ProfileImageService profileImageService;
     private final FileStorageService fileStorageService;
+    private final EmailVerificationService emailVerificationService;
+    private static final Duration RESEND_COOLDOWN = Duration.ofMinutes(5);
+    private static final int MAX_RESENDS_PER_DAY = 5;
+    private final Map<String, LocalDateTime> resendCooldowns = new ConcurrentHashMap<>();
+    private final Map<String, Integer> resendDailyCounts = new ConcurrentHashMap<>();
+    private final Map<String, LocalDate> resendDailyDates = new ConcurrentHashMap<>();
 
     public void register(RegisterRequest request) {
 
@@ -44,10 +55,96 @@ public class UserService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
+                .phoneVerifiedAt(null)
                 .createdAt(LocalDateTime.now())
                 .build();
 
         userRepository.save(user);
+
+        String verificationToken =
+                emailVerificationService.generateToken(user.getEmail());
+
+        emailVerificationService.sendVerificationEmail(
+                user.getEmail(),
+                user.getUsername(),
+                verificationToken
+        );
+    }
+
+    public void verifyEmail(String token) {
+
+        if (!emailVerificationService.isValid(token)) {
+            throw new InvalidCredentialsException();
+        }
+
+        String email = emailVerificationService.getEmailFromToken(token);
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(InvalidCredentialsException::new);
+
+        if (user.getPhoneVerifiedAt() == null) {
+            user.setPhoneVerifiedAt(LocalDateTime.now());
+            user.setUpdatedAt(LocalDateTime.now());
+
+            userRepository.save(user);
+        }
+    }
+
+    public void resendVerification(String email) {
+
+        User user = userRepository.findByEmail(email)
+                .orElse(null);
+
+        if (user == null) {
+            return;
+        }
+
+        if (user.getPhoneVerifiedAt() != null) {
+            return;
+        }
+
+        String userEmail = user.getEmail();
+        LocalDateTime now = LocalDateTime.now();
+        LocalDate today = now.toLocalDate();
+
+        LocalDate lastAttemptDate = resendDailyDates.get(userEmail);
+
+        if (lastAttemptDate == null || !lastAttemptDate.equals(today)) {
+            resendDailyDates.put(userEmail, today);
+            resendDailyCounts.put(userEmail, 0);
+        }
+
+        int dailyCount = resendDailyCounts.getOrDefault(userEmail, 0);
+
+        if (dailyCount >= MAX_RESENDS_PER_DAY) {
+            return;
+        }
+
+        LocalDateTime lastResend = resendCooldowns.get(userEmail);
+
+        if (lastResend != null
+                && Duration.between(lastResend, now).compareTo(RESEND_COOLDOWN) < 0) {
+            return;
+        }
+
+        try {
+
+            String verificationToken =
+                    emailVerificationService.generateToken(userEmail);
+
+            emailVerificationService.sendVerificationEmail(
+                    userEmail,
+                    user.getUsername(),
+                    verificationToken
+            );
+
+            resendCooldowns.put(userEmail, now);
+            resendDailyCounts.put(userEmail, dailyCount + 1);
+
+        } catch (Exception e) {
+
+            throw e;
+        }
     }
 
     public LoginResponse login(LoginRequest request) {
@@ -57,6 +154,10 @@ public class UserService {
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new InvalidCredentialsException();
+        }
+
+        if (user.getPhoneVerifiedAt() == null) {
+            throw new EmailNotVerifiedException();
         }
 
         String token = jwtService.generateToken(user);

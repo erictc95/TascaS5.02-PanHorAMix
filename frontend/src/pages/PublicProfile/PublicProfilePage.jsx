@@ -77,7 +77,7 @@ function PublicProfilePage() {
                 firstName={user.firstName}
                 lastName={user.lastName}
                 bio={user.bio}
-                isOwnProfile={true}
+                isOwnProfile={currentUser?.id === user.id}
             />
 
             <ProfileGrid media={media} />

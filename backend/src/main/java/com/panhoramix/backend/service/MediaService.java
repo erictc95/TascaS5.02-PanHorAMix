@@ -13,6 +13,7 @@ import com.panhoramix.backend.entity.enums.Role;
 import com.panhoramix.backend.exception.MediaNotFoundException;
 import com.panhoramix.backend.mapper.MediaMapper;
 import com.panhoramix.backend.repository.MediaRepository;
+import com.panhoramix.backend.service.EmailService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +23,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -37,6 +40,7 @@ public class MediaService {
     private final MediaMapper mediaMapper;
     private final FileStorageService fileStorageService;
     private final CurrentUserService currentUserService;
+    private final EmailService emailService;
 
     @Transactional
     public MediaResponse createMedia(CreateMediaRequest request) {
@@ -303,5 +307,61 @@ public class MediaService {
                 .totalElements(mediaPage.getTotalElements())
                 .last(mediaPage.isLast())
                 .build();
+    }
+
+    @Transactional
+    public void deleteMediaAsAdmin(Long id, String directorNote) {
+        Media media = mediaRepository.findById(id)
+                .orElseThrow(() -> new MediaNotFoundException(id));
+
+        // Send Director's Note, but never block deletion if email fails.
+        try {
+            emailService.sendDirectorNote(
+                    media.getUser().getEmail(),
+                    media.getUser().getUsername(),
+                    media.getTitle(),
+                    directorNote
+            );
+        } catch (Exception e) {
+            log.error(
+                    "Failed to send Director's Note for media {}. Media will still be deleted.",
+                    id,
+                    e
+            );
+        }
+
+        try {
+            fileStorageService.deleteFile(media.getMediaUrl());
+        } catch (Exception e) {
+            throw new RuntimeException(
+                    "Failed to delete media from Cloudflare",
+                    e
+            );
+        }
+
+        mediaRepository.delete(media);
+    }
+
+    @Transactional
+    public void deleteAllMediaByUser(Long userId) {
+
+        List<Media> mediaList =
+                mediaRepository.findAllByUserId(userId);
+
+        for (Media media : mediaList) {
+
+            try {
+                fileStorageService.deleteFile(media.getMediaUrl());
+
+            } catch (Exception e) {
+
+                throw new RuntimeException(
+                        "Failed to delete media from Cloudflare",
+                        e
+                );
+            }
+
+            mediaRepository.delete(media);
+        }
     }
 }

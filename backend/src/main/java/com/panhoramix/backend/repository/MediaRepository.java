@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface MediaRepository extends JpaRepository<Media, Long> {
 
     Page<Media> findByVisibility(
@@ -29,5 +31,7 @@ public interface MediaRepository extends JpaRepository<Media, Long> {
             Long userId,
             Visibility visibility,
             Pageable pageable);
+
+    List<Media> findAllByUserId(Long userId);
 
 }
