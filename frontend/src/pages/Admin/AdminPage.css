@@ -1,0 +1,227 @@
+.admin-page {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 25px 80px;
+}
+
+.admin-page h1 {
+    margin: 0 0 40px;
+    font-size: 32px;
+    text-align: center;
+}
+
+.admin-section {
+    margin-bottom: 40px;
+    padding: 25px;
+    border: 1px solid #333;
+    border-radius: 10px;
+}
+
+.admin-section h2 {
+    margin: 0 0 15px;
+    font-size: 24px;
+}
+
+.admin-section p {
+    margin: 0;
+    color: #aaa;
+}
+
+.admin-users-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.admin-users-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.admin-users-table th,
+.admin-users-table td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #333;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.admin-users-table th {
+    font-weight: 600;
+}
+
+.admin-users-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.admin-error {
+    color: #ff6b6b;
+}
+
+.admin-media-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.admin-media-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.admin-media-table th,
+.admin-media-table td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #333;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.admin-media-table th {
+    font-weight: 600;
+}
+
+.admin-media-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.admin-delete-button {
+    padding: 8px 14px;
+    border: 1px solid #b33a3a;
+    border-radius: 6px;
+    background: transparent;
+    color: #ff6b6b;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.admin-delete-button:hover:not(:disabled) {
+    background: #b33a3a;
+    color: #fff;
+}
+
+.admin-delete-button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.admin-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.admin-modal {
+    width: 100%;
+    max-width: 550px;
+    padding: 30px;
+    border: 1px solid #444;
+    border-radius: 10px;
+    background: #080808;
+}
+
+.admin-modal h2 {
+    margin: 0 0 20px;
+}
+
+.admin-modal p {
+    margin: 0 0 10px;
+}
+
+.admin-modal-media-title {
+    margin-bottom: 25px !important;
+    font-weight: 600;
+}
+
+.admin-modal label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.admin-modal textarea {
+    width: 100%;
+    box-sizing: border-box;
+    resize: vertical;
+    padding: 12px;
+    border: 1px solid #444;
+    border-radius: 6px;
+    background: #111;
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.admin-modal textarea:focus {
+    outline: none;
+    border-color: #d4af37;
+}
+
+.admin-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.admin-cancel-button {
+    padding: 9px 16px;
+    border: 1px solid #444;
+    border-radius: 6px;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.admin-cancel-button:hover {
+    background: #222;
+}
+
+.admin-role-button {
+    padding: 8px 14px;
+    border: 1px solid #d4af37;
+    border-radius: 6px;
+    background: transparent;
+    color: #d4af37;
+    cursor: pointer;
+    font-size: 14px;
+    white-space: nowrap;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.admin-role-button:hover:not(:disabled) {
+    background: #d4af37;
+    color: #000;
+}
+
+.admin-role-button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.admin-role-button-user {
+    border-color: #888;
+    color: #ccc;
+}
+
+.admin-role-button-user:hover:not(:disabled) {
+    background: #888;
+    color: #fff;
+}
+
+.admin-users-table th:last-child,
+.admin-users-table td:last-child {
+    text-align: center;
+}
+
+.admin-users-table td:last-child button + button {
+    margin-left: 20px;
+}

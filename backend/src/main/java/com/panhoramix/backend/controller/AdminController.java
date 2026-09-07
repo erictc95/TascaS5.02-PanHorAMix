@@ -1,9 +1,13 @@
 package com.panhoramix.backend.controller;
 
+import com.panhoramix.backend.dto.request.AdminUserDeleteRequest;
+import com.panhoramix.backend.entity.enums.Role;
 import com.panhoramix.backend.dto.response.AdminUserResponse;
 import com.panhoramix.backend.dto.response.MediaPageResponse;
+import com.panhoramix.backend.dto.request.AdminMediaDeleteRequest;
 import com.panhoramix.backend.service.AdminService;
 import com.panhoramix.backend.service.MediaService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -49,8 +53,32 @@ public class AdminController {
     @DeleteMapping("/media/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteMedia(
-            @PathVariable Long id) {
+            @PathVariable Long id,
+            @Valid @RequestBody AdminMediaDeleteRequest request
+    ) {
+        mediaService.deleteMediaAsAdmin(
+                id,
+                request.getDirectorNote()
+        );
+    }
 
-        mediaService.deleteMediaAsAdmin(id);
+    @PatchMapping("/users/{userId}/role")
+    public AdminUserResponse updateUserRole(
+            @PathVariable Long userId,
+            @RequestParam Role role
+    ) {
+        return adminService.updateUserRole(userId, role);
+    }
+
+    @DeleteMapping("/users/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUser(
+            @PathVariable Long id,
+            @Valid @RequestBody AdminUserDeleteRequest request
+    ) {
+        adminService.deleteUser(
+                id,
+                request.getDirectorNote()
+        );
     }
 }

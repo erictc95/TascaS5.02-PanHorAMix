@@ -195,6 +195,26 @@
     color: #d4af37;
 }
 
+.profile-toggle-option.disabled {
+    color: #666;
+    cursor: not-allowed;
+}
+
+.profile-toggle-option.disabled:hover {
+    background: transparent;
+    color: #666;
+}
+
+.profile-toggle.disabled {
+    background: #0d0d0d;
+    border-color: #333;
+    cursor: not-allowed;
+}
+
+.profile-toggle.disabled .profile-toggle-knob {
+    background: #555;
+}
+
 
 /* Toggle */
 
@@ -257,6 +277,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    z-index: 20;
 }
 
 
@@ -330,7 +352,7 @@
 
 .profile-center-info .profile-avatar-wrapper {
     position: relative;
-    z-index: 10;
+    z-index: 100;
 }
 
 .profile-center-info .profile-avatar-wrapper.avatar-overlap {

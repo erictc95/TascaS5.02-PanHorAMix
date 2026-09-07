@@ -82,6 +82,7 @@ function ProfilePage() {
                 firstName={user.firstName}
                 lastName={user.lastName}
                 bio={user.bio}
+                role={user.role}
                 isOwnProfile={true}
             />
 

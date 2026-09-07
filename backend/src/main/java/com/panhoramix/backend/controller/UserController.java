@@ -6,12 +6,14 @@ import com.panhoramix.backend.dto.response.LoginResponse;
 import com.panhoramix.backend.entity.User;
 import com.panhoramix.backend.service.UserService;
 import com.panhoramix.backend.dto.request.ChangePasswordRequest;
+import com.panhoramix.backend.dto.request.ResendVerificationRequest;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -34,6 +36,20 @@ public class UserController {
 
         return userService.login(request);
 
+    }
+
+    @GetMapping("/verify-email")
+    @ResponseStatus(HttpStatus.OK)
+    public void verifyEmail(@RequestParam String token) {
+        userService.verifyEmail(token);
+    }
+
+    @PostMapping("/resend-verification")
+    @ResponseStatus(HttpStatus.OK)
+    public void resendVerification(
+            @Valid @RequestBody ResendVerificationRequest request
+    ) {
+        userService.resendVerification(request.getEmail());
     }
 
     @PutMapping("/me/password")

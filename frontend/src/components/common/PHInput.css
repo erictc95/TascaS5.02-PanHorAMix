@@ -24,11 +24,10 @@
 }
 
 .ph-input {
-
     width: 100%;
     padding: 14px 50px 14px 18px;
 
-    background: transparent;
+    background: #000;
 
     border: 2px solid var(--gold);
 
@@ -41,7 +40,6 @@
     transition: 0.3s;
 
     box-sizing: border-box;
-
 }
 
 .ph-input::placeholder {
@@ -83,4 +81,15 @@
 
     opacity: .75;
 
+}
+
+/* Chrome autofill */
+.ph-input:-webkit-autofill,
+.ph-input:-webkit-autofill:hover,
+.ph-input:-webkit-autofill:focus,
+.ph-input:-webkit-autofill:active {
+    -webkit-text-fill-color: white;
+    -webkit-box-shadow: 0 0 0 1000px #000 inset;
+    box-shadow: 0 0 0 1000px #000 inset;
+    caret-color: white;
 }

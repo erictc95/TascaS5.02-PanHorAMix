@@ -10,6 +10,8 @@ import PublicProfilePage from "../pages/PublicProfile/PublicProfilePage.jsx";
 import EditProfilePage from "../pages/EditProfile/EditProfilePage.jsx";
 import AppLayout from "../components/layout/AppLayout.jsx";
 import MediaPage from "../pages/Media/MediaPage.jsx";
+import AdminPage from "../pages/Admin/AdminPage.jsx";
+import VerifyEmailPage from "../pages/Auth/VerifyEmailPage.jsx";
 
 function AppRouter() {
 
@@ -27,6 +29,8 @@ function AppRouter() {
 
                 <Route path="/register" element={<RegisterPage />} />
 
+                <Route path="/verify-email" element={<VerifyEmailPage />} />
+
                 {/* Privadas */}
 
                 <Route element={<AppLayout />}>
@@ -41,7 +45,10 @@ function AppRouter() {
 
                     <Route path="/edit-profile" element={<EditProfilePage />} />
 
+                    <Route path="/admin" element={<AdminPage />} />
+
                     <Route path="/users/:username" element={<PublicProfilePage />} />
+
 
                 </Route>
 
