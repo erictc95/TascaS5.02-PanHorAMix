@@ -5,6 +5,7 @@ import {updateAvatarEnabled, updateBannerEnabled} from "../../api/userService";
 import defaultAvatar from "../../assets/icons/default-avatar-icon.png";
 import defaultBanner from "../../assets/placeholders/pham-banner-placeholder.png";
 
+
 function ProfileHeader({
                            username,
                            sceneCount,

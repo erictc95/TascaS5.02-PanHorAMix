@@ -69,6 +69,11 @@
 
 }
 
+.media-toolbar .scene-menu {
+    position: relative;
+    top: -8px;
+}
+
 .media-info{
 
     margin-top:32px;
@@ -101,13 +106,6 @@
     display: block;
     width: 100px;
     height: 100px;
-    object-fit: contain;
-}
-
-.back-button img {
-    display: block;
-    width: 70px;
-    height: 70px;
     object-fit: contain;
     transition:
             transform .25s ease,

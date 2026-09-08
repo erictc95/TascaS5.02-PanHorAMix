@@ -5,6 +5,7 @@ import "./LoginPage.css";
 
 import PHButton from "../../components/common/PHButton";
 import PHInput from "../../components/common/PHInput";
+import Toast from "../../components/common/Toast/Toast";
 
 import {login, resendVerification} from "../../api/authService";
 import {useNavigate} from "react-router-dom";
@@ -16,6 +17,7 @@ function LoginPage() {
     const [password, setPassword] = useState("");
 
     const [error, setError] = useState("");
+    const [showErrorToast, setShowErrorToast] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const [emailNotVerified, setEmailNotVerified] = useState(false);
@@ -62,7 +64,8 @@ function LoginPage() {
                 setError("Your email address is not verified.");
             } else {
                 setEmailNotVerified(false);
-                setError("Invalid email or password.");
+                setError("");
+                setShowErrorToast(true);
             }
 
         } finally {
@@ -116,100 +119,123 @@ function LoginPage() {
 
     }, [resendCooldown]);
 
+    useEffect(() => {
+        if (!showErrorToast) {
+            return;
+        }
+
+        const timer = setTimeout(() => {
+            setShowErrorToast(false);
+        }, 5000);
+
+        return () => clearTimeout(timer);
+    }, [showErrorToast]);
+
     return (
 
-        <main className="login-page">
+        <>
 
-            <div className="login-container">
+            <Toast
+                visible={showErrorToast}
+                title="SIGN IN FAILED"
+                message="Invalid email or password."
+                type="error"
+            />
 
-                <div className="logo-frame">
+            <main className="login-page">
 
-                    <img
-                        src={loginLogo}
-                        alt="PanHorAMix"
-                        className="login-logo"
-                    />
+                <div className="login-container">
 
-                </div>
+                    <div className="logo-frame">
 
-                <p className="subtitle">
-                    Keep building your cinematic world
-                </p>
+                        <img
+                            src={loginLogo}
+                            alt="PanHorAMix"
+                            className="login-logo"
+                        />
 
-                <div className="login-form">
+                    </div>
 
-                    <PHInput
-                        label="Email"
-                        type="email"
-                        placeholder="Enter your email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-
-                    <PHInput
-                        label="Password"
-                        type="password"
-                        placeholder="Enter your password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-
-                    {error && (
-                        <p className="login-error">
-                            {error}
-                        </p>
-                    )}
-
-                    {emailNotVerified && (
-                        <PHButton
-                            onClick={handleResendVerification}
-                            disabled={resendLoading || resendCooldown > 0}
-                        >
-                            {resendLoading
-                                ? "SENDING..."
-                                : resendCooldown > 0
-                                    ? `RESEND VERIFICATION EMAIL (${Math.floor(resendCooldown / 60)}:${String(resendCooldown % 60).padStart(2, "0")})`
-                                    : "RESEND VERIFICATION EMAIL"}
-                        </PHButton>
-                    )}
-
-                    {resendMessage && (
-                        <p className="login-message">
-                            {resendMessage}
-                        </p>
-                    )}
-
-                    <PHButton
-                        onClick={handleLogin}
-                        disabled={loading}
-                    >
-
-                        {loading ? "SIGNING IN..." : "SIGN IN"}
-
-                    </PHButton>
-
-                    <p className="register-text">
-                        Don't have an account?
+                    <p className="subtitle">
+                        Keep building your cinematic world
                     </p>
 
-                    <Link
-                        className="register-link"
-                        to="/register"
-                    >
+                    <div className="login-form">
 
-                        <PHButton>
+                        <PHInput
+                            label="Email"
+                            type="email"
+                            placeholder="Enter your email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
 
-                            CREATE ACCOUNT
+                        <PHInput
+                            label="Password"
+                            type="password"
+                            placeholder="Enter your password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+
+                        {error && (
+                            <p className="login-error">
+                                {error}
+                            </p>
+                        )}
+
+                        {emailNotVerified && (
+                            <PHButton
+                                onClick={handleResendVerification}
+                                disabled={resendLoading || resendCooldown > 0}
+                            >
+                                {resendLoading
+                                    ? "SENDING..."
+                                    : resendCooldown > 0
+                                        ? `RESEND VERIFICATION EMAIL (${Math.floor(resendCooldown / 60)}:${String(resendCooldown % 60).padStart(2, "0")})`
+                                        : "RESEND VERIFICATION EMAIL"}
+                            </PHButton>
+                        )}
+
+                        {resendMessage && (
+                            <p className="login-message">
+                                {resendMessage}
+                            </p>
+                        )}
+
+                        <PHButton
+                            onClick={handleLogin}
+                            disabled={loading}
+                        >
+
+                            {loading ? "SIGNING IN..." : "SIGN IN"}
 
                         </PHButton>
 
-                    </Link>
+                        <p className="register-text">
+                            Don't have an account?
+                        </p>
+
+                        <Link
+                            className="register-link"
+                            to="/register"
+                        >
+
+                            <PHButton>
+
+                                CREATE ACCOUNT
+
+                            </PHButton>
+
+                        </Link>
+
+                    </div>
 
                 </div>
 
-            </div>
+            </main>
 
-        </main>
+        </>
 
     );
 

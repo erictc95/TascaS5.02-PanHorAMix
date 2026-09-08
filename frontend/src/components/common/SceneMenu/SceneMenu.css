@@ -18,6 +18,8 @@
     width: 100px;
     height: 100px;
 
+    object-fit: contain;
+
     transition:
             transform .25s ease,
             filter .25s ease;
