@@ -1,12 +1,13 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 
 import "./RegisterPage.css";
 
 import PHButton from "../../components/common/PHButton";
 import PHInput from "../../components/common/PHInput";
+import Toast from "../../components/common/Toast/Toast.jsx";
 
-import { register } from "../../api/authService";
+import {register} from "../../api/authService";
 import registerLogo from "../../assets/brand/Panhoramix-register-logo.png";
 
 function RegisterPage() {
@@ -17,6 +18,23 @@ function RegisterPage() {
 
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const [toastStep, setToastStep] = useState(0);
+
+    useEffect(() => {
+        if (toastStep === 0) {
+            return;
+        }
+
+        const timer = setTimeout(() => {
+            if (toastStep === 1) {
+                setToastStep(2);
+            } else {
+                setToastStep(0);
+            }
+        }, 5000);
+
+        return () => clearTimeout(timer);
+    }, [toastStep]);
 
     async function handleRegister() {
 
@@ -54,6 +72,8 @@ function RegisterPage() {
             await register(request);
 
             setSuccessMessage("Account created successfully!");
+            setErrorMessage("");
+            setToastStep(1);
 
             setEmail("");
             setPassword("");
@@ -84,106 +104,124 @@ function RegisterPage() {
     }
 
     return (
+        <>
+            <Toast
+                visible={toastStep !== 0}
+                title={
+                    toastStep === 1
+                        ? "ACCOUNT CREATED"
+                        : "CHECK YOUR EMAIL"
+                }
+                message={
+                    toastStep === 1
+                        ? "Your account has been created successfully."
+                        : "We've sent a verification email to your registered email address."
+                }
+                type="success"
+            />
 
-        <main className="register-page">
+            <main className="register-page">
 
-            <div className="register-container">
+                <div className="register-container">
 
-                <div className="logo-frame">
+                    <div className="logo-frame">
 
-                    <img
-                        src={registerLogo}
-                        alt="PanHorAMix"
-                        className="register-logo"
-                    />
+                        <img
+                            src={registerLogo}
+                            alt="PanHorAMix"
+                            className="register-logo"
+                        />
 
-                </div>
+                    </div>
 
-                <p className="subtitle">
-                    Join the landscape revolution
-                </p>
-
-                <div className="register-form">
-
-                    <PHInput
-                        label="Email"
-                        type="email"
-                        placeholder="Enter your email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-
-                    <PHInput
-                        label="Password"
-                        type="password"
-                        placeholder="Create your password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-
-                    <PHInput
-                        label="Username"
-                        placeholder="Choose your username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-
-                    <PHButton
-                        onClick={handleRegister}
-                    >
-                        CREATE ACCOUNT
-                    </PHButton>
-
-                    <p className="login-text">
-                        Already have an account?
+                    <p className="subtitle">
+                        Join the landscape revolution
                     </p>
 
-                    <Link to="/login">
+                    <div className="register-form">
 
-                        <PHButton>
-                            SIGN IN
+                        <PHInput
+                            label="Email"
+                            type="email"
+                            placeholder="Enter your email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+
+                        <PHInput
+                            label="Password"
+                            type="password"
+                            placeholder="Create your password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+
+                        <PHInput
+                            label="Username"
+                            placeholder="Choose your username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+
+                        <PHButton
+                            onClick={handleRegister}
+                        >
+                            CREATE ACCOUNT
                         </PHButton>
 
-                    </Link>
+                        <p className="login-text">
+                            Already have an account?
+                        </p>
 
-                    {successMessage && (
+                        <Link to="/login">
 
-                        <div className="success-box">
+                            <PHButton>
+                                SIGN IN
+                            </PHButton>
 
-                            <p>{successMessage}</p>
+                        </Link>
 
-                            <Link
-                                className="login-link"
-                                to="/login"
-                            >
+                        {successMessage && (
+                            <div className="success-box">
 
-                                <PHButton>
+                                <p className="verification-title">
+                                    CHECK YOUR EMAIL
+                                </p>
 
-                                    GO TO LOGIN
+                                <p className="verification-message">
+                                    We've sent a verification email to your registered email address.
+                                    Please verify your email before signing in.
+                                </p>
 
-                                </PHButton>
+                                <Link
+                                    className="login-link"
+                                    to="/login"
+                                >
+                                    <PHButton className="go-to-login-button">
+                                        GO TO LOGIN
+                                    </PHButton>
+                                </Link>
 
-                            </Link>
+                            </div>
+                        )}
 
-                        </div>
+                        {errorMessage && (
 
-                    )}
+                            <div className="error-box">
 
-                    {errorMessage && (
+                                {errorMessage}
 
-                        <div className="error-box">
+                            </div>
 
-                            {errorMessage}
+                        )}
 
-                        </div>
-
-                    )}
+                    </div>
 
                 </div>
 
-            </div>
+            </main>
 
-        </main>
+        </>
 
     );
 

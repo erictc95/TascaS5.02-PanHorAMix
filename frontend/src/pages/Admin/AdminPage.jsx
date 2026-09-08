@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./AdminPage.css";
 import api from "../../api/axiosConfig";
 import mediaService from "../../api/mediaService";
+import phamBackIcon from "../../assets/icons/pham-back-icon.png";
 
 function AdminPage() {
     const [users, setUsers] = useState([]);
@@ -23,6 +25,8 @@ function AdminPage() {
     const [userToDelete, setUserToDelete] = useState(null);
     const [deletingUser, setDeletingUser] = useState(false);
     const [roleChangeConfirmation, setRoleChangeConfirmation] = useState(null);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         loadUsers();
@@ -218,6 +222,18 @@ function AdminPage() {
 
     return (
         <div className="admin-page">
+
+            <button
+                type="button"
+                className="admin-back-button"
+                onClick={() => navigate("/profile")}
+            >
+                <img
+                    src={phamBackIcon}
+                    alt="PHAM Back"
+                />
+            </button>
+
             <h1>Admin Panel</h1>
 
             <section className="admin-section">
