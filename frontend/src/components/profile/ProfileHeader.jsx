@@ -21,6 +21,7 @@ function ProfileHeader({
                        }) {
 
     const [menuOpen, setMenuOpen] = useState(false);
+    const [languageOpen, setLanguageOpen] = useState(false);
     const menuRef = useRef(null);
     const navigate = useNavigate();
 
@@ -76,6 +77,7 @@ function ProfileHeader({
                 !menuRef.current.contains(event.target)
             ) {
                 setMenuOpen(false);
+                setLanguageOpen(false);
             }
         }
 
@@ -150,7 +152,15 @@ function ProfileHeader({
                             className="profile-avatar"
                             onClick={() => {
                                 if (isOwnProfile) {
-                                    setMenuOpen((prev) => !prev);
+                                    setMenuOpen((prev) => {
+                                        const newValue = !prev;
+
+                                        if (!newValue) {
+                                            setLanguageOpen(false);
+                                        }
+
+                                        return newValue;
+                                    });
                                 }
                             }}
                             role={isOwnProfile ? "button" : undefined}
@@ -161,7 +171,15 @@ function ProfileHeader({
                                     (e.key === "Enter" || e.key === " ")
                                 ) {
                                     e.preventDefault();
-                                    setMenuOpen((prev) => !prev);
+                                    setMenuOpen((prev) => {
+                                        const newValue = !prev;
+
+                                        if (!newValue) {
+                                            setLanguageOpen(false);
+                                        }
+
+                                        return newValue;
+                                    });
                                 }
                             }}
                         >
@@ -230,7 +248,7 @@ function ProfileHeader({
                                             overlapAvatar && canOverlapBanner ? "active" : ""
                                         } ${!canOverlapBanner ? "disabled" : ""}`}
                                     >
-                                        <div className="profile-toggle-knob" />
+                                        <div className="profile-toggle-knob"/>
                                     </div>
                                 </div>
 
@@ -252,20 +270,89 @@ function ProfileHeader({
                                     </button>
                                 )}
 
-                                <button
-                                    type="button"
-                                    onClick={() =>
-                                        handleMenuAction("settings")
-                                    }
-                                >
-                                    Settings
-                                </button>
+                                <div className="profile-language-option">
+                                    <button
+                                        type="button"
+                                        onClick={() => setLanguageOpen(prev => !prev)}
+                                    >
+                                        <span>Language</span>
+                                        <span className={`language-arrow ${languageOpen ? "open" : ""}`}>
+                                        ›
+                                        </span>
+                                    </button>
+
+                                    {languageOpen && (
+                                        <div className="profile-language-submenu">
+                                            <button
+                                                type="button"
+                                                className="language-item active"
+                                            >
+                                                <svg
+                                                    className="language-flag"
+                                                    viewBox="0 0 60 40"
+                                                    aria-hidden="true"
+                                                >
+                                                    <clipPath id="uk-flag-clip">
+                                                        <rect width="60" height="40" rx="2"/>
+                                                    </clipPath>
+
+                                                    <g clipPath="url(#uk-flag-clip)">
+                                                        <rect width="60" height="40" fill="#012169"/>
+
+                                                        <path
+                                                            d="M0 0L60 40M60 0L0 40"
+                                                            stroke="#fff"
+                                                            strokeWidth="10"
+                                                        />
+
+                                                        <path
+                                                            d="M0 0L60 40M60 0L0 40"
+                                                            stroke="#C8102E"
+                                                            strokeWidth="5"
+                                                        />
+
+                                                        <path
+                                                            d="M30 0V40M0 20H60"
+                                                            stroke="#fff"
+                                                            strokeWidth="14"
+                                                        />
+
+                                                        <path
+                                                            d="M30 0V40M0 20H60"
+                                                            stroke="#C8102E"
+                                                            strokeWidth="8"
+                                                        />
+                                                    </g>
+                                                </svg>
+
+                                                <span>English</span>
+                                                <span className="language-check">✓</span>
+                                            </button>
+
+                                            <button
+                                                type="button"
+                                                className="language-item disabled"
+                                                disabled
+                                            >
+                                                <svg
+                                                    className="language-flag"
+                                                    viewBox="0 0 60 40"
+                                                    aria-hidden="true"
+                                                >
+                                                    <rect width="60" height="40" rx="2" fill="#AA151B"/>
+                                                    <rect y="10" width="60" height="20" fill="#F1BF00"/>
+                                                </svg>
+
+                                                <span>Español</span>
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
 
                                 <button
                                     type="button"
-                                    onClick={() =>
-                                        handleMenuAction("change-password")
-                                    }
+                                    className="disabled-menu-option"
+                                    disabled
                                 >
                                     Change Password
                                 </button>

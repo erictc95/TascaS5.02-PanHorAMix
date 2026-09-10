@@ -393,6 +393,112 @@
     font-size: 16px;
 }
 
+.profile-account-menu .disabled-menu-option {
+    color: #555;
+    cursor: not-allowed;
+}
+
+.profile-account-menu .disabled-menu-option:hover {
+    background: transparent;
+    color: #555;
+}
+
+/* =========================
+   LANGUAGE SUBMENU
+   ========================= */
+
+.profile-language-option {
+    position: relative;
+}
+
+.profile-language-option > button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.language-arrow {
+    font-size: 18px;
+    color: #777;
+    line-height: 1;
+    transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.language-arrow.open {
+    transform: rotate(90deg);
+    color: #d4af37;
+}
+
+.profile-language-submenu {
+    margin: 2px 4px 4px;
+    padding: 4px;
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 8px;
+}
+
+.language-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    border: none;
+    background: transparent;
+    color: #e8e8e8;
+
+    text-align: left;
+    padding: 9px 8px;
+    border-radius: 6px;
+
+    font-size: 13px;
+    cursor: pointer;
+
+    transition:
+            background-color 0.15s ease,
+            color 0.15s ease;
+}
+
+.language-item:hover:not(:disabled) {
+    background: rgba(212, 175, 55, 0.14);
+    color: #d4af37;
+}
+
+.language-item.disabled {
+    color: #555;
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+.language-flag {
+    font-size: 18px;
+    line-height: 1;
+}
+
+.language-item > span:nth-child(2) {
+    flex: 1;
+}
+
+.language-check {
+    color: #d4af37;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* =========================
+   LANGUAGE FLAGS
+   ========================= */
+
+.profile-language-submenu .language-flag {
+    width: 24px;
+    height: 16px;
+    min-width: 24px;
+    min-height: 16px;
+    flex: 0 0 24px;
+    display: block;
+    border-radius: 2px;
+}
+
 
 /* =========================================
    RESPONSIVE
