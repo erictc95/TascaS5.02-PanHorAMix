@@ -96,6 +96,43 @@
 
 }
 
+.media-card-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.media-card-text {
+    min-width: 0;
+}
+
+.media-card-category {
+    flex-shrink: 0;
+
+    padding: 8px 16px;
+
+    border: 1px solid #D4AF37;
+    border-radius: 20px;
+
+    color: #D4AF37;
+    background: rgba(212, 175, 55, 0.05);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    transition:
+            background 0.2s ease,
+            box-shadow 0.2s ease;
+}
+
+.media-card-category:hover {
+    background: rgba(212, 175, 55, 0.10);
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.20);
+}
+
 .media-card-author {
     display: flex;
     align-items: center;

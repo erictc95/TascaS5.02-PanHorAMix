@@ -23,6 +23,10 @@ public interface MediaRepository extends JpaRepository<Media, Long> {
             String category,
             Pageable pageable);
 
+    Page<Media> findByTitleContainingIgnoreCase(
+            String title,
+            Pageable pageable);
+
     Page<Media> findByUserId(
             Long userId,
             Pageable pageable);

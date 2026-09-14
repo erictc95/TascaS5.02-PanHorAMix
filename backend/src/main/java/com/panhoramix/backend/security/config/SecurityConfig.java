@@ -38,7 +38,8 @@ public class SecurityConfig {
 
         configuration.setAllowedOriginPatterns(
                 List.of("http://localhost:5173",
-                        "http://192.168.*:*")
+                        "http://192.168.*:*",
+                        "http://10.218.150.*:5173")
         );
 
         configuration.setAllowedMethods(

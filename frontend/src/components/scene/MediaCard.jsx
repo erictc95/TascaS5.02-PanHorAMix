@@ -67,9 +67,23 @@ function MediaCard({ item, showVisibility = false }) {
 
             <div className="media-card-content">
 
-                <h3>{item.title}</h3>
+                <div className="media-card-info">
 
-                <p>{item.description}</p>
+                    <div className="media-card-text">
+
+                        <h3>{item.title}</h3>
+
+                        <p>{item.description}</p>
+
+                    </div>
+
+                    {item.category && (
+                        <span className="media-card-category">
+                {item.category}
+            </span>
+                    )}
+
+                </div>
 
             </div>
 

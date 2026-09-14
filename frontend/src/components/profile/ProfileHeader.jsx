@@ -71,6 +71,16 @@ function ProfileHeader({
     }, [avatarEnabled, bannerEnabled]);
 
     useEffect(() => {
+        const savedOverlap = localStorage.getItem(
+            `profile-overlap-${username}`
+        );
+
+        setOverlapAvatar(
+            savedOverlap === null ? true : savedOverlap === "true"
+        );
+    }, [username]);
+
+    useEffect(() => {
         function handleClickOutside(event) {
             if (
                 menuRef.current &&
@@ -197,6 +207,32 @@ function ProfileHeader({
                             />
                         </div>
 
+                        {isOwnProfile && (
+                            <div className="profile-menu-orbit" aria-hidden="true">
+                                <svg
+                                    className="profile-menu-orbit-svg"
+                                    viewBox="0 0 190 190"
+                                >
+                                    <defs>
+                                        <path
+                                            id="menu-pham-curve"
+                                            d="M 95,13 A 82,82 0 1,1 94.99,13"
+                                        />
+                                    </defs>
+
+                                    <text className="profile-menu-orbit-text">
+                                        <textPath
+                                            href="#menu-pham-curve"
+                                            startOffset="50%"
+                                            textAnchor="middle"
+                                        >
+                                            MENU PHAM · 📸 · 🎥 · MENU PHAM · 📸 · 🎥 · MENU PHAM · 📸 · 🎥 ·
+                                        </textPath>
+                                    </text>
+                                </svg>
+                            </div>
+                        )}
+
                         {/* ACCOUNT MENU */}
                         {isOwnProfile && menuOpen && (
                             <div className="profile-account-menu">
@@ -237,7 +273,16 @@ function ProfileHeader({
                                     }`}
                                     onClick={() => {
                                         if (canOverlapBanner) {
-                                            setOverlapAvatar(prev => !prev);
+                                            setOverlapAvatar(prev => {
+                                                const newValue = !prev;
+
+                                                localStorage.setItem(
+                                                    `profile-overlap-${username}`,
+                                                    String(newValue)
+                                                );
+
+                                                return newValue;
+                                            });
                                         }
                                     }}
                                 >
