@@ -148,15 +148,25 @@ public class MediaService {
                 .build();
     }
 
-    public MediaPageResponse getAllMediaForAdmin(int page) {
+    public MediaPageResponse getAllMediaForAdmin(int page, String search) {
 
         Pageable pageable = PageRequest.of(
                 page,
                 PAGE_SIZE,
                 DEFAULT_SORT);
 
-        Page<Media> mediaPage =
-                mediaRepository.findAll(pageable);
+        Page<Media> mediaPage;
+
+        if (search == null || search.isBlank()) {
+            mediaPage = mediaRepository.findAll(pageable);
+        } else {
+            String normalizedSearch = search.trim();
+
+            mediaPage = mediaRepository
+                    .findByTitleContainingIgnoreCase(
+                            normalizedSearch,
+                            pageable);
+        }
 
         return MediaPageResponse.builder()
                 .content(mediaMapper.toResponseList(mediaPage.getContent()))

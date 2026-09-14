@@ -9,6 +9,10 @@ function AdminPage() {
     const [users, setUsers] = useState([]);
     const [media, setMedia] = useState([]);
 
+    const [mediaPage, setMediaPage] = useState(0);
+    const [mediaTotalPages, setMediaTotalPages] = useState(0);
+    const [mediaSearch, setMediaSearch] = useState("");
+
     const [loadingUsers, setLoadingUsers] = useState(true);
     const [loadingMedia, setLoadingMedia] = useState(true);
 
@@ -30,8 +34,15 @@ function AdminPage() {
 
     useEffect(() => {
         loadUsers();
-        loadMedia();
     }, []);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            loadMedia(0, mediaSearch);
+        }, 400);
+
+        return () => clearTimeout(timeout);
+    }, [mediaSearch]);
 
     async function loadUsers() {
         try {
@@ -121,13 +132,23 @@ function AdminPage() {
         }
     }
 
-    async function loadMedia() {
+    async function loadMedia(page = mediaPage, search = mediaSearch) {
         try {
             setLoadingMedia(true);
             setMediaError("");
 
-            const response = await api.get("/admin/media");
+            const response = await api.get("/admin/media", {
+                params: {
+                    page,
+                    ...(search.trim()
+                        ? { search: search.trim() }
+                        : {})
+                }
+            });
+
             setMedia(response.data.content || []);
+            setMediaPage(response.data.page ?? page);
+            setMediaTotalPages(response.data.totalPages ?? 0);
         } catch (error) {
             console.error("Failed to load admin media:", error);
             setMediaError("Failed to load media.");
@@ -320,7 +341,17 @@ function AdminPage() {
                                             </button>
                                         )}
                                         <button
+                                            type="button"
                                             className="admin-delete-button"
+                                            disabled={
+                                                user.role === "ADMIN" &&
+                                                adminCount <= 1
+                                            }
+                                            title={
+                                                user.role === "ADMIN" && adminCount <= 1
+                                                    ? "The last administrator cannot be deleted."
+                                                    : "Delete User"
+                                            }
                                             onClick={() => openDeleteUserModal(user)}
                                         >
                                             Delete User
@@ -335,7 +366,20 @@ function AdminPage() {
             </section>
 
             <section className="admin-section">
-                <h2>Media</h2>
+                <div className="admin-media-header">
+                    <h2>Media</h2>
+
+                    <input
+                        type="text"
+                        className="admin-media-search"
+                        value={mediaSearch}
+                        onChange={(event) => {
+                            setMediaSearch(event.target.value);
+                            setMediaPage(0);
+                        }}
+                        placeholder="Search by title..."
+                    />
+                </div>
 
                 {loadingMedia && (
                     <p>Loading media...</p>

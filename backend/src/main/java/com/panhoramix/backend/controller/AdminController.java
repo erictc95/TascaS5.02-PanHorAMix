@@ -36,9 +36,11 @@ public class AdminController {
     @GetMapping("/media")
     public MediaPageResponse getAllMedia(
             @RequestParam(defaultValue = "0")
-            int page) {
+            int page,
+            @RequestParam(required = false)
+            String search) {
 
-        return mediaService.getAllMediaForAdmin(page);
+        return mediaService.getAllMediaForAdmin(page, search);
     }
 
     @GetMapping("/media/user/{userId}")
