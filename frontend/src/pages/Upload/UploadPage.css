@@ -226,4 +226,109 @@
         max-width: none;
     }
 
+    .first-take-header {
+        width: 100%;
+        padding: 0 12px;
+        box-sizing: border-box;
+    }
+
+    .media-selector {
+        width: 100%;
+        margin-top: 15px;
+        box-sizing: border-box;
+    }
+
+    .upload-zone {
+        width: 100%;
+        max-width: 100%;
+        padding: 20px 12px;
+        box-sizing: border-box;
+        border-width: 2px;
+        border-radius: 14px;
+    }
+
+    .media-type-icons {
+        gap: 15px;
+        margin-bottom: 18px;
+    }
+
+    .media-type-icon {
+        width: 75px;
+        height: 75px;
+    }
+
+    .media-details {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        gap: 12px;
+    }
+
+    .media-details textarea,
+    .media-details select {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        padding: 14px;
+        font-size: 16px;
+    }
+
+    .scene-information {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        gap: 12px;
+        margin-top: 25px;
+    }
+
+    .scene-information input,
+    .scene-information textarea,
+    .scene-information select {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        padding: 14px;
+        font-size: 16px;
+    }
+
+    .scene-information textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    .scene-information select {
+        height: 50px;
+    }
+
+    .media-preview {
+        width: 100%;
+        max-width: 100%;
+        margin-top: 20px;
+        box-sizing: border-box;
+    }
+
+    .preview-image,
+    .preview-video {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        box-sizing: border-box;
+    }
+
+    .selected-media {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        padding: 15px;
+    }
+
+    .publish-container {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        margin-top: 25px;
+    }
+
 }

@@ -226,7 +226,7 @@ function ProfileHeader({
                                             startOffset="50%"
                                             textAnchor="middle"
                                         >
-                                            MENU PHAM · 📸 · 🎥 · MENU PHAM · 📸 · 🎥 · MENU PHAM · 📸 · 🎥 ·
+                                            MENU PHAM · 📸 · 🎥 · MENU PHAM · 📸 · 🎥 · MENU PHAM · 📸 · 🎥 · MENU PHAM · 🎥 · 📸 ·
                                         </textPath>
                                     </text>
                                 </svg>

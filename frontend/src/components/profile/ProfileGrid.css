@@ -19,3 +19,14 @@
     object-fit: cover;
     display: block;
 }
+
+@media (max-width: 768px) {
+
+    .profile-card h3 {
+        margin: 8px 10px;
+        font-size: 0.75rem;
+        line-height: 1.2;
+        font-weight: 600;
+    }
+
+}

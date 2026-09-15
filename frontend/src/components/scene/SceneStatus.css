@@ -29,3 +29,14 @@
     background: rgba(212, 175, 55, 0.12);
 
 }
+
+@media (max-width: 768px) {
+
+    .scene-status {
+        width: 26px;
+        height: 26px;
+        font-size: 13px;
+        border-width: 2px;
+    }
+
+}
