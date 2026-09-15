@@ -166,3 +166,46 @@
 
 }
 
+@media (max-width: 768px) {
+
+    .pham-navbar {
+        padding: 0 20px;
+        gap: 20px;
+    }
+
+    .pham-logo {
+        gap: 10px;
+        min-width: 0;
+    }
+
+    .pham-logo-text {
+        min-width: 0;
+    }
+
+    .pham-title {
+        font-size: 24px;
+        letter-spacing: 3px;
+    }
+
+    .pham-subtitle {
+        font-size: 10px;
+        letter-spacing: 0.8px;
+        line-height: 1.35;
+        max-width: 150px;
+    }
+
+    .pham-navbar-links {
+        gap: 20px;
+        flex-shrink: 0;
+    }
+
+    .pham-navbar-links a {
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    .pham-user {
+        white-space: nowrap;
+    }
+}
+

@@ -120,3 +120,67 @@
 .filter-menu::-webkit-scrollbar-track {
     background: transparent;
 }
+
+/* MOBILE FILTER */
+@media (max-width: 768px) {
+
+    .feed-filter-container {
+        top: auto;
+        left: 50%;
+        bottom: calc(20px + env(safe-area-inset-bottom));
+        transform: translateX(-50%);
+        z-index: 1000;
+    }
+
+    .feed-filter-button {
+        width: auto;
+        height: 48px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        padding: 6px 18px 6px 10px;
+
+        background: rgba(10, 10, 10, 0.92);
+        border: 1px solid #d4af37;
+        border-radius: 28px;
+
+        box-shadow:
+                0 6px 20px rgba(0, 0, 0, 0.55),
+                0 0 12px rgba(212, 175, 55, 0.15);
+    }
+
+    .feed-filter-icon-mobile {
+        display: block;
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+    }
+
+    .feed-filter-icon-desktop {
+        display: none;
+    }
+
+    .feed-filter-label {
+        color: #d4af37;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        white-space: nowrap;
+    }
+
+    .filter-menu {
+        top: auto;
+        bottom: 58px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        width: 180px;
+        max-height: 55vh;
+
+        padding: 12px;
+        border-radius: 14px;
+    }
+}

@@ -4,6 +4,7 @@ import { getProfile } from "../../api/userService";
 import PhamFrame from "./components/PhamFrame.jsx";
 import VideoFeed from "./components/VideoFeed";
 import phamFilterIcon from "../../assets/icons/pham-filter-icon.png";
+import phamFilterMobileIcon from "../../assets/icons/pham-filter-mobile-icon.png";
 
 import "./HomePage.css";
 
@@ -74,9 +75,20 @@ function HomePage() {
                         onClick={() => setFilterOpen(previous => !previous)}
                     >
                         <img
+                            className="feed-filter-icon-desktop"
                             src={phamFilterIcon}
                             alt="Filter"
                         />
+
+                        <img
+                            className="feed-filter-icon-mobile"
+                            src={phamFilterMobileIcon}
+                            alt="Filter"
+                        />
+
+                        <span className="feed-filter-label">
+                          | PHAM FILTER
+                        </span>
                     </button>
 
                     {filterOpen && (
