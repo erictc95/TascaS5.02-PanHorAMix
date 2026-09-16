@@ -1,7 +1,7 @@
 import "./LandingPage.css";
 import {Link} from "react-router-dom";
 import PHButton from "../../components/common/PHButton";
-import landingLogo from "../../assets/brand/panhoramix-landscape-logo.png";
+
 
 function LandingPage() {
     return (
