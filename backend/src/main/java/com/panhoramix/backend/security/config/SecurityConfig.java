@@ -70,6 +70,7 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers(
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**",
@@ -79,9 +80,7 @@ public class SecurityConfig {
                         ).permitAll()
                         .requestMatchers("/api/users/me/**").authenticated()
                         .requestMatchers(HttpMethod.GET, "/api/users/*").permitAll()
-
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
-
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
