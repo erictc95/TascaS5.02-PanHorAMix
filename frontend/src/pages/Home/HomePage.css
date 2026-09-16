@@ -184,3 +184,75 @@
         border-radius: 14px;
     }
 }
+
+/* PHAM MODE / MOBILE LANDSCAPE */
+@media (max-width: 1200px) and (orientation: landscape) {
+
+    .feed-filter-container {
+        top: auto;
+        left: 50%;
+        bottom: 20px;
+        transform: translateX(-50%);
+        width: auto;
+        z-index: 1000;
+    }
+
+    .feed-filter-button {
+        width: fit-content;
+        min-width: 0;
+        height: 48px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+
+        padding: 6px 12px 6px 8px;
+
+        background: rgba(10, 10, 10, 0.92);
+        border: 1px solid #d4af37;
+        border-radius: 28px;
+
+        box-shadow:
+                0 6px 20px rgba(0, 0, 0, 0.55),
+                0 0 12px rgba(212, 175, 55, 0.15);
+    }
+
+    .feed-filter-icon-mobile {
+        display: block;
+        width: 34px;
+        height: 34px;
+        flex: 0 0 34px;
+        object-fit: contain;
+    }
+
+    .feed-filter-label {
+        display: block;
+        flex: 0 0 auto;
+        margin: 0;
+        color: #d4af37;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        white-space: nowrap;
+    }
+
+    .feed-filter-icon-desktop {
+        display: none;
+    }
+
+    .filter-menu {
+        top: auto;
+        bottom: 58px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        width: 260px;
+        max-height: 42vh;
+
+        padding: 10px;
+        border-radius: 14px;
+
+        overflow-y: auto;
+    }
+}

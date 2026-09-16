@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import phamVideoPlaceholder from "../../assets/placeholders/pham-video-placeholder.png";
 import SceneStatus from "../scene/SceneStatus.jsx";
 
-function ProfileGrid({ media }) {
+function ProfileGrid({ media, isOwnProfile = false }) {
     return (
         <div className="profile-grid">
             {media.map((scene) => {
@@ -18,7 +18,7 @@ function ProfileGrid({ media }) {
                 return (
                     <Link
                         key={scene.id}
-                        to={`/media/${scene.id}`}
+                        to={`/media/${scene.id}${isOwnProfile ? "?from=profile" : ""}`}
                         className="profile-card"
                     >
                         <div className="profile-card-status">
