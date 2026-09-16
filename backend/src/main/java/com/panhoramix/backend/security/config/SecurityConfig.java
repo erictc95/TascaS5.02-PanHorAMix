@@ -37,8 +37,11 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         configuration.setAllowedOriginPatterns(
-                List.of( "http://localhost:5173",
-                        "http://panhoramix.com")
+                List.of(
+                        "http://localhost:5173",
+                        "https://panhoramix.com",
+                        "https://www.panhoramix.com"
+                )
         );
 
         configuration.setAllowedMethods(
