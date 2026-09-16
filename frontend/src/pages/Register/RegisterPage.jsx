@@ -8,7 +8,7 @@ import PHInput from "../../components/common/PHInput";
 import Toast from "../../components/common/Toast/Toast.jsx";
 
 import {register} from "../../api/authService";
-import registerLogo from "../../assets/brand/Panhoramix-register-logo.png";
+import registerLogo from "../../assets/brand/panhoramix-register-logo.png";
 
 function RegisterPage() {
 

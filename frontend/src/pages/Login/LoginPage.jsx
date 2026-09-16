@@ -9,7 +9,7 @@ import Toast from "../../components/common/Toast/Toast";
 
 import {login, resendVerification} from "../../api/authService";
 import {useNavigate} from "react-router-dom";
-import loginLogo from "../../assets/brand/Panhoramix-login-logo.png";
+import loginLogo from "../../assets/brand/panhoramix-login-logo.png";
 
 function LoginPage() {
 

@@ -3,8 +3,8 @@ import "./UploadPage.css";
 
 import mediaService from "../../api/mediaService";
 import MediaSelector from "./components/MediaSelector.jsx";
-import firstTakeHero from "../../assets/brand/Panhoramix-first-take-hero.png";
-import nextSceneHero from "../../assets/brand/Panhoramix-next-scene-hero.png";
+import firstTakeHero from "../../assets/brand/panhoramix-first-take-hero.png";
+import nextSceneHero from "../../assets/brand/panhoramix-next-scene-hero.png";
 
 
 function UploadPage() {

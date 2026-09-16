@@ -1,5 +1,5 @@
 import "./PhamFrame.css";
-import feedLogo from "../../../assets/brand/Panhoramix-feed-logo.png";
+import feedLogo from "../../../assets/brand/panhoramix-feed-logo.png";
 
 function PhamFrame({username}) {
     return (
