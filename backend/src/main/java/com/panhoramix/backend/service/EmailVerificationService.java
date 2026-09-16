@@ -62,7 +62,8 @@ public class EmailVerificationService {
             String verificationToken
     ) {
         String verificationUrl =
-                "http://localhost:5173/verify-email?token="
+                System.getenv("FRONTEND_URL")
+                        + "/verify-email?token="
                         + verificationToken;
 
         SimpleMailMessage message = new SimpleMailMessage();
