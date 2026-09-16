@@ -39,7 +39,7 @@ public class SecurityConfig {
         configuration.setAllowedOriginPatterns(
                 List.of("http://localhost:5173",
                         "http://192.168.*:*",
-                        "https://panhoramix.com",
+                        "http://10.218.150.*:5173",
                         "https://tasca5-02-panhoramix.pages.dev")
         );
 
