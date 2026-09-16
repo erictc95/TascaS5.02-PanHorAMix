@@ -124,7 +124,7 @@ function ProfilePage() {
                                 <div
                                     key={scene.id}
                                     className="profile-card"
-                                    onClick={() => navigate(`/media/${scene.id}`)}
+                                    onClick={() => navigate(`/media/${scene.id}?from=profile`)}
                                 >
 
                                     <div className="profile-card-status">
