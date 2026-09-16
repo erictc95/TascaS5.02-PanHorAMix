@@ -1,19 +1,24 @@
 package com.panhoramix.backend.service;
 
-import lombok.RequiredArgsConstructor;
+import com.resend.Resend;
+import com.resend.core.exception.ResendException;
+import com.resend.services.emails.model.CreateEmailOptions;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class EmailService {
 
-    private final JavaMailSender mailSender;
+    private final Resend resend;
 
     @Value("${app.mail.from}")
     private String from;
+
+    public EmailService(
+            @Value("${RESEND_API_KEY}") String resendApiKey
+    ) {
+        this.resend = new Resend(resendApiKey);
+    }
 
     public void sendDirectorNote(
             String recipientEmail,
@@ -21,13 +26,8 @@ public class EmailService {
             String mediaTitle,
             String directorNote
     ) {
-        SimpleMailMessage message = new SimpleMailMessage();
 
-        message.setFrom(from);
-        message.setTo(recipientEmail);
-        message.setSubject("PHAM — Media removed");
-
-        message.setText("""
+        String emailText = """
                 Hello %s,
 
                 Your media "%s" has been removed from PanHorAMix.
@@ -44,41 +44,63 @@ public class EmailService {
                 username,
                 mediaTitle,
                 directorNote
-        ));
+        );
 
-        mailSender.send(message);
+        CreateEmailOptions params = CreateEmailOptions.builder()
+                .from(from)
+                .to(recipientEmail)
+                .subject("PHAM — Media removed")
+                .text(emailText)
+                .build();
+
+        try {
+            resend.emails().send(params);
+        } catch (ResendException e) {
+            throw new RuntimeException(
+                    "Failed to send director note email",
+                    e
+            );
+        }
     }
 
     public void sendUserDeletionNote(
             String recipientEmail,
             String username,
             String directorNote
-    ){
-        SimpleMailMessage message = new SimpleMailMessage();
+    ) {
 
-        message.setFrom(from);
-        message.setTo(recipientEmail);
+        String emailText = """
+                Hello %s,
 
-        message.setSubject("PHAM — Account removed");
+                Your PanHorAMix account has been permanently removed.
 
-        message.setText("""
-        Hello %s,
+                Director's Note:
+                %s
 
-        Your PanHorAMix account has been permanently removed.
+                If you believe this removal was made in error, you can reply to this email to contact PHAM.
 
-        Director's Note:
-        %s
-
-        If you believe this removal was made in error, you can reply to this email to contact PHAM.
-
-        Regards,
-        PHAM Director
-        PanHorAMix
-        """.formatted(
+                Regards,
+                PHAM Director
+                PanHorAMix
+                """.formatted(
                 username,
                 directorNote
-        ));
+        );
 
-        mailSender.send(message);
+        CreateEmailOptions params = CreateEmailOptions.builder()
+                .from(from)
+                .to(recipientEmail)
+                .subject("PHAM — Account removed")
+                .text(emailText)
+                .build();
+
+        try {
+            resend.emails().send(params);
+        } catch (ResendException e) {
+            throw new RuntimeException(
+                    "Failed to send account deletion email",
+                    e
+            );
+        }
     }
 }

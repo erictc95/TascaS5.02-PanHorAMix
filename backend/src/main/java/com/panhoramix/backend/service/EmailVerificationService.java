@@ -1,11 +1,12 @@
 package com.panhoramix.backend.service;
 
+import com.resend.Resend;
+import com.resend.core.exception.ResendException;
+import com.resend.services.emails.model.CreateEmailOptions;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -20,19 +21,22 @@ public class EmailVerificationService {
     private static final Duration TOKEN_VALIDITY = Duration.ofHours(24);
 
     private final SecretKey secretKey;
-    private final JavaMailSender mailSender;
+    private final Resend resend;
 
     @Value("${app.mail.from}")
     private String from;
+    @Value("${FRONTEND_URL}")
+    private String frontendUrl;
 
     public EmailVerificationService(
             @Value("${app.email-verification.secret}") String secret,
-            JavaMailSender mailSender
+            @Value("${RESEND_API_KEY}") String resendApiKey
     ) {
         this.secretKey = Keys.hmacShaKeyFor(
                 secret.getBytes(StandardCharsets.UTF_8)
         );
-        this.mailSender = mailSender;
+
+        this.resend = new Resend(resendApiKey);
     }
 
     public String generateToken(String email) {
@@ -62,17 +66,11 @@ public class EmailVerificationService {
             String verificationToken
     ) {
         String verificationUrl =
-                System.getenv("FRONTEND_URL")
+                frontendUrl
                         + "/verify-email?token="
                         + verificationToken;
 
-        SimpleMailMessage message = new SimpleMailMessage();
-
-        message.setFrom(from);
-        message.setTo(recipientEmail);
-        message.setSubject("PHAM — Verify your email");
-
-        message.setText("""
+        String emailText = """
                 Hello %s,
 
                 Welcome to PanHorAMix.
@@ -91,9 +89,20 @@ public class EmailVerificationService {
                 """.formatted(
                 username,
                 verificationUrl
-        ));
+        );
 
-        mailSender.send(message);
+        CreateEmailOptions params = CreateEmailOptions.builder()
+                .from(from)
+                .to(recipientEmail)
+                .subject("PHAM — Verify your email")
+                .text(emailText)
+                .build();
+
+        try {
+            resend.emails().send(params);
+        } catch (ResendException e) {
+            throw new RuntimeException("Failed to send verification email", e);
+        }
     }
 
     public boolean isValid(String token) {

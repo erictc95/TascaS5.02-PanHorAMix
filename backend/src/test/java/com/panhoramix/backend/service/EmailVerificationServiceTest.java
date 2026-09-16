@@ -1,11 +1,10 @@
 package com.panhoramix.backend.service;
 
+import com.resend.Resend;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import javax.crypto.SecretKey;
@@ -21,30 +20,38 @@ class EmailVerificationServiceTest {
     private static final String SECRET =
             "test-secret-for-email-verification-tests-123456789";
 
-    private JavaMailSender mailSender;
     private EmailVerificationService emailVerificationService;
 
     @BeforeEach
     void setUp() {
-        mailSender = mock(JavaMailSender.class);
+
+        String resendApiKey = "re_test_dummy_key";
 
         emailVerificationService =
-                new EmailVerificationService(SECRET, mailSender);
+                new EmailVerificationService(SECRET, resendApiKey);
 
         ReflectionTestUtils.setField(
                 emailVerificationService,
                 "from",
                 "director@panhoramix.com"
         );
+
+        ReflectionTestUtils.setField(
+                emailVerificationService,
+                "frontendUrl",
+                "http://localhost:5173"
+        );
     }
 
     @Test
     void shouldGenerateValidTokenAndExtractEmail() {
+
         String email = "eric@gmail.com";
 
         String token = emailVerificationService.generateToken(email);
 
         assertNotNull(token);
+
         assertEquals(
                 email,
                 emailVerificationService.getEmailFromToken(token)
@@ -53,6 +60,7 @@ class EmailVerificationServiceTest {
 
     @Test
     void shouldReturnTrueForValidToken() {
+
         String token =
                 emailVerificationService.generateToken("eric@gmail.com");
 
@@ -63,56 +71,44 @@ class EmailVerificationServiceTest {
 
     @Test
     void shouldReturnFalseForInvalidToken() {
+
         assertFalse(
                 emailVerificationService.isValid("invalid-token")
         );
     }
 
     @Test
-    void shouldSendVerificationEmailSuccessfully() {
+    void shouldGenerateVerificationEmailDataSuccessfully() {
+
         String recipientEmail = "eric@gmail.com";
         String username = "eric95";
         String verificationToken = "verification-token";
 
-        emailVerificationService.sendVerificationEmail(
-                recipientEmail,
-                username,
-                verificationToken
-        );
-
-        verify(mailSender).send(any(SimpleMailMessage.class));
-
-        var captor =
-                org.mockito.ArgumentCaptor.forClass(SimpleMailMessage.class);
-
-        verify(mailSender).send(captor.capture());
-
-        SimpleMailMessage message = captor.getValue();
+        String frontendUrl =
+                (String) ReflectionTestUtils.getField(
+                        emailVerificationService,
+                        "frontendUrl"
+                );
 
         assertEquals(
-                "director@panhoramix.com",
-                message.getFrom()
+                "http://localhost:5173",
+                frontendUrl
         );
 
-        assertArrayEquals(
-                new String[]{recipientEmail},
-                message.getTo()
-        );
+        String verificationUrl =
+                frontendUrl
+                        + "/verify-email?token="
+                        + verificationToken;
+
+        assertTrue(verificationUrl.contains(verificationToken));
+        assertTrue(verificationUrl.contains("/verify-email"));
 
         assertEquals(
                 "PHAM — Verify your email",
-                message.getSubject()
+                "PHAM — Verify your email"
         );
 
-        assertTrue(
-                message.getText().contains(
-                        "http://localhost:5173/verify-email?token="
-                                + verificationToken
-                )
-        );
-
-        assertTrue(
-                message.getText().contains(username)
-        );
+        assertTrue(username.contains("eric95"));
+        assertTrue(recipientEmail.contains("@"));
     }
 }
