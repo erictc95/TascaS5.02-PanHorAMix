@@ -20,6 +20,19 @@
 
 }
 
+/* DESKTOP FILTER ICON */
+
+.feed-filter-icon-mobile {
+    display: none;
+}
+
+.feed-filter-icon-desktop {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 .feed-filter-container {
     position: fixed;
     top: 100px;
