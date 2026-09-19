@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import SceneMenu from "../../components/common/SceneMenu/SceneMenu";
@@ -35,6 +35,8 @@ function MediaPage() {
     const [showPhamControls, setShowPhamControls] = useState(false);
 
     const [touchStartY, setTouchStartY] = useState(null);
+
+    const videoRef = useRef(null);
 
     const [isPhamMode, setIsPhamMode] = useState(!fromProfile);
 
@@ -178,6 +180,15 @@ function MediaPage() {
         setTouchStartY(null);
     }
 
+    function exitPhamMode() {
+        if (videoRef.current) {
+            videoRef.current.pause();
+            videoRef.current.currentTime = 0;
+        }
+
+        navigate("/home");
+    }
+
     function handleVisibilityChange(updatedMedia) {
         setMedia(updatedMedia);
 
@@ -315,7 +326,7 @@ function MediaPage() {
             {isPhamMode && !showPhamIntro && (
                 <button
                     className="pham-mode-exit"
-                    onClick={() => navigate("/home")}
+                    onClick={exitPhamMode}
                 >
                     EXIT PHAM MODE
                 </button>
@@ -362,6 +373,7 @@ function MediaPage() {
                     ) : (
 
                         <video
+                            ref={videoRef}
                             controls
                             autoPlay
                             muted
