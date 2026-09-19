@@ -43,7 +43,9 @@ public class CloudflareStorageService implements FileStorageService {
             String extension = "";
 
             if (originalFilename != null && originalFilename.contains(".")) {
-                extension = originalFilename.substring(originalFilename.lastIndexOf("."));
+                extension = originalFilename.substring(
+                        originalFilename.lastIndexOf(".")
+                );
             }
 
             String fileName = UUID.randomUUID() + extension;
@@ -62,13 +64,19 @@ public class CloudflareStorageService implements FileStorageService {
 
             s3Client.putObject(
                     putObjectRequest,
-                    RequestBody.fromBytes(file.getBytes())
+                    RequestBody.fromInputStream(
+                            file.getInputStream(),
+                            file.getSize()
+                    )
             );
 
             return publicUrl + "/" + objectKey;
 
         } catch (IOException e) {
-            throw new RuntimeException("Error uploading file to Cloudflare R2", e);
+            throw new RuntimeException(
+                    "Error uploading file to Cloudflare R2",
+                    e
+            );
         }
     }
 
