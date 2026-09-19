@@ -181,10 +181,10 @@ function MediaPage() {
     }
 
     function exitPhamMode() {
-        if (videoRef.current) {
-            videoRef.current.pause();
-            videoRef.current.currentTime = 0;
-        }
+        document.querySelectorAll("video, audio").forEach((media) => {
+            media.pause();
+            media.currentTime = 0;
+        });
 
         navigate("/home");
     }
