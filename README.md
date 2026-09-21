@@ -536,13 +536,9 @@ These features are not part of the MVP, but they are planned for future versions
 
 ## Authentication
 
-☐ Logout (invalidar el token del dispositivo actual).
-
 ☐ Logout from all devices (invalidar todos los tokens del usuario).
 
 ☐ Refresh Token (renovación automática del JWT sin volver a introducir credenciales).
-
-☐ Remember Me (sesiones de larga duración opcionales).
 
 ☐ Active Sessions (listar todos los dispositivos donde el usuario tiene una sesión iniciada).
 
