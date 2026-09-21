@@ -11,11 +11,16 @@ function LandingPage() {
 
                 <div className="logo-frame">
 
-                    <img
-                        src={landingLogo}
-                        alt="PanHorAMix"
-                        className="landing-logo"
-                    />
+                    <Link
+                        to="/home"
+                        state={{ fromLanding: true }}
+                    >
+                        <img
+                            src={landingLogo}
+                            alt="PanHorAMix"
+                            className="landing-logo"
+                        />
+                    </Link>
 
                 </div>
 

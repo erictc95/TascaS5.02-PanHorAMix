@@ -25,7 +25,7 @@ function VideoFeed({ selectedCategories }) {
 
             const response = await mediaService.getMedia();
 
-            setMedia(response.content);
+            setMedia(response.content || []);
 
         } catch (error) {
 

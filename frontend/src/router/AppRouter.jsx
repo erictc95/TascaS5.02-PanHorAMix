@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import LandingPage from "../pages/Landing/LandingPage";
 import RegisterPage from "../pages/Register/RegisterPage";
@@ -12,6 +12,46 @@ import AppLayout from "../components/layout/AppLayout.jsx";
 import MediaPage from "../pages/Media/MediaPage.jsx";
 import AdminPage from "../pages/Admin/AdminPage.jsx";
 import VerifyEmailPage from "../pages/Auth/VerifyEmailPage.jsx";
+
+function ProtectedRoute({ children }) {
+    const token = sessionStorage.getItem("token");
+
+    if (!token) {
+        return <Navigate to="/" replace />;
+    }
+
+    return children;
+}
+
+function AdminRoute({ children }) {
+    const token = sessionStorage.getItem("token");
+    const role = sessionStorage.getItem("role");
+
+    if (!token) {
+        return <Navigate to="/login" replace />;
+    }
+
+    if (role !== "ADMIN") {
+        return <Navigate to="/home" replace />;
+    }
+
+    return children;
+}
+
+function HomeRoute({ children }) {
+    const token = sessionStorage.getItem("token");
+    const location = useLocation();
+
+    if (token) {
+        return children;
+    }
+
+    if (location.state?.fromLanding === true) {
+        return children;
+    }
+
+    return <Navigate to="/" replace />;
+}
 
 function AppRouter() {
 
@@ -35,19 +75,19 @@ function AppRouter() {
 
                 <Route element={<AppLayout />}>
 
-                    <Route path="/home" element={<HomePage />} />
+                    <Route path="/home" element={<HomeRoute><HomePage /></HomeRoute>} />
 
-                    <Route path="/media/:id" element={<MediaPage />} />
+                    <Route path="/media/:id" element={<ProtectedRoute><MediaPage /></ProtectedRoute>} />
 
-                    <Route path="/upload" element={<UploadPage />} />
+                    <Route path="/upload" element={<ProtectedRoute><UploadPage /></ProtectedRoute>} />
 
-                    <Route path="/profile" element={<ProfilePage />} />
+                    <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
 
-                    <Route path="/edit-profile" element={<EditProfilePage />} />
+                    <Route path="/edit-profile" element={<ProtectedRoute><EditProfilePage /></ProtectedRoute>} />
 
-                    <Route path="/admin" element={<AdminPage />} />
+                    <Route path="/users/:username" element={<ProtectedRoute><PublicProfilePage /></ProtectedRoute>} />
 
-                    <Route path="/users/:username" element={<PublicProfilePage />} />
+                    <Route path="/admin" element={<AdminRoute> <AdminPage /> </AdminRoute>}/>
 
 
                 </Route>
