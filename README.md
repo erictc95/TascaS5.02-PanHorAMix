@@ -6,9 +6,9 @@
 
 ## Description
 
-PanHorAMix is a web application where users can upload, discover and manage horizontal videos.
+PanHorAMix is a web application where users can upload, discover and manage horizontal images and videos.
 
-The application focuses on providing a simple platform dedicated to horizontal video content, allowing users to browse videos by category while administrators can moderate the platform.
+The application focuses on providing a simple platform dedicated to horizontal image and video content, allowing users to browse media by category while administrators can moderate the platform.
 
 This project is developed as the Final MVP for the IT Academy Java Backend course.
 
@@ -30,17 +30,16 @@ The first version of PanHorAMix will allow users to:
 
 * Register an account
 * Log in securely using JWT authentication
-* Upload videos
-* Edit their own videos
-* Delete their own videos
-* Browse all published videos
-* Search videos by title
-* Filter videos by category
+* Upload images and videos
+* Edit their own media
+* Delete their own media
+* Browse all published media
+* Filter media by category
 
 Administrators will additionally be able to:
 
-* Manage categories
-* Delete any video
+* Manage role accounts
+* Delete any media
 * Delete users
 
 ---
@@ -51,11 +50,10 @@ The main workflow of the application is:
 
 1. A visitor registers.
 2. The user logs in.
-3. The user uploads a video.
-4. The video becomes publicly available.
+3. The user uploads a media.
+4. The media becomes publicly available.
 5. Other users can browse the video.
-6. Users can search videos.
-7. Users can filter videos by category.
+6. Users can filter videos by category.
 
 ---
 
@@ -68,22 +66,21 @@ A regular user can:
 * Register
 * Log in
 * Manage their own profile
-* Upload videos
-* Edit their own videos
-* Delete their own videos
+* Upload image or videos
+* Edit their own media
+* Delete their own media
 * Browse videos
-* Search videos
 * Filter videos by category
 
 ## Administrator
 
 An administrator can:
 
-* Delete any video
+* Delete any media (image/video)
 * Delete users
-* Create categories
-* Update categories
-* Delete categories
+* Find any media by Title
+* Change the account Role (User/Admin)
+
 
 ---
 
@@ -103,7 +100,7 @@ As a user, I want to access a home page after logging in so that I can start usi
 
 ## US-04
 
-As a user, I want to upload a video so that I can share content.
+As a user, I want to upload an image or video so that I can share content.
 
 ## US-05
 
@@ -115,15 +112,15 @@ As a visitor, I want to browse published videos so that I can discover content.
 
 ## US-07
 
-As a user, I want to search videos by title so that I can quickly find content.
+As a user, I want to filter videos by category so that I can discover related content.
 
 ## US-08
 
-As a user, I want to filter videos by category so that I can discover related content.
+As a administrator, I want to search videos by title so that I can quickly find content.
 
 ## US-09
 
-As an administrator, I want to manage categories so that videos remain properly organized.
+As an administrator, I want to manage role of account
 
 ## US-10
 
@@ -154,6 +151,31 @@ As an administrator, I want to delete users when necessary.
 * Bean Validation
 * OpenAPI (Swagger)
 
+## Database
+
+* PostgreSQL
+* Flyway
+
+## Testing
+
+* JUnit
+* Mockito
+
+## Infrastructure & Deployment
+
+* Docker
+* Render
+* Cloudflare R2
+* Cloudflare DNS / Domain
+* Resend
+
+## Development & Version Control
+
+* Maven
+* Git
+* GitHub
+* IntelliJ IDEA
+
 ## Project Structure
 
 ```text
@@ -169,24 +191,96 @@ PanHorAMix
 │   │   │   │   │   ├── request
 │   │   │   │   │   └── response
 │   │   │   │   ├── entity
+│   │   │   │   │   ├── enums
+│   │   │   │   │   ├── Media
+│   │   │   │   │   ├── User
+│   │   │   │   │   └── VerificationCode
 │   │   │   │   ├── exception
 │   │   │   │   ├── mapper
 │   │   │   │   ├── repository
 │   │   │   │   ├── security
+│   │   │   │   │   ├── config
+│   │   │   │   │   └── jwt
 │   │   │   │   ├── service
+│   │   │   │   │   └── impl
+│   │   │   │   │       ├── CloudflareStorageService
+│   │   │   │   │       ├── AdminService
+│   │   │   │   │       ├── CurrentUserService
+│   │   │   │   │       ├── EmailService
+│   │   │   │   │       ├── EmailVerificationService
+│   │   │   │   │       ├── FileStorageService
+│   │   │   │   │       ├── MediaService
+│   │   │   │   │       ├── ProfileImageService
+│   │   │   │   │       └── UserService
 │   │   │   │   ├── validation
-│   │   │   │   └── BackendApplication.java
+│   │   │   │   └── BackendApplication
+│   │   │   │
 │   │   │   └── resources
-│   │   │       ├── db
-│   │   │       │   └── migration
+│   │   │       ├── db.migration
 │   │   │       ├── static
 │   │   │       ├── templates
 │   │   │       └── application.properties
+│   │   │
 │   │   └── test
-│   ├── pom.xml
-│   └── ...
+│   │
+│   ├── Dockerfile
+│   ├── HELP.md
+│   ├── mvnw
+│   ├── mvnw.cmd
+│   └── pom.xml
 │
 ├── frontend
+│   ├── public
+│   ├── src
+│   │   ├── api
+│   │   ├── assets
+│   │   ├── components
+│   │   │   ├── common
+│   │   │   │   ├── SceneMenu
+│   │   │   │   ├── Toast
+│   │   │   │   ├── FrameButton.css
+│   │   │   │   ├── FrameButton.jsx
+│   │   │   │   ├── PHButton.css
+│   │   │   │   ├── PHButton.jsx
+│   │   │   │   ├── PHInput.css
+│   │   │   │   └── PHInput.jsx
+│   │   │   ├── layout
+│   │   │   │   ├── Navbar
+│   │   │   │   └── AppLayout.jsx
+│   │   │   ├── profile
+│   │   │   ├── scene
+│   │   │   └── ui
+│   │   ├── context
+│   │   ├── pages
+│   │   │   ├── Admin
+│   │   │   ├── Auth
+│   │   │   ├── EditProfile
+│   │   │   ├── Home
+│   │   │   │   ├── components
+│   │   │   │   ├── HomePage.css
+│   │   │   │   └── HomePage.jsx
+│   │   │   ├── Landing
+│   │   │   ├── Login
+│   │   │   ├── Media
+│   │   │   ├── Profile
+│   │   │   ├── PublicProfile
+│   │   │   ├── Register
+│   │   │   └── Upload
+│   │   │       ├── components
+│   │   │       ├── UploadPage.css
+│   │   │       └── UploadPage.jsx
+│   │   ├── router
+│   │   ├── styles
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   │
+│   ├── .gitignore
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── README.md
+│   └── vite.config.js
 │
 ├── docs
 │   ├── PanHorAMix-ERD.drawio
@@ -196,74 +290,79 @@ PanHorAMix
 └── README.md
 ```
 
-## Database
-
-* PostgreSQL
-
 ## Entity Relationships
-
-- A user can upload multiple videos.
-- A video belongs to one user.
-- A video can have multiple tags.
-- A tag can be associated with multiple videos.
+* A user can upload multiple media (images and videos).
+* Each media belongs to one user.
+* Each media is associated with one category.
+* A category can be associated with multiple media.
 
 ## Entity Relationship Diagram (ERD)
 
 ```mermaid
 erDiagram
 
-    USER ||--o{ VIDEO : uploads
-    VIDEO ||--o{ VIDEO_TAG : has
-    TAG ||--o{ VIDEO_TAG : tags
+    USERS ||--o{ MEDIA : uploads
+    USERS ||--o{ VERIFICATION_CODES : has
+    MEDIA ||--o{ MEDIA_TAGS : has
+    TAGS ||--o{ MEDIA_TAGS : contains
 
-    USER {
+    USERS {
         BIGSERIAL id PK
         VARCHAR username UK
         VARCHAR email UK
         VARCHAR password
         VARCHAR role
         VARCHAR avatar_url
+        BOOLEAN avatar_enabled
+        VARCHAR banner_url
+        BOOLEAN banner_enabled
+        VARCHAR first_name
+        VARCHAR last_name
+        TEXT bio
+        VARCHAR phone_number
+        TIMESTAMP phone_verified_at
+        VARCHAR deletion_keyword_hash
         TIMESTAMP created_at
+        TIMESTAMP updated_at
+        TIMESTAMP deleted_at
     }
 
-    VIDEO {
+    MEDIA {
         BIGSERIAL id PK
         VARCHAR title
         TEXT description
-        VARCHAR storage_url
+        VARCHAR media_url
         VARCHAR thumbnail_url
-        INTEGER duration_seconds
-        INTEGER views
+        VARCHAR media_type
+        VARCHAR category
         VARCHAR visibility
         TIMESTAMP created_at
+        TIMESTAMP updated_at
         BIGINT user_id FK
     }
 
-    TAG {
+    VERIFICATION_CODES {
+        BIGSERIAL id PK
+        BIGINT user_id FK
+        VARCHAR code_hash
+        VARCHAR purpose
+        VARCHAR target_phone
+        TIMESTAMP expires_at
+        INTEGER attempts
+        TIMESTAMP used_at
+        TIMESTAMP created_at
+    }
+
+    TAGS {
         BIGSERIAL id PK
         VARCHAR name UK
     }
 
-    VIDEO_TAG {
-        BIGINT video_id PK,FK
+    MEDIA_TAGS {
+        BIGINT media_id PK,FK
         BIGINT tag_id PK,FK
     }
 ```
-## Database Migration
-
-* Flyway
-
-## Testing
-
-* JUnit 5
-* Mockito
-* MockMvc
-
-## DevOps
-
-* Docker
-* Docker Compose
-
 ---
 
 # Planned Data Model
@@ -274,27 +373,56 @@ erDiagram
 * username
 * email
 * password
-* avatar
 * role
+* avatarUrl
+* avatarEnabled
+* bannerUrl
+* bannerEnabled
+* firstName
+* lastName
+* bio
+* phoneNumber
+* phoneVerifiedAt
+* deletionKeywordHash
 * createdAt
+* updatedAt
+* deletedAt
 
-## Video
+## Media
 
 * id
 * title
 * description
-* videoUrl
-* thumbnail
-* duration
-* uploadDate
-* views
+* mediaUrl
+* thumbnailUrl
+* mediaType
+* category
+* visibility
 * userId
-* categoryId
+* createdAt
+* updatedAt
 
-## Category
+## VerificationCode
+
+* id
+* userId
+* codeHash
+* purpose
+* targetPhone
+* expiresAt
+* attempts
+* usedAt
+* createdAt
+
+## Tag
 
 * id
 * name
+
+## MediaTag
+
+* mediaId
+* tagId
 
 ---
 
@@ -378,7 +506,6 @@ The current version of PanHorAMix is a Minimum Viable Product (MVP). The followi
 ## Content Management
 
 - Create playlists
-- Private and unlisted videos
 - Video reports
 - Content moderation tools
 
@@ -405,7 +532,7 @@ The current version of PanHorAMix is a Minimum Viable Product (MVP). The followi
 
 # 🔐 Security Roadmap
 
-Estas funcionalidades no forman parte del MVP, pero están previstas para futuras versiones de PanHorAMix.
+These features are not part of the MVP, but they are planned for future versions of PanHorAMix.
 
 ## Authentication
 
